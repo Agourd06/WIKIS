@@ -34,5 +34,23 @@ else{
 
 // --------------------------------login------------------------------
 
+if(isset($_POST['login'])){
+$email = $_POST['email'];
+$logPwd = $_POST['password'];
+ $loged =  $Userservice->login($email);
+ $password = $loged['user_pwd'];
+ $role = $loged["user_role"];
+
+if(password_verify($logPwd,$password) && $role = 'author'){
+
+    header('Location: ../views/visiteur/');
+}else if(password_verify($logPwd,$password) && $role = 'admin'){
+    header('Location: ../views/admin/');
+
+}else{
+    $_SESSION['erreur'] = 'inccorect E-mail Or Password';
+    header('Location: ../views/authentification/login.php');
+}
+}
 
 ?>

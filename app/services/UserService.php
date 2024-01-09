@@ -31,6 +31,20 @@ $stmt->execute();
 
 }
 
+public function login($email){
+    $conn = $this->connect();
+
+    $query = "SELECT * FROM users WHERE user_email = :email";
+    $stmt = $conn->prepare($query);
+    $stmt->bindParam(":email", $email);
+    $stmt->execute();
+    $loged  = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    return $loged;
+
+}
+
+
     public function updateuser(User $user){
 }
 public function removeUser(){
