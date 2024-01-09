@@ -19,8 +19,16 @@ session_start();
             <h4 class="sm:text-3xl text-2xl font-bold text-white">Create your account to be an author</h4>
         </div>
         <div class="mx-4 mb-4 -mt-16">
-            <form action="../../controllers/ConUser.php" method="post" class="max-w-4xl mx-auto bg-white shadow-[0_2px_18px_-3px_rgba(6,81,237,0.4)] sm:p-8 p-4 rounded-md">
-
+            <form id="registerForm" action="../../controllers/ConUser.php" method="post" class="max-w-4xl mx-auto bg-white shadow-[0_2px_18px_-3px_rgba(6,81,237,0.4)] sm:p-8 p-4 rounded-md">
+            <?php
+                 if (isset($_SESSION['exist'])) {
+                    ?>
+                  <p class="text-red-600"><?= $_SESSION['exist'] ?> </p>
+                  <?php  
+                    unset($_SESSION['exist']);
+                } else { ?>
+                  
+              <?php }  ?> 
                  <?php
                  if (isset($_SESSION['error'])) {
                     ?>
@@ -28,19 +36,33 @@ session_start();
                   <?php  
                     unset($_SESSION['error']);
                 } else { ?>
-                  <p></p>
+                  
               <?php }  ?>  
+              <?php
+                 if (isset($_SESSION['empty'])) {
+                    ?>
+                  <p class="text-red-600"><?= $_SESSION['empty'] ?> </p>
+                  <?php  
+                    unset($_SESSION['empty']);
+                } else { ?>
+                  
+              <?php }  ?>  
+              
                 <div class="grid md:grid-cols-2 gap-y-7 gap-x-12">
                   
                     <div>
-                        <label class="text-sm mb-2 block">Full Name</label>
-                        <input name="Fname" type="text" class="bg-gray-100 w-full text-sm px-4 py-3 rounded-md outline-blue-500" placeholder="Enter Full name" />
-                    </div>
-                    <div>
-                        <label class="text-sm mb-2 block">Email Id</label>
-                        <input name="email" type="text" class="bg-gray-100 w-full text-sm px-4 py-3 rounded-md outline-blue-500" placeholder="Enter email" />
+                        <label class="text-sm mb-2 block">Full Name</label> 
+                        <input name="Fname" id="Fname" type="text" class="bg-gray-100 w-full text-sm px-4 py-3 rounded-md border border-solid outline-none" placeholder="Enter Full name" />
+                        <p id="errorMessage" class="hidden text-red-500">invalid characters</p>
                     </div>
                     
+                    <div>
+                        <label class="text-sm mb-2 block">Email Id</label>
+                        <input name="email" id="email" type="text" class="bg-gray-100 w-full text-sm px-4 py-3 rounded-md border border-solid outline-none" placeholder="Enter email" />
+                        <p id="errormessage1" class="hidden text-red-500">invalid E-mail</p>
+
+                    </div>
+
                     <div>
                         <label class="text-sm mb-2 block">Password</label>
                         <input name="password" type="password" class="bg-gray-100 w-full text-sm px-4 py-3 rounded-md outline-blue-500" placeholder="Enter password" />
@@ -60,6 +82,8 @@ session_start();
             </form>
         </div>
     </div>
+    <script  src="../../../public/js/regexforms.js" >
+    </script>
 </body>
 
 </html>

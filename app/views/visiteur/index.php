@@ -1,3 +1,15 @@
+<?php
+session_start();
+if(isset($_SESSION['user'])){
+    $welcom =  'WELCOM :'. $_SESSION['username'];
+    unset($_SESSION['user']);
+}
+else{
+    header('Location: ../authentification/login.php');
+}
+    var_dump($_SESSION['user']);
+    ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -71,7 +83,7 @@
 
         <div class="min-h-full w-[70%] mx-auto rounded-xl">
             <div class="md:flex cursor-pointer w-full md:min-h-[25vh] min-h-fit bg-slate-100 rounded-xl p-8 md:p-0  hover:scale-105 mb-6 md:mb-4">
-                <img class="w-48 h-[100%] md:w-48 md:h-auto md:rounded-xl rounded-xl mx-auto" src="images/Capture d'écran 2023-12-27 165611.png" alt="" width="384" height="512">
+                <img class="w-48 md:h-[100%] h-[5%] md:rounded-xl rounded-xl mx-auto" src="../../../public/images/Capture d'écran 2024-01-08 202704.png" alt="" width="384" height="512">
                 <div class="pt-6 md:p-8 text-center md:text-left space-y-4">
                     <div class="text-slate-700 text-2xl font-bold">
                         <h1>web developer cnejzhchci jhdchai</h1>
@@ -94,7 +106,7 @@
                 </div>
             </div>
             <div class="md:flex cursor-pointer w-full md:min-h-[25vh] min-h-fit bg-slate-100 rounded-xl p-8 md:p-0  hover:scale-105 mb-6 md:mb-4">
-                <img class="w-48 h-[100%] md:w-48 md:h-auto md:rounded-xl rounded-xl mx-auto" src="images/Capture d'écran 2023-12-27 165611.png" alt="" width="384" height="512">
+                <img class="w-48 md:h-[100%] h-[5%] md:rounded-xl rounded-xl mx-auto" src="../../../public/images/Capture d'écran 2024-01-08 202704.png" alt="" width="384" height="512">
                 <div class="pt-6 md:p-8 text-center md:text-left space-y-4">
                     <div class="text-slate-700 text-2xl font-bold">
                         <h1>web developer cnejzhchci jhdchai</h1>
@@ -117,7 +129,7 @@
                 </div>
             </div>
             <div class="md:flex cursor-pointer w-full md:min-h-[25vh] min-h-fit bg-slate-100 rounded-xl p-8 md:p-0  hover:scale-105 mb-6 md:mb-4">
-                <img class="w-48 h-[100%] md:w-48 md:h-auto md:rounded-xl rounded-xl mx-auto" src="images/Capture d'écran 2023-12-27 165611.png" alt="" width="384" height="512">
+                <img class="w-48 md:h-[100%] h-[5%]  md:rounded-xl rounded-xl mx-auto" src="../../../public/images/Capture d'écran 2024-01-08 202704.png" alt="" width="384" height="512">
                 <div class="pt-6 md:p-8 text-center md:text-left space-y-4">
                     <div class="text-slate-700 text-2xl font-bold">
                         <h1>web developer cnejzhchci jhdchai</h1>
@@ -140,7 +152,7 @@
                 </div>
             </div>
             <div class="md:flex cursor-pointer w-full md:min-h-[25vh] min-h-fit bg-slate-100 rounded-xl p-8 md:p-0  hover:scale-105 mb-6 md:mb-4">
-                <img class="w-48 h-[100%] md:w-48 md:h-auto md:rounded-xl rounded-xl mx-auto" src="images/Capture d'écran 2023-12-27 165611.png" alt="" width="384" height="512">
+                <img class="w-48 md:h-[100%] h-[5%]  md:h-auto md:rounded-xl rounded-xl mx-auto" src="../../../public/images/Capture d'écran 2024-01-08 202704.png" alt="" width="384" height="512">
                 <div class="pt-6 md:p-8 text-center md:text-left space-y-4">
                     <div class="text-slate-700 text-2xl font-bold">
                         <h1>web developer cnejzhchci jhdchai</h1>
@@ -163,7 +175,7 @@
                 </div>
             </div>
             <div class="md:flex cursor-pointer w-full md:min-h-[25vh] min-h-fit bg-slate-100 rounded-xl p-8 md:p-0  hover:scale-105 mb-6 md:mb-4">
-                <img class="w-48 h-[100%] md:w-48 md:h-auto md:rounded-xl rounded-xl mx-auto" src="images/Capture d'écran 2023-12-27 165611.png" alt="" width="384" height="512">
+                <img class="w-48 md:h-[100%] h-[5%]  md:h-auto md:rounded-xl rounded-xl mx-auto" src="../../../public/images/Capture d'écran 2024-01-08 202704.png" alt="" width="384" height="512">
                 <div class="pt-6 md:p-8 text-center md:text-left space-y-4">
                     <div class="text-slate-700 text-2xl font-bold">
                         <h1>web developer cnejzhchci jhdchai</h1>
@@ -186,7 +198,7 @@
                 </div>
             </div>
             <div class="md:flex cursor-pointer w-full md:min-h-[25vh] min-h-fit bg-slate-100 rounded-xl p-8 md:p-0  hover:scale-105 mb-6 md:mb-4">
-                <img class="w-48 h-[100%] md:w-48 md:h-auto md:rounded-xl rounded-xl mx-auto" src="images/Capture d'écran 2023-12-27 165611.png" alt="" width="384" height="512">
+                <img class="w-48 md:h-[100%] h-[5%] md:w-48 md:h-auto md:rounded-xl rounded-xl mx-auto" src="../../../public/images/Capture d'écran 2024-01-08 202704.png" alt="" width="384" height="512">
                 <div class="pt-6 md:p-8 text-center md:text-left space-y-4">
                     <div class="text-slate-700 text-2xl font-bold">
                         <h1>web developer cnejzhchci jhdchai</h1>
@@ -208,7 +220,7 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
     </section>
 </body>
