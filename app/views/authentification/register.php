@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,7 +21,15 @@
         <div class="mx-4 mb-4 -mt-16">
             <form action="../../controllers/ConUser.php" method="post" class="max-w-4xl mx-auto bg-white shadow-[0_2px_18px_-3px_rgba(6,81,237,0.4)] sm:p-8 p-4 rounded-md">
 
-
+                 <?php
+                 if (isset($_SESSION['error'])) {
+                    ?>
+                  <p class="text-red-600"><?= $_SESSION['error'] ?> </p>
+                  <?php  
+                    unset($_SESSION['error']);
+                } else { ?>
+                  <p></p>
+              <?php }  ?>  
                 <div class="grid md:grid-cols-2 gap-y-7 gap-x-12">
                   
                     <div>

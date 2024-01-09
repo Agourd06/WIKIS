@@ -23,11 +23,19 @@ $role = $user->getRole();
       $stmt->execute();
       
     }
+public function getUser(){
+    $conn =  $this->connect();
+$query = "SELECT * FROM users";
+$stmt = $conn->prepare($query);
+$stmt->execute();
+
+}
+
     public function updateuser(User $user){
 }
 public function removeUser(){
 }
 
-public function getUser(){}
+
 }
 ?>
