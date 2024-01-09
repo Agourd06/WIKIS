@@ -15,8 +15,10 @@
 
         <div class="bg-white text-white shadow w-full p-2 flex items-center justify-between">
             <div class="flex items-center justify-between px-4 w-[95%]">
-                <div class="flex items-center">
+                <div class="flex items-center gap-2">
                     <img src="../../../public/images/logowiki.png" alt="Logo" class="w-24 h-18 mr-2">
+                    <p class="text-transparent bg-clip-text bg-gradient-to-r text-[20px] font-bold to-blue-400 from-blue-900">Administration</p>
+
                 </div>
                 
                 <div class="text-right ">
@@ -50,9 +52,7 @@
             <a class="block text-black font-bold py-2.5 px-4 my-4 rounded  duration-300 hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 hover:text-white" href="index.php">
                 <i class="fas fa-home mr-2"></i>Dashboard
             </a>
-            <a class="block text-black font-bold py-2.5 px-4 my-4 rounded  duration-300 hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 hover:text-white" href="Authors.php">
-                <i class="fas fa-users mr-2"></i>Authors
-            </a>
+         
 
             <a class="block text-black font-bold py-2.5 px-4 my-4 rounded  duration-300 hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 hover:text-white" href="Categories.php">
                 <i class="fas fa-file-alt mr-2"></i>Categorys
@@ -73,9 +73,7 @@
                 <nav><a class="block text-black font-bold py-2.5 px-4 my-4 rounded  duration-300 hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 hover:text-white" href="index.php">
                 <i class="fas fa-home mr-2"></i>Dashboard
             </a>
-            <a class="block text-black font-bold py-2.5 px-4 my-4 rounded  duration-300 hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 hover:text-white" href="Authors.php">
-                <i class="fas fa-users mr-2"></i>Authors
-            </a>
+           
 
             <a class="block text-black font-bold py-2.5 px-4 my-4 rounded  duration-300 hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 hover:text-white" href="Categories.php">
                 <i class="fas fa-file-alt mr-2"></i>Categorys

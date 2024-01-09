@@ -17,6 +17,10 @@ public function __construct($id, $fullname, $email, $password ,$role){
         $this->password = $password;
         $this->role = $role;
 }
+public function getId()
+{
+    return $this->id;
+}
 
 public function getFullname()
 {

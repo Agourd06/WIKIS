@@ -19,7 +19,7 @@ unset($_SESSION['user']);
     <div class="font-[sans-serif] text-[#333]">
         <div class="grid lg:grid-cols-2 gap-4 bg-gradient-to-r from-blue-500 to-blue-700 sm:p-8 p-4 h-[420px]">
             <div>
-                <a href="login.php"><img src="../../../public/images/logowiki.png" alt="logo" class='w-40' />
+                <a href="login.php"><img src="../../../public/images/whitelogo.png" alt="logo" class='w-40' />
                 </a>
                 <div class="max-w-lg mt-16 px-6 max-lg:hidden">
                     <h3 class="text-3xl font-bold text-white">Sign in</h3>
@@ -51,14 +51,16 @@ unset($_SESSION['user']);
                   
               <?php }  ?>   
                     <div>
-                        <label class="text-sm mb-2 block">User name</label>
+                        <label class="text-sm mb-2 block">User E-mail</label>
                         <div class="relative flex items-center">
-                            <input name="email" type="email"  class="w-full text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600" placeholder="Enter user name" />
+                            <input name="email" id="emailLogin" type="email"  class="w-full text-sm border border-solid px-4 py-3 rounded-md outline-none" placeholder="Enter E-mail" />
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb" class="w-[18px] h-[18px] absolute right-4" viewBox="0 0 24 24">
                                 <circle cx="10" cy="7" r="6" data-original="#000000"></circle>
                                 <path d="M14 15H6a5 5 0 0 0-5 5 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 5 5 0 0 0-5-5zm8-4h-2.59l.3-.29a1 1 0 0 0-1.42-1.42l-2 2a1 1 0 0 0 0 1.42l2 2a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42l-.3-.29H22a1 1 0 0 0 0-2z" data-original="#000000"></path>
                             </svg>
                         </div>
+                        <p id="errormessage2" class="hidden text-red-500">invalid E-mail</p>
+
                     </div>
                     <div class="mt-6">
                         <label class="text-sm mb-2 block">Password</label>
@@ -78,6 +80,9 @@ unset($_SESSION['user']);
             </div>
         </div>
     </div>
+
+    <script  src="../../../public/js/regixLogin.js" >
+    </script>
 </body>
 
 </html>

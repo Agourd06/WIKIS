@@ -83,7 +83,7 @@ session_start();
             </form>
         </div>
     </div>
-    <script  src="../../../public/js/regexforms.js" >
+    <script  src="../../../public/js/regixRegister.js" >
     </script>
 </body>
 

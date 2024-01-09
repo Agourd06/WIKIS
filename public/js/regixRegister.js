@@ -1,3 +1,4 @@
+
 document.getElementById('Fname').addEventListener('input', function() {
     const FnameValue = this.value;
     const FnameStyle = this;
@@ -30,6 +31,8 @@ document.getElementById('Fname').addEventListener('input', function() {
       hideError('errormessage1');
     }
   });
+
+
 
 
   function showError(errorId) {

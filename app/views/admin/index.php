@@ -1,6 +1,5 @@
 <?php
-
-require_once('../../config/config.php')
+require_once(__DIR__ . '/../../controllers/ConUser.php');
 
 ?>
 <!DOCTYPE html>
@@ -13,15 +12,17 @@ require_once('../../config/config.php')
 
 </head>
 
-<body class="bg-slate-200">
-    <div class="flex flex-col h-screen bg-gray-100">
+<body>
+    <div class="flex flex-col min-h-screen bg-gray-100 ">
 
 
 
         <div class="bg-white text-white shadow w-full p-2 flex items-center justify-between">
             <div class="flex items-center">
-                <div class="flex items-center">
-                <img src="../../../public/images/logowiki.png" alt="Logo" class="w-24 h-18 mr-2">
+                <div class="flex items-center gap-2 ml-4">
+                    <img src="../../../public/images/logowiki.png" alt="Logo" class="w-24 h-18 mr-2">
+                    <p class="text-transparent bg-clip-text bg-gradient-to-r text-[20px] font-bold to-blue-400 from-blue-900">Administration</p>
+
                 </div>
             </div>
             <!-- --------------------------------burger icon ----------------------------- -->
@@ -45,9 +46,7 @@ require_once('../../config/config.php')
             <a class="block text-black font-bold py-2.5 px-4 my-4 rounded  duration-300 hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 hover:text-white" href="index.php">
                 <i class="fas fa-home mr-2"></i>Dashboard
             </a>
-            <a class="block text-black font-bold py-2.5 px-4 my-4 rounded  duration-300 hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 hover:text-white" href="Authors.php">
-                <i class="fas fa-users mr-2"></i>Authors
-            </a>
+
 
             <a class="block text-black font-bold py-2.5 px-4 my-4 rounded  duration-300 hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 hover:text-white" href="Categories.php">
                 <i class="fas fa-file-alt mr-2"></i>Categorys
@@ -69,9 +68,7 @@ require_once('../../config/config.php')
                 <nav><a class="block text-black font-bold py-2.5 px-4 my-4 rounded  duration-300 hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 hover:text-white" href="index.php">
                         <i class="fas fa-home mr-2"></i>Dashboard
                     </a>
-                    <a class="block text-black font-bold py-2.5 px-4 my-4 rounded  duration-300 hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 hover:text-white" href="Authors.php">
-                        <i class="fas fa-users mr-2"></i>Authors
-                    </a>
+
 
                     <a class="block text-black font-bold py-2.5 px-4 my-4 rounded  duration-300 hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 hover:text-white" href="Categories.php">
                         <i class="fas fa-file-alt mr-2"></i>Categorys
@@ -152,7 +149,7 @@ require_once('../../config/config.php')
                 <div class="mt-2 md:flex md:justify-rounded   space-x-0 space-y-2 md:space-x-4 md:space-y-0">
 
 
-               
+
                     <div class="flex-1 bg-white p-4 shadow rounded-lg md:w-1/2">
 
                         <h2 class="text-gray-500 text-lg font-semibold pb-1">Tags</h2>
@@ -185,10 +182,61 @@ require_once('../../config/config.php')
 
                         </div>
                     </div>
-                </div>
 
+                </div>
+                <div class="mt-8 bg-white p-4 shadow rounded-lg mx-auto min-h-1/2">
+
+                    <h2 class="text-gray-500 text-lg font-semibold pb-4">Authors</h2>
+                    <div class="my-1"></div>
+                    <div class="bg-gradient-to-r from-sky-100 to-sky-900 h-px mb-6"></div>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white font-[sans-serif]">
+                            <thead class="bg-gradient-to-r from-sky-300 to-sky-800 whitespace-nowrap">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-white">
+                                        User Id
+                                    </th>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-white">
+                                        Full Name
+                                    </th>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-white">
+                                        Email
+                                    </th>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-white">
+                                        Role
+                                    </th>
+
+                                </tr>
+                            </thead>
+                            <tbody class="whitespace-nowrap">
+                                <?php
+                                foreach($users as $user):
+                                ?>
+                                <tr class="even:bg-blue-50">
+                                    <td class="px-6 py-4 text-sm">
+                                        <?= $user->getId(); ?>
+                                    </td>
+                                    <td class="px-6 py-4 text-sm">
+                                    <?= $user->getFullname(); ?>
+                                    </td>
+                                    <td class="px-6 py-4 text-sm">
+                                    <?= $user->getEmail(); ?>
+                                    </td>
+                                    <td class="px-6 py-4 text-sm">
+                                    <?= $user->getRole(); ?>
+                                    </td>
+
+                                </tr>
+                       <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
             </div>
+
         </div>
+
     </div>
     <script src="../../../public/js/burgerMenu.js"></script>
 

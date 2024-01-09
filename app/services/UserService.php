@@ -1,16 +1,19 @@
 <?php
 require_once("UserInterface.php");
-require_once("../config/Database.php");
+require_once(__DIR__ . "/../models/User.php");
+require_once(__DIR__ . "/../config/Database.php");
+
 class UserService implements UserInterface
 {
     use Database;
 
     protected $db;
 
-    public function adduser(User $user, $email)
+    public function adduser(User $user)
 {
     $conn = $this->connect();
     $fullname = $user->getFullName();
+    $email = $user->getEmail();
     $password = $user->getPassword();
     $role = $user->getRole();
    
@@ -39,10 +42,19 @@ return $emails;
     public function getUser()
     {
         $conn =  $this->connect();
-        $query = "SELECT * FROM users";
+        $query = "SELECT * FROM users WHERE user_role = 'author'";
         $stmt = $conn->prepare($query);
         $stmt->execute();
+       $result= $stmt->fetchAll(PDO::FETCH_ASSOC);
+       $users = array();
+       foreach ($result as $row) {
+        
+
+        $users[] = new User($row['user_id'],$row['user_fullname'],$row['user_email'],$row['user_pwd'],$row['user_role']);
     }
+return $users;
+}
+
 
     public function login($email)
     {
