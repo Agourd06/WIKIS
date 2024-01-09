@@ -2,34 +2,41 @@
 
 
 class User{
-
+    protected $id;
+    protected $fullname;
     private $email;
     private $password;
 
+private $role;
 
+public function __construct($id, $fullname, $email, $password ,$role){
 
-
- public function __construct( $email, $password){   
-
-    $this->email = $email;
-    $this->password = $password;
- }
-
-
-public function __get($property) {
-    if (property_exists($this, $property)) {
-      return $this->$property;
-    }
+        $this->id = $id;
+        $this->fullname = $fullname;
+        $this->email = $email;
+        $this->password = $password;
+        $this->role = $role;
 }
 
-public function __set($property, $value) {
-
-    if (property_exists($this, $property)) {
-        $this->$property = $value;
-    }
-
+public function getFullname()
+{
+    return $this->fullname;
 }
 
+public function getEmail()
+{
+    return $this->email;
+}
+
+public function getPassword()
+{
+    return $this->password;
+}
+
+public function getRole()
+{
+    return $this->role;
+}
 
 }
 
