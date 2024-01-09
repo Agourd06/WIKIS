@@ -20,6 +20,7 @@ session_start();
         </div>
         <div class="mx-4 mb-4 -mt-16">
             <form id="registerForm" action="../../controllers/ConUser.php" method="post" class="max-w-4xl mx-auto bg-white shadow-[0_2px_18px_-3px_rgba(6,81,237,0.4)] sm:p-8 p-4 rounded-md">
+                <div class="w-full  mb-6">
             <?php
                  if (isset($_SESSION['exist'])) {
                     ?>
@@ -47,7 +48,7 @@ session_start();
                 } else { ?>
                   
               <?php }  ?>  
-              
+              </div>
                 <div class="grid md:grid-cols-2 gap-y-7 gap-x-12">
                   
                     <div>

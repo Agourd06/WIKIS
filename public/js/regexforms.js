@@ -1,26 +1,26 @@
-document.getElementById('Fname').addEventListener('submit', function() {
-    const prenomValue = this.value;
-    const prenomstyle = this;
-    const regexprenom = /^[A-Za-z\s-]+$/;
+document.getElementById('Fname').addEventListener('input', function() {
+    const FnameValue = this.value;
+    const FnameStyle = this;
+    const regexFname = /^[A-Za-z\s-]+$/;
 
   
-    prenomstyle.classList.remove('border-gray-300', 'border-red-300', 'border-green-300');
+    FnameStyle.classList.remove( 'border-red-300', 'border-green-300');
   
-    if (!regexprenom.test(prenomValue)) {
-      prenomstyle.classList.add('border-red-300');
+    if (!regexFname.test(FnameValue)) {
+        FnameStyle.classList.add('border-red-300');
       showError('errorMessage');
     } else {
-      prenomstyle.classList.add('border-green-300');
+        FnameStyle.classList.add('border-green-300');
       hideError('errorMessage');
     }
   });
 
-  document.getElementById('email').addEventListener('submit', function() {
+  document.getElementById('email').addEventListener('input', function() {
     const emailValue = this.value;
     const emailStyle = this;
     const regexEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$/;
   
-    emailStyle.classList.remove('border-gray-300', 'border-red-300', 'border-green-300');
+    emailStyle.classList.remove('border-red-300', 'border-green-300');
   
     if (!regexEmail.test(emailValue)) {
         emailStyle.classList.add('border-red-300');

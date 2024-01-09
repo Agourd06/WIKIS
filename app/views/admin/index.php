@@ -21,7 +21,7 @@ require_once('../../config/config.php')
         <div class="bg-white text-white shadow w-full p-2 flex items-center justify-between">
             <div class="flex items-center">
                 <div class="flex items-center">
-                    <img src="../public/images/logoblack.png" alt="Logo" class="w-28 h-18 mr-2">
+                <img src="../../../public/images/logowiki.png" alt="Logo" class="w-24 h-18 mr-2">
                 </div>
             </div>
             <!-- --------------------------------burger icon ----------------------------- -->
@@ -45,7 +45,7 @@ require_once('../../config/config.php')
             <a class="block text-black font-bold py-2.5 px-4 my-4 rounded  duration-300 hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 hover:text-white" href="index.php">
                 <i class="fas fa-home mr-2"></i>Dashboard
             </a>
-            <a class="block text-black font-bold py-2.5 px-4 my-4 rounded  duration-300 hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 hover:text-white" href="users">
+            <a class="block text-black font-bold py-2.5 px-4 my-4 rounded  duration-300 hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 hover:text-white" href="Authors.php">
                 <i class="fas fa-users mr-2"></i>Authors
             </a>
 
@@ -53,10 +53,10 @@ require_once('../../config/config.php')
                 <i class="fas fa-file-alt mr-2"></i>Categorys
             </a>
 
-            <a class="block text-black font-bold py-2.5 px-4 my-4 rounded  duration-300 hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 hover:text-white" href="products">
+            <a class="block text-black font-bold py-2.5 px-4 my-4 rounded  duration-300 hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 hover:text-white" href="wikis.php">
                 <i class="fas fa-store mr-2"></i>Wikis
             </a>
-            <a class="block text-black font-bold py-2.5 px-4 my-4 rounded  duration-300 hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 hover:text-white" href="products">
+            <a class="block text-black font-bold py-2.5 px-4 my-4 rounded  duration-300 hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 hover:text-white" href="tags.php">
                 <i class="fas fa-store mr-2"></i>Tags
             </a>
         </div>
@@ -69,7 +69,7 @@ require_once('../../config/config.php')
                 <nav><a class="block text-black font-bold py-2.5 px-4 my-4 rounded  duration-300 hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 hover:text-white" href="index.php">
                         <i class="fas fa-home mr-2"></i>Dashboard
                     </a>
-                    <a class="block text-black font-bold py-2.5 px-4 my-4 rounded  duration-300 hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 hover:text-white" href="users">
+                    <a class="block text-black font-bold py-2.5 px-4 my-4 rounded  duration-300 hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 hover:text-white" href="Authors.php">
                         <i class="fas fa-users mr-2"></i>Authors
                     </a>
 
@@ -77,10 +77,10 @@ require_once('../../config/config.php')
                         <i class="fas fa-file-alt mr-2"></i>Categorys
                     </a>
 
-                    <a class="block text-black font-bold py-2.5 px-4 my-4 rounded  duration-300 hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 hover:text-white" href="products">
+                    <a class="block text-black font-bold py-2.5 px-4 my-4 rounded  duration-300 hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 hover:text-white" href="wikis.php">
                         <i class="fas fa-store mr-2"></i>Wikis
                     </a>
-                    <a class="block text-black font-bold py-2.5 px-4 my-4 rounded  duration-300 hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 hover:text-white" href="products">
+                    <a class="block text-black font-bold py-2.5 px-4 my-4 rounded  duration-300 hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 hover:text-white" href="tags.php">
                         <i class="fas fa-store mr-2"></i>Tags
                     </a>
 
@@ -152,21 +152,7 @@ require_once('../../config/config.php')
                 <div class="mt-2 md:flex md:justify-rounded   space-x-0 space-y-2 md:space-x-4 md:space-y-0">
 
 
-                    <!-- <div class="flex-1 bg-white p-4 shadow rounded-lg md:w-1/2">
-                        <h2 class="text-gray-500 text-lg font-semibold pb-1">Admins</h2>
-                        <div class="my-1"></div>
-                        <div class="bg-gradient-to-r from-sky-300 to-sky-800 h-px mb-6"></div>
-                        <div class="flex">
-                            <svg class="w-6 h-6 text-gray-800 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.333 6.764a3 3 0 1 1 3.141-5.023M2.5 16H1v-2a4 4 0 0 1 4-4m7.379-8.121a3 3 0 1 1 2.976 5M15 10a4 4 0 0 1 4 4v2h-1.761M13 7a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm-4 6h2a4 4 0 0 1 4 4v2H5v-2a4 4 0 0 1 4-4Z" />
-                            </svg>
-                            <span class="py-2 px-16 bg-grey-lightest font-bold uppercase text-l text-grey-light ">
-                                454545
-                            </span>
-                            <h3 class="py-2 px-4 bg-grey-lightest font-bold uppercase text-sm text-gray-500 border-b border-grey-light">
-                                Active Admins</h3>
-                        </div>
-                    </div> -->
+               
                     <div class="flex-1 bg-white p-4 shadow rounded-lg md:w-1/2">
 
                         <h2 class="text-gray-500 text-lg font-semibold pb-1">Tags</h2>
