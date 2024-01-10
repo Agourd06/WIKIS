@@ -9,7 +9,7 @@ session_start();
 
 $Userservice = new Userservice();
 
-// ----------------------add author-------------------------
+// <---------------------------------add author--------------------------------->
 
 if (isset($_POST["register"])) {
     $fullname = $_POST["Fname"];

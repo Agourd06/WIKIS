@@ -50,8 +50,61 @@ if (isset($_POST['update'])) {
     $data =  $categoryService->displayUpdate($id);
     if ($data) {
         $_SESSION['category'] = $data;
+        $_SESSION['IdCat'] = $id;
         header('Location: ../views/admin/Categories.php');
     } else {
         echo 'rien de rien';
     }
 }
+// ------------------------------------Update Category---------------------------------
+
+if (isset($_POST["updateCat"])) {
+    $id = $_POST["updateCat"];
+    $CatName = $_POST["CategoryName"];
+    $CatDescr = $_POST["CategoryDesc"];
+    $image = $_FILES["image"]["name"];
+    $tempname = $_FILES["image"]["tmp_name"];
+
+    $idcat = '';
+    
+    if ($CatName !== '' && $CatDescr !== ''  && preg_match('/^[A-Za-z\s-]+$/', $CatName)) {
+
+     
+            $category = new Category($idcat, $CatName, $CatDescr, URLROOT . 'public/images/' . $image);
+            $categoryService->updateCategory($category, $id);
+            header('Location: ../views/admin/Categories.php');
+        
+    } else {
+        $_SESSION['error'] = 'Empty Input or invalid Information';
+        header('Location: ../views/authentification/register.php');
+    }
+}
+
+
+
+// ----------------------------DELETE Category-----------------------------
+
+
+
+
+if (isset($_POST['delete'])) {
+    $id = $_POST['delete'];
+
+    $categoryService->removeCatgory($id);
+    header('Location: ../views/admin/Categories.php');
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,6 +1,12 @@
 <?php
 require_once(__DIR__ . '/../../controllers/ConUser.php');
 
+if(isset($_SESSION['user'])){
+    $welcom =  'WELCOM :'. $_SESSION['username'];
+}
+else{
+    header('Location: ../authentification/login.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -18,6 +24,8 @@ require_once(__DIR__ . '/../../controllers/ConUser.php');
 
 
         <div class="bg-white text-white shadow w-full p-2 flex items-center justify-between">
+        
+
             <div class="flex items-center">
                 <div class="flex items-center gap-2 ml-4">
                     <img src="../../../public/images/logowiki.png" alt="Logo" class="w-24 h-18 mr-2">
@@ -58,6 +66,9 @@ require_once(__DIR__ . '/../../controllers/ConUser.php');
             <a class="block text-black font-bold py-2.5 px-4 my-4 rounded  duration-300 hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 hover:text-white" href="tags.php">
                 <i class="fas fa-store mr-2"></i>Tags
             </a>
+            <a class="block text-black font-bold py-2.5 px-4 my-2 rounded duration-300 hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 hover:text-white mt-auto" href="../authentification/login.php">
+                    <i class="fas fa-sign-out-alt mr-2"></i>Log Out
+                </a>
         </div>
         <!-- --------------------------------burger menu ----------------------------- -->
 
@@ -83,7 +94,7 @@ require_once(__DIR__ . '/../../controllers/ConUser.php');
 
                 </nav>
 
-                <a class="block text-black font-bold py-2.5 px-4 my-2 rounded  duration-300 hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 hover:text-white mt-auto" href="#">
+                <a class="block text-black font-bold py-2.5 px-4 my-2 rounded duration-300 hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 hover:text-white mt-auto" href="../authentification/login.php">
                     <i class="fas fa-sign-out-alt mr-2"></i>Log Out
                 </a>
 
@@ -92,6 +103,7 @@ require_once(__DIR__ . '/../../controllers/ConUser.php');
             <!-- --------------------------------SideBar ----------------------------- -->
 
             <div class="flex-1 p-4 w-full md:w-1/2">
+            <div class="w-full"> <h1><?= $welcom?></h1></div>
 
                 <div class="mt-8 md:flex jmd:ustify-rounded  space-x-0 space-y-2 md:space-x-4 md:space-y-0">
                     <div class="flex-1 bg-white p-4 shadow rounded-lg md:w-1/2">

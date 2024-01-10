@@ -1,6 +1,15 @@
 <?Php
 require_once(__DIR__ . '/../../controllers/ConCategorie.php');
-?>
+
+
+if(isset($_SESSION['user'])){
+    $welcom =  'WELCOM :'. $_SESSION['username'];
+}
+else{
+    header('Location: ../authentification/login.php');
+}
+    ?>
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -68,6 +77,9 @@ require_once(__DIR__ . '/../../controllers/ConCategorie.php');
             <a class="block text-black font-bold py-2.5 px-4 my-4 rounded  duration-300 hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 hover:text-white" href="tags.php">
                 <i class="fas fa-store mr-2"></i>Tags
             </a>
+            <a class="block text-black font-bold py-2.5 px-4 my-2 rounded duration-300 hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 hover:text-white mt-auto" href="../authentification/login.php">
+                    <i class="fas fa-sign-out-alt mr-2"></i>Log Out
+                </a>
         </div>
         <!-- --------------------------------burger menu ----------------------------- -->
 
@@ -92,7 +104,7 @@ require_once(__DIR__ . '/../../controllers/ConCategorie.php');
 
                 </nav>
 
-                <a class="block text-black font-bold py-2.5 px-4 my-2 rounded duration-300 hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 hover:text-white mt-auto" href="#">
+                <a class="block text-black font-bold py-2.5 px-4 my-2 rounded duration-300 hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 hover:text-white mt-auto" href="../authentification/login.php">
                     <i class="fas fa-sign-out-alt mr-2"></i>Log Out
                 </a>
 
@@ -232,8 +244,17 @@ require_once(__DIR__ . '/../../controllers/ConCategorie.php');
                 </div>
 
                 <div class="flex justify-end">
-                    <button type="submit" name="addcategory" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800">Add
-                        Category</button>
+                <?php if (isset($_SESSION['IdCat'])) {
+                        $id = $_SESSION['IdCat'] ?>
+                        <button type="submit" name="updateCat" value="<?= $id ?>" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            Edit Category
+                        </button>
+
+                    <?php } else { ?>
+                        <button type="submit" name="addClaim" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            Add Category
+                        </button>
+                    <?php } ?>
                 </div>
             </form>
         </div>
