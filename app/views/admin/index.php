@@ -31,7 +31,7 @@ else{
             <div class="flex items-center">
                 <div class="flex items-center gap-2 ml-4">
                     <img src="../../../public/images/logowiki.png" alt="Logo" class="w-24 h-18 mr-2">
-                    <p class="text-transparent bg-clip-text bg-gradient-to-r text-[20px] font-bold to-blue-400 from-blue-900">Administration</p>
+                    <p class="text-transparent bg-clip-text  text-[20px] font-bold bg-gradient-to-r to-blue-400 from-blue-900">Administration</p>
 
                 </div>
             </div>
