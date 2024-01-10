@@ -97,4 +97,15 @@ class CategoryService implements CategoryInterface
         $stmt->bindParam(":id", $id);
         $stmt->execute();
     }
+
+    public function CountCatgorys(){
+
+        $conn = $this->connect();
+        $query = "SELECT count(category_id) as categorys FROM category ";
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+       $CategorysCount = $stmt->fetchColumn();
+    
+       return $CategorysCount;
+    }
 }

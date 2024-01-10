@@ -3,7 +3,6 @@ require_once(__DIR__ . '/../services/UserService.php');
 require_once(__DIR__ . '/../models/User.php');
 
 
-session_start();
 
 
 
@@ -77,3 +76,12 @@ $users =  $Userservice->getUser();
 
 
 // -------------------------Count authors----------------------------
+
+
+$authors =  $Userservice->CountAUthors();
+
+
+
+
+
+

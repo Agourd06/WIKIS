@@ -2,7 +2,6 @@
 require_once(__DIR__ . '/../services/TagsService.php');
 require_once(__DIR__ . '/../models/tag.php');
 
-session_start();
 
 
 $tagsService = new TagsService();
@@ -89,4 +88,15 @@ if (isset($_POST['delete'])) {
     header('Location: ../views/admin/tags.php');
 
 }
+
+
+
+
+
+
+// -------------------------Count Tags----------------------------
+
+
+$tags =  $tagsService->CountTags();
+
 ?>

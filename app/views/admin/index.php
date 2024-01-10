@@ -1,5 +1,7 @@
 <?php
 require_once(__DIR__ . '/../../controllers/ConUser.php');
+require_once(__DIR__ . '/../../controllers/ConCategorie.php');
+require_once(__DIR__ . '/../../controllers/ConTags.php');
 
 if(isset($_SESSION['user'])){
     $welcom =  'WELCOM :'. $_SESSION['username'];
@@ -116,7 +118,7 @@ else{
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.333 6.764a3 3 0 1 1 3.141-5.023M2.5 16H1v-2a4 4 0 0 1 4-4m7.379-8.121a3 3 0 1 1 2.976 5M15 10a4 4 0 0 1 4 4v2h-1.761M13 7a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm-4 6h2a4 4 0 0 1 4 4v2H5v-2a4 4 0 0 1 4-4Z" />
                             </svg>
                             <span class="py-2 px-8 bg-grey-lightest font-bold uppercase text-l text-grey-light ">
-                                4454545
+                                <?=$authors?>
                             </span>
                             <h3 class="py-2 px-4 bg-grey-lightest font-bold uppercase text-sm text-gray-500 border-b border-grey-light">
                                 Active Authors</h3>
@@ -134,7 +136,8 @@ else{
                         400v-320h320v320H520ZM200-600h160v-160H200v160Zm400 0h160v-160H600v160Zm0 400h160v-160H600v160Zm-400 0h160v-160H200v160Zm400-400Zm0 240Zm-240 0Zm0-240Z" />
                             </svg>
                             <span class="py-2 px-10 bg-grey-lightest font-bold uppercase text-l text-grey-light ">
-                                4654654
+                            <?=$category?>
+
                             </span>
                             <h3 class="py-2 px-4 bg-grey-lightest font-bold uppercase text-sm text-gray-500 border-b border-grey-light">
                                 Available categorys</h3>
@@ -172,7 +175,7 @@ else{
                                 <path d="M570-104q-23 23-57 23t-57-23L104-456q-11-11-17.5-26T80-514v-286q0-33 23.5-56.5T160-880h286q17 0 32 6.5t26 17.5l352 353q23 23 23 56.5T856-390L570-104Zm-57-56 286-286-353-354H160v286l353 354ZM260-640q25 0 42.5-17.5T320-700q0-25-17.5-42.5T260-760q-25 0-42.5 17.5T200-700q0 25 17.5 42.5T260-640ZM160-800Z" />
                             </svg>
                             <span class="py-2 px-8 bg-grey-lightest font-bold uppercase text-l text-grey-light ">
-                                4454545
+                            <?=$tags?>
                             </span>
                             <h3 class="py-2 px-4 bg-grey-lightest font-bold uppercase text-sm text-gray-500 border-b border-grey-light">
                                 Available Tags</h3>

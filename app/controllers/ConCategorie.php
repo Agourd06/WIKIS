@@ -3,7 +3,6 @@ require_once(__DIR__ . '/../services/CategoryService.php');
 require_once(__DIR__ . '/../models/Category.php');
 require_once(__DIR__ . '/../config/config.php');
 
-session_start();
 
 
 $categoryService = new CategoryService();
@@ -98,6 +97,10 @@ if (isset($_POST['delete'])) {
 
 }
 
+// -------------------------Count category----------------------------
+
+
+$category =  $categoryService->CountCatgorys();
 
 
 

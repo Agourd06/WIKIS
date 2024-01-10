@@ -92,4 +92,14 @@ class TagsService implements TagsInterface
         $stmt->bindParam(":id", $id);
         $stmt->execute();
     }
+    public function CountTags(){
+
+        $conn = $this->connect();
+        $query = "SELECT count(tag_id) as Tags FROM tag ";
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+       $tagsCount = $stmt->fetchColumn();
+    
+       return $tagsCount;
+    }
 }

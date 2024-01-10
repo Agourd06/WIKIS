@@ -72,9 +72,15 @@ return $users;
 public function CountAUthors(){
 
     $conn = $this->connect();
-    $query = "SELECT count(user_id) as authors WHERE user_role = author";
+    $query = "SELECT count(user_id) as authors FROM users WHERE user_role = 'author'
+    ";
     $stmt = $conn->prepare($query);
     $stmt->execute();
+   $authorsCount = $stmt->fetchColumn();
+
+   return $authorsCount;
 }
+
+
   
 }

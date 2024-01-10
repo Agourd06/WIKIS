@@ -17,6 +17,7 @@ trait Database {
 
 }
 
+session_start();
 
 
 ?>

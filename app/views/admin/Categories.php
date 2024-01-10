@@ -157,7 +157,7 @@ else{
                                         <td class="px-6 py-4 text-sm">
                                             <?= $cat->getCategory_desc(); ?>
                                         </td>
-                                        <td class="px-6 py-4">
+                                        <td class="px-6 py-4 flex">
                                             <form action="../../controllers/ConCategorie.php" method="post">
                                                 <button class="mr-4" title="Edit" name="update" value="<?= $cat->getId(); ?>">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 fill-blue-500 hover:fill-blue-700" viewBox="0 0 348.882 348.882">
