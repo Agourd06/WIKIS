@@ -30,7 +30,7 @@ public function getCategorys(){
 
     $conn = $this->connect();
 
-    $query = "SELECT category_name FROM category";
+    $query = "SELECT * FROM category";
     $stmt = $conn->prepare($query);
     $stmt->execute();
     $categorys  = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -41,8 +41,6 @@ public function getCategorys(){
     return $Category;
 
 }
-public function updateCategory(Category $category,$id){}
-public function removeCatgory($id){}
 
 public function CheckCat($name){
     $conn = $this->connect();
@@ -54,5 +52,38 @@ public function CheckCat($name){
     $names  = $stmt->fetch(PDO::FETCH_ASSOC);
 return $names;
 }
+
+public function displayUpdate($id){
+    $conn = $this->connect();
+    $query = "SELECT category_name , category_desc ,  category_image FROM category WHERE category_id = :id";
+    $stmt = $conn->prepare($query);
+    $stmt->bindParam(":id", $id);
+    $stmt->execute();
+    $resulte = $stmt->fetch(PDO::FETCH_ASSOC);
+    $name = $resulte["category_name"];
+    $desc = $resulte["category_desc"];
+    $img = $resulte["category_image"];
+
+    return [$name,$desc , $img];
+
+}
+
+
+
+public function updateCategory(Category $category,$id){
+
+    $conn = $this->connect();
+
+
+
+
+}
+
+
+
+
+public function removeCatgory($id){}
+
+
 }
 ?>

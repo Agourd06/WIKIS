@@ -70,10 +70,5 @@ return $users;
     }
 
 
-    public function updateuser(User $user)
-    {
-    }
-    public function removeUser()
-    {
-    }
+  
 }
