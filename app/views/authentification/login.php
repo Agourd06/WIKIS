@@ -32,21 +32,13 @@ unset($_SESSION['user']);
                     <div class="mb-10">
                         <h3 class="text-3xl font-extrabold">Sign in</h3>
                     </div>
-                    <?php
-                 if (isset($_SESSION['erreur'])) {
-                    ?>
-                  <p class="text-red-600"><?= $_SESSION['erreur'] ?> </p>
-                  <?php  
-                    unset($_SESSION['erreur']);
-                } else { ?>
-                  <p></p>
-              <?php }  ?> 
+         
               <?php
-                 if (isset($_SESSION['empty'])) {
+                 if (isset($_SESSION['error'])) {
                     ?>
-                  <p class="text-red-600"><?= $_SESSION['empty'] ?> </p>
+                  <p class="text-red-600"><?= $_SESSION['error'] ?> </p>
                   <?php  
-                    unset($_SESSION['empty']);
+                    unset($_SESSION['error']);
                 } else { ?>
                   
               <?php }  ?>   

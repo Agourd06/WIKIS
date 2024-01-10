@@ -21,15 +21,7 @@ session_start();
         <div class="mx-4 mb-4 -mt-16">
             <form id="registerForm" action="../../controllers/ConUser.php" method="post" class="max-w-4xl mx-auto bg-white shadow-[0_2px_18px_-3px_rgba(6,81,237,0.4)] sm:p-8 p-4 rounded-md">
                 <div class="w-full  mb-6">
-            <?php
-                 if (isset($_SESSION['exist'])) {
-                    ?>
-                  <p class="text-red-600"><?= $_SESSION['exist'] ?> </p>
-                  <?php  
-                    unset($_SESSION['exist']);
-                } else { ?>
-                  
-              <?php }  ?> 
+         
                  <?php
                  if (isset($_SESSION['error'])) {
                     ?>
@@ -39,15 +31,7 @@ session_start();
                 } else { ?>
                   
               <?php }  ?>  
-              <?php
-                 if (isset($_SESSION['empty'])) {
-                    ?>
-                  <p class="text-red-600"><?= $_SESSION['empty'] ?> </p>
-                  <?php  
-                    unset($_SESSION['empty']);
-                } else { ?>
-                  
-              <?php }  ?>  
+            
               </div>
                 <div class="grid md:grid-cols-2 gap-y-7 gap-x-12">
                   

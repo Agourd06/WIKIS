@@ -6,6 +6,7 @@ interface CategoryInterface{
     public function getCategorys();
     public function updateCategory(Category $category,$id);
     public function removeCatgory($id);
+    public function CheckCat($name);
   
 }
 

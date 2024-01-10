@@ -1,3 +1,7 @@
+<?Php
+require_once(__DIR__ . '/../../controllers/ConCategorie.php');
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -108,16 +112,16 @@
                             <thead class="bg-gradient-to-r from-sky-300 to-sky-800 whitespace-nowrap">
                                 <tr>
                                     <th class="px-6 py-3 text-left text-sm font-semibold text-white">
+                                        Category Id
+                                    </th>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-white">
                                         Name
                                     </th>
                                     <th class="px-6 py-3 text-left text-sm font-semibold text-white">
-                                        Email
+                                        Image
                                     </th>
                                     <th class="px-6 py-3 text-left text-sm font-semibold text-white">
-                                        Role
-                                    </th>
-                                    <th class="px-6 py-3 text-left text-sm font-semibold text-white">
-                                        Joined At
+                                        Description
                                     </th>
                                     <th class="px-6 py-3 text-left text-sm font-semibold text-white">
                                         Actions
@@ -125,9 +129,12 @@
                                 </tr>
                             </thead>
                             <tbody class="whitespace-nowrap">
+                                <?php
+                             foreach($Categorys as $cat) :
+                                ?>
                                 <tr class="even:bg-blue-50">
                                     <td class="px-6 py-4 text-sm">
-                                        Jane Smith
+                                    <?= $cat->getId(); ?>
                                     </td>
                                     <td class="px-6 py-4 text-sm">
                                         jane@example.com
@@ -153,7 +160,7 @@
                                         </button>
                                     </td>
                                 </tr>
-
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>
@@ -164,14 +171,22 @@
         </div>
     </div>
     </div>
+   
+           
     <div id="overlay" class="hidden h-screen w-full fixed top-0 left-0 bg-black/10  flex justify-center items-center">
 
 
 
     <div class="w-full md:w-1/2 mx-auto bg-white p-6 rounded-md shadow-md">
         <h2 class="text-2xl font-semibold mb-4">Add Catgory</h2>
-
-        <form action="" method="POST" enctype="multipart/form-data">
+        <?php
+if (isset($_GET['error']) && $_GET['error'] === 'true') {?>
+   <script>document.getElementById('overlay').classList.remove('hidden'); </script>  
+   <p class="text-red-600">Category Already Exist </p>
+   <?php
+   unset($_GET['error']);
+}?>
+        <form action="../../controllers/ConCategorie.php" method="POST" enctype="multipart/form-data">
             <div class="mb-4">
                 <label for="CategoryName" class="block text-gray-700 text-sm font-bold mb-2">Catgory Name  </label>
                 <input type="text" id="CategoryName" name="CategoryName" placeholder="Enter catgory name"
@@ -183,11 +198,6 @@
                     class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
             </div>
 
-           
-
-
-
-
             <div class="mb-4">
 
                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white mt-4"
@@ -198,7 +208,7 @@
             </div>
 
             <div class="flex justify-end">
-                <button type="submit"
+                <button type="submit" name="addcategory"
                     class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800">Add
                     Category</button>
             </div>

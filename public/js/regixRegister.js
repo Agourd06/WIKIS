@@ -10,6 +10,7 @@ document.getElementById('Fname').addEventListener('input', function() {
     if (!regexFname.test(FnameValue)) {
         FnameStyle.classList.add('border-red-300');
       showError('errorMessage');
+      
     } else {
         FnameStyle.classList.add('border-green-300');
       hideError('errorMessage');

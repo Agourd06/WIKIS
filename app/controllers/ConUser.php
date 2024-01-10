@@ -21,7 +21,7 @@ if (isset($_POST["register"])) {
     if ($fullname !== '' && $email !== '' && $password !== '' && $cpassword !== '' && preg_match('/^[A-Za-z\s-]+$/', $fullname) && preg_match('/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/', $email) && preg_match('/^.{1,8}$/', $password)) {
         if ($password === $cpassword) {
             if ($emails) {
-                $_SESSION['exist'] = 'E-mail already exists';
+                $_SESSION['error'] = 'E-mail already exists';
                 header('Location: ../views/authentification/register.php');
             } else {
                 $hashing = password_hash($password, PASSWORD_DEFAULT);
@@ -37,7 +37,7 @@ if (isset($_POST["register"])) {
             header('Location: ../views/authentification/register.php');
         }
     } else {
-        $_SESSION['empty'] = 'Empty Input or invalid Information';
+        $_SESSION['error'] = 'Empty Input or invalid Information';
         header('Location: ../views/authentification/register.php');
     }
 }
@@ -66,11 +66,11 @@ if (isset($_POST['login'])) {
             header('Location: ../views/authentification/login.php');
         }
     } else {
-        $_SESSION['empty'] = 'Empty Input or invalid Information';
+        $_SESSION['error'] = 'Empty Input or invalid Information';
         header('Location: ../views/authentification/login.php');
     }
 }
 
-
+// --------------------------fetch Authors-------------------------------
 
 $users =  $Userservice->getUser();
