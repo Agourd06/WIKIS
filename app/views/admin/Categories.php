@@ -221,7 +221,7 @@ else{
                                 <script>
                                     document.getElementById('overlay').classList.remove('hidden');
                                 </script>
-                                <p class="text-red-600">Category Already Exist </p>
+                                <p class="text-red-600"><?= $_SESSION['error'] ?>  </p>
                             <?php
                                 unset($_GET['error']);
                             } ?>
@@ -251,7 +251,7 @@ else{
                         </button>
 
                     <?php } else { ?>
-                        <button type="submit" name="addClaim" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        <button type="submit" name="addCat" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                             Add Category
                         </button>
                     <?php } ?>

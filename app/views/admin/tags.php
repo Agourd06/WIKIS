@@ -1,14 +1,16 @@
-<?php
-require_once(__DIR__ . '/../../controllers/conTags.php');
-session_start();
+<?Php
+require_once(__DIR__ . '/../../controllers/ConTags.php');
 
-if(isset($_SESSION['user'])){
-    $welcom =  'WELCOM :'. $_SESSION['username'];
-}
-else{
-    header('Location: ../authentification/login.php');
-}
-?>
+
+// if(isset($_SESSION['user'])){
+//     $welcom =  'WELCOM :'. $_SESSION['username'];
+// }
+// else{
+//     header('Location: ../authentification/login.php');
+// }
+    ?>
+
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -31,12 +33,12 @@ else{
                     <p class="text-transparent bg-clip-text bg-gradient-to-r text-[20px] font-bold to-blue-400 from-blue-900">Administration</p>
 
                 </div>
-                
+
                 <div class="text-right ">
-                    <button class="hover:bg-gradient-to-r md:w-auto w-16 hover:from-sky-300 hover:to-sky-800 md:text-[17px] text-[10px] bg-gradient-to-r from-sky-800 to-sky-300 text-white font-semibold py-2 px-4 rounded">
+                    <button id="addcategory" class="hover:bg-gradient-to-r md:w-auto w-16 hover:from-sky-300 hover:to-sky-800 md:text-[17px] text-[10px] bg-gradient-to-r from-sky-800 to-sky-300 text-white font-semibold py-2 px-4 rounded">
 
 
-                        add Category
+                        add Tag
 
                     </button>
                 </div>
@@ -63,10 +65,10 @@ else{
             <a class="block text-black font-bold py-2.5 px-4 my-4 rounded  duration-300 hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 hover:text-white" href="index.php">
                 <i class="fas fa-home mr-2"></i>Dashboard
             </a>
-         
+
 
             <a class="block text-black font-bold py-2.5 px-4 my-4 rounded  duration-300 hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 hover:text-white" href="Categories.php">
-                <i class="fas fa-file-alt mr-2"></i>Categorys
+                <i class="fas fa-file-alt mr-2"></i>Category
             </a>
 
             <a class="block text-black font-bold py-2.5 px-4 my-4 rounded  duration-300 hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 hover:text-white" href="wikis.php">
@@ -85,20 +87,20 @@ else{
 
             <div class="p-2 bg-white w-full md:w-60 flex flex-col md:flex hidden" id="sideNav">
                 <nav><a class="block text-black font-bold py-2.5 px-4 my-4 rounded  duration-300 hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 hover:text-white" href="index.php">
-                <i class="fas fa-home mr-2"></i>Dashboard
-            </a>
-           
+                        <i class="fas fa-home mr-2"></i>Dashboard
+                    </a>
 
-            <a class="block text-black font-bold py-2.5 px-4 my-4 rounded  duration-300 hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 hover:text-white" href="Categories.php">
-                <i class="fas fa-file-alt mr-2"></i>Categorys
-            </a>
 
-            <a class="block text-black font-bold py-2.5 px-4 my-4 rounded  duration-300 hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 hover:text-white" href="wikis.php">
-                <i class="fas fa-store mr-2"></i>Wikis
-            </a>
-            <a class="block text-black font-bold py-2.5 px-4 my-4 rounded  duration-300 hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 hover:text-white" href="tags.php">
-                <i class="fas fa-store mr-2"></i>Tags
-            </a>
+                    <a class="block text-black font-bold py-2.5 px-4 my-4 rounded  duration-300 hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 hover:text-white" href="Categories.php">
+                        <i class="fas fa-file-alt mr-2"></i>Category
+                    </a>
+
+                    <a class="block text-black font-bold py-2.5 px-4 my-4 rounded  duration-300 hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 hover:text-white" href="wikis.php">
+                        <i class="fas fa-store mr-2"></i>Wikis
+                    </a>
+                    <a class="block text-black font-bold py-2.5 px-4 my-4 rounded  duration-300 hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 hover:text-white" href="tags.php">
+                        <i class="fas fa-store mr-2"></i>Tags
+                    </a>
 
                 </nav>
 
@@ -122,16 +124,10 @@ else{
                             <thead class="bg-gradient-to-r from-sky-300 to-sky-800 whitespace-nowrap">
                                 <tr>
                                     <th class="px-6 py-3 text-left text-sm font-semibold text-white">
+                                        Tag Id
+                                    </th>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-white">
                                         Name
-                                    </th>
-                                    <th class="px-6 py-3 text-left text-sm font-semibold text-white">
-                                        Email
-                                    </th>
-                                    <th class="px-6 py-3 text-left text-sm font-semibold text-white">
-                                        Role
-                                    </th>
-                                    <th class="px-6 py-3 text-left text-sm font-semibold text-white">
-                                        Joined At
                                     </th>
                                     <th class="px-6 py-3 text-left text-sm font-semibold text-white">
                                         Actions
@@ -139,174 +135,37 @@ else{
                                 </tr>
                             </thead>
                             <tbody class="whitespace-nowrap">
-                                <tr class="even:bg-blue-50">
-                                    <td class="px-6 py-4 text-sm">
-                                        John Doe
-                                    </td>
-                                    <td class="px-6 py-4 text-sm">
-                                        john@example.com
-                                    </td>
-                                    <td class="px-6 py-4 text-sm">
-                                        Admin
-                                    </td>
-                                    <td class="px-6 py-4 text-sm">
-                                        2022-05-15
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <button class="mr-4" title="Edit">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 fill-blue-500 hover:fill-blue-700" viewBox="0 0 348.882 348.882">
-                                                <path d="m333.988 11.758-.42-.383A43.363 43.363 0 0 0 304.258 0a43.579 43.579 0 0 0-32.104 14.153L116.803 184.231a14.993 14.993 0 0 0-3.154 5.37l-18.267 54.762c-2.112 6.331-1.052 13.333 2.835 18.729 3.918 5.438 10.23 8.685 16.886 8.685h.001c2.879 0 5.693-.592 8.362-1.76l52.89-23.138a14.985 14.985 0 0 0 5.063-3.626L336.771 73.176c16.166-17.697 14.919-45.247-2.783-61.418zM130.381 234.247l10.719-32.134.904-.99 20.316 18.556-.904.99-31.035 13.578zm184.24-181.304L182.553 197.53l-20.316-18.556L294.305 34.386c2.583-2.828 6.118-4.386 9.954-4.386 3.365 0 6.588 1.252 9.082 3.53l.419.383c5.484 5.009 5.87 13.546.861 19.03z" data-original="#000000" />
-                                                <path d="M303.85 138.388c-8.284 0-15 6.716-15 15v127.347c0 21.034-17.113 38.147-38.147 38.147H68.904c-21.035 0-38.147-17.113-38.147-38.147V100.413c0-21.034 17.113-38.147 38.147-38.147h131.587c8.284 0 15-6.716 15-15s-6.716-15-15-15H68.904C31.327 32.266.757 62.837.757 100.413v180.321c0 37.576 30.571 68.147 68.147 68.147h181.798c37.576 0 68.147-30.571 68.147-68.147V153.388c.001-8.284-6.715-15-14.999-15z" data-original="#000000" />
-                                            </svg>
-                                        </button>
-                                        <button class="mr-4" title="Delete">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 fill-red-500 hover:fill-red-700" viewBox="0 0 24 24">
-                                                <path d="M19 7a1 1 0 0 0-1 1v11.191A1.92 1.92 0 0 1 15.99 21H8.01A1.92 1.92 0 0 1 6 19.191V8a1 1 0 0 0-2 0v11.191A3.918 3.918 0 0 0 8.01 23h7.98A3.918 3.918 0 0 0 20 19.191V8a1 1 0 0 0-1-1Zm1-3h-4V2a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v2H4a1 1 0 0 0 0 2h16a1 1 0 0 0 0-2ZM10 4V3h4v1Z" data-original="#000000" />
-                                                <path d="M11 17v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Zm4 0v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Z" data-original="#000000" />
-                                            </svg>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr class="even:bg-blue-50">
-                                    <td class="px-6 py-4 text-sm">
-                                        Jane Smith
-                                    </td>
-                                    <td class="px-6 py-4 text-sm">
-                                        jane@example.com
-                                    </td>
-                                    <td class="px-6 py-4 text-sm">
-                                        User
-                                    </td>
-                                    <td class="px-6 py-4 text-sm">
-                                        2022-07-20
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <button class="mr-4" title="Edit">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 fill-blue-500 hover:fill-blue-700" viewBox="0 0 348.882 348.882">
-                                                <path d="m333.988 11.758-.42-.383A43.363 43.363 0 0 0 304.258 0a43.579 43.579 0 0 0-32.104 14.153L116.803 184.231a14.993 14.993 0 0 0-3.154 5.37l-18.267 54.762c-2.112 6.331-1.052 13.333 2.835 18.729 3.918 5.438 10.23 8.685 16.886 8.685h.001c2.879 0 5.693-.592 8.362-1.76l52.89-23.138a14.985 14.985 0 0 0 5.063-3.626L336.771 73.176c16.166-17.697 14.919-45.247-2.783-61.418zM130.381 234.247l10.719-32.134.904-.99 20.316 18.556-.904.99-31.035 13.578zm184.24-181.304L182.553 197.53l-20.316-18.556L294.305 34.386c2.583-2.828 6.118-4.386 9.954-4.386 3.365 0 6.588 1.252 9.082 3.53l.419.383c5.484 5.009 5.87 13.546.861 19.03z" data-original="#000000" />
-                                                <path d="M303.85 138.388c-8.284 0-15 6.716-15 15v127.347c0 21.034-17.113 38.147-38.147 38.147H68.904c-21.035 0-38.147-17.113-38.147-38.147V100.413c0-21.034 17.113-38.147 38.147-38.147h131.587c8.284 0 15-6.716 15-15s-6.716-15-15-15H68.904C31.327 32.266.757 62.837.757 100.413v180.321c0 37.576 30.571 68.147 68.147 68.147h181.798c37.576 0 68.147-30.571 68.147-68.147V153.388c.001-8.284-6.715-15-14.999-15z" data-original="#000000" />
-                                            </svg>
-                                        </button>
-                                        <button class="mr-4" title="Delete">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 fill-red-500 hover:fill-red-700" viewBox="0 0 24 24">
-                                                <path d="M19 7a1 1 0 0 0-1 1v11.191A1.92 1.92 0 0 1 15.99 21H8.01A1.92 1.92 0 0 1 6 19.191V8a1 1 0 0 0-2 0v11.191A3.918 3.918 0 0 0 8.01 23h7.98A3.918 3.918 0 0 0 20 19.191V8a1 1 0 0 0-1-1Zm1-3h-4V2a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v2H4a1 1 0 0 0 0 2h16a1 1 0 0 0 0-2ZM10 4V3h4v1Z" data-original="#000000" />
-                                                <path d="M11 17v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Zm4 0v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Z" data-original="#000000" />
-                                            </svg>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr class="even:bg-blue-50">
-                                    <td class="px-6 py-4 text-sm">
-                                        Alen Doe
-                                    </td>
-                                    <td class="px-6 py-4 text-sm">
-                                        alen@example.com
-                                    </td>
-                                    <td class="px-6 py-4 text-sm">
-                                        User
-                                    </td>
-                                    <td class="px-6 py-4 text-sm">
-                                        2022-07-21
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <button class="mr-4" title="Edit">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 fill-blue-500 hover:fill-blue-700" viewBox="0 0 348.882 348.882">
-                                                <path d="m333.988 11.758-.42-.383A43.363 43.363 0 0 0 304.258 0a43.579 43.579 0 0 0-32.104 14.153L116.803 184.231a14.993 14.993 0 0 0-3.154 5.37l-18.267 54.762c-2.112 6.331-1.052 13.333 2.835 18.729 3.918 5.438 10.23 8.685 16.886 8.685h.001c2.879 0 5.693-.592 8.362-1.76l52.89-23.138a14.985 14.985 0 0 0 5.063-3.626L336.771 73.176c16.166-17.697 14.919-45.247-2.783-61.418zM130.381 234.247l10.719-32.134.904-.99 20.316 18.556-.904.99-31.035 13.578zm184.24-181.304L182.553 197.53l-20.316-18.556L294.305 34.386c2.583-2.828 6.118-4.386 9.954-4.386 3.365 0 6.588 1.252 9.082 3.53l.419.383c5.484 5.009 5.87 13.546.861 19.03z" data-original="#000000" />
-                                                <path d="M303.85 138.388c-8.284 0-15 6.716-15 15v127.347c0 21.034-17.113 38.147-38.147 38.147H68.904c-21.035 0-38.147-17.113-38.147-38.147V100.413c0-21.034 17.113-38.147 38.147-38.147h131.587c8.284 0 15-6.716 15-15s-6.716-15-15-15H68.904C31.327 32.266.757 62.837.757 100.413v180.321c0 37.576 30.571 68.147 68.147 68.147h181.798c37.576 0 68.147-30.571 68.147-68.147V153.388c.001-8.284-6.715-15-14.999-15z" data-original="#000000" />
-                                            </svg>
-                                        </button>
-                                        <button class="mr-4" title="Delete">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 fill-red-500 hover:fill-red-700" viewBox="0 0 24 24">
-                                                <path d="M19 7a1 1 0 0 0-1 1v11.191A1.92 1.92 0 0 1 15.99 21H8.01A1.92 1.92 0 0 1 6 19.191V8a1 1 0 0 0-2 0v11.191A3.918 3.918 0 0 0 8.01 23h7.98A3.918 3.918 0 0 0 20 19.191V8a1 1 0 0 0-1-1Zm1-3h-4V2a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v2H4a1 1 0 0 0 0 2h16a1 1 0 0 0 0-2ZM10 4V3h4v1Z" data-original="#000000" />
-                                                <path d="M11 17v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Zm4 0v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Z" data-original="#000000" />
-                                            </svg>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr class="even:bg-blue-50">
-                                    <td class="px-6 py-4 text-sm">
-                                        Kelwin mark
-                                    </td>
-                                    <td class="px-6 py-4 text-sm">
-                                        kelwin@example.com
-                                    </td>
-                                    <td class="px-6 py-4 text-sm">
-                                        User
-                                    </td>
-                                    <td class="px-6 py-4 text-sm">
-                                        2020-07-06
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <button class="mr-4" title="Edit">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 fill-blue-500 hover:fill-blue-700" viewBox="0 0 348.882 348.882">
-                                                <path d="m333.988 11.758-.42-.383A43.363 43.363 0 0 0 304.258 0a43.579 43.579 0 0 0-32.104 14.153L116.803 184.231a14.993 14.993 0 0 0-3.154 5.37l-18.267 54.762c-2.112 6.331-1.052 13.333 2.835 18.729 3.918 5.438 10.23 8.685 16.886 8.685h.001c2.879 0 5.693-.592 8.362-1.76l52.89-23.138a14.985 14.985 0 0 0 5.063-3.626L336.771 73.176c16.166-17.697 14.919-45.247-2.783-61.418zM130.381 234.247l10.719-32.134.904-.99 20.316 18.556-.904.99-31.035 13.578zm184.24-181.304L182.553 197.53l-20.316-18.556L294.305 34.386c2.583-2.828 6.118-4.386 9.954-4.386 3.365 0 6.588 1.252 9.082 3.53l.419.383c5.484 5.009 5.87 13.546.861 19.03z" data-original="#000000" />
-                                                <path d="M303.85 138.388c-8.284 0-15 6.716-15 15v127.347c0 21.034-17.113 38.147-38.147 38.147H68.904c-21.035 0-38.147-17.113-38.147-38.147V100.413c0-21.034 17.113-38.147 38.147-38.147h131.587c8.284 0 15-6.716 15-15s-6.716-15-15-15H68.904C31.327 32.266.757 62.837.757 100.413v180.321c0 37.576 30.571 68.147 68.147 68.147h181.798c37.576 0 68.147-30.571 68.147-68.147V153.388c.001-8.284-6.715-15-14.999-15z" data-original="#000000" />
-                                            </svg>
-                                        </button>
-                                        <button class="mr-4" title="Delete">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 fill-red-500 hover:fill-red-700" viewBox="0 0 24 24">
-                                                <path d="M19 7a1 1 0 0 0-1 1v11.191A1.92 1.92 0 0 1 15.99 21H8.01A1.92 1.92 0 0 1 6 19.191V8a1 1 0 0 0-2 0v11.191A3.918 3.918 0 0 0 8.01 23h7.98A3.918 3.918 0 0 0 20 19.191V8a1 1 0 0 0-1-1Zm1-3h-4V2a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v2H4a1 1 0 0 0 0 2h16a1 1 0 0 0 0-2ZM10 4V3h4v1Z" data-original="#000000" />
-                                                <path d="M11 17v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Zm4 0v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Z" data-original="#000000" />
-                                            </svg>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr class="even:bg-blue-50">
-                                    <td class="px-6 py-4 text-sm">
-                                        Dustin
-                                    </td>
-                                    <td class="px-6 py-4 text-sm">
-                                        dustin@example.com
-                                    </td>
-                                    <td class="px-6 py-4 text-sm">
-                                        User
-                                    </td>
-                                    <td class="px-6 py-4 text-sm">
-                                        2021-07-06
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <button class="mr-4" title="Edit">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 fill-blue-500 hover:fill-blue-700" viewBox="0 0 348.882 348.882">
-                                                <path d="m333.988 11.758-.42-.383A43.363 43.363 0 0 0 304.258 0a43.579 43.579 0 0 0-32.104 14.153L116.803 184.231a14.993 14.993 0 0 0-3.154 5.37l-18.267 54.762c-2.112 6.331-1.052 13.333 2.835 18.729 3.918 5.438 10.23 8.685 16.886 8.685h.001c2.879 0 5.693-.592 8.362-1.76l52.89-23.138a14.985 14.985 0 0 0 5.063-3.626L336.771 73.176c16.166-17.697 14.919-45.247-2.783-61.418zM130.381 234.247l10.719-32.134.904-.99 20.316 18.556-.904.99-31.035 13.578zm184.24-181.304L182.553 197.53l-20.316-18.556L294.305 34.386c2.583-2.828 6.118-4.386 9.954-4.386 3.365 0 6.588 1.252 9.082 3.53l.419.383c5.484 5.009 5.87 13.546.861 19.03z" data-original="#000000" />
-                                                <path d="M303.85 138.388c-8.284 0-15 6.716-15 15v127.347c0 21.034-17.113 38.147-38.147 38.147H68.904c-21.035 0-38.147-17.113-38.147-38.147V100.413c0-21.034 17.113-38.147 38.147-38.147h131.587c8.284 0 15-6.716 15-15s-6.716-15-15-15H68.904C31.327 32.266.757 62.837.757 100.413v180.321c0 37.576 30.571 68.147 68.147 68.147h181.798c37.576 0 68.147-30.571 68.147-68.147V153.388c.001-8.284-6.715-15-14.999-15z" data-original="#000000" />
-                                            </svg>
-                                        </button>
-                                        <button class="mr-4" title="Delete">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 fill-red-500 hover:fill-red-700" viewBox="0 0 24 24">
-                                                <path d="M19 7a1 1 0 0 0-1 1v11.191A1.92 1.92 0 0 1 15.99 21H8.01A1.92 1.92 0 0 1 6 19.191V8a1 1 0 0 0-2 0v11.191A3.918 3.918 0 0 0 8.01 23h7.98A3.918 3.918 0 0 0 20 19.191V8a1 1 0 0 0-1-1Zm1-3h-4V2a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v2H4a1 1 0 0 0 0 2h16a1 1 0 0 0 0-2ZM10 4V3h4v1Z" data-original="#000000" />
-                                                <path d="M11 17v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Zm4 0v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Z" data-original="#000000" />
-                                            </svg>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr class="even:bg-blue-50">
-                                    <td class="px-6 py-4 text-sm">
-                                        Jams david
-                                    </td>
-                                    <td class="px-6 py-4 text-sm">
-                                        jams@example.com
-                                    </td>
-                                    <td class="px-6 py-4 text-sm">
-                                        Candidate
-                                    </td>
-                                    <td class="px-6 py-4 text-sm">
-                                        2018-09-04
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <button class="mr-4" title="Edit">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 fill-blue-500 hover:fill-blue-700" viewBox="0 0 348.882 348.882">
-                                                <path d="m333.988 11.758-.42-.383A43.363 43.363 0 0 0 304.258 0a43.579 43.579 0 0 0-32.104 14.153L116.803 184.231a14.993 14.993 0 0 0-3.154 5.37l-18.267 54.762c-2.112 6.331-1.052 13.333 2.835 18.729 3.918 5.438 10.23 8.685 16.886 8.685h.001c2.879 0 5.693-.592 8.362-1.76l52.89-23.138a14.985 14.985 0 0 0 5.063-3.626L336.771 73.176c16.166-17.697 14.919-45.247-2.783-61.418zM130.381 234.247l10.719-32.134.904-.99 20.316 18.556-.904.99-31.035 13.578zm184.24-181.304L182.553 197.53l-20.316-18.556L294.305 34.386c2.583-2.828 6.118-4.386 9.954-4.386 3.365 0 6.588 1.252 9.082 3.53l.419.383c5.484 5.009 5.87 13.546.861 19.03z" data-original="#000000" />
-                                                <path d="M303.85 138.388c-8.284 0-15 6.716-15 15v127.347c0 21.034-17.113 38.147-38.147 38.147H68.904c-21.035 0-38.147-17.113-38.147-38.147V100.413c0-21.034 17.113-38.147 38.147-38.147h131.587c8.284 0 15-6.716 15-15s-6.716-15-15-15H68.904C31.327 32.266.757 62.837.757 100.413v180.321c0 37.576 30.571 68.147 68.147 68.147h181.798c37.576 0 68.147-30.571 68.147-68.147V153.388c.001-8.284-6.715-15-14.999-15z" data-original="#000000" />
-                                            </svg>
-                                        </button>
-                                        <button class="mr-4" title="Delete">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 fill-red-500 hover:fill-red-700" viewBox="0 0 24 24">
-                                                <path d="M19 7a1 1 0 0 0-1 1v11.191A1.92 1.92 0 0 1 15.99 21H8.01A1.92 1.92 0 0 1 6 19.191V8a1 1 0 0 0-2 0v11.191A3.918 3.918 0 0 0 8.01 23h7.98A3.918 3.918 0 0 0 20 19.191V8a1 1 0 0 0-1-1Zm1-3h-4V2a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v2H4a1 1 0 0 0 0 2h16a1 1 0 0 0 0-2ZM10 4V3h4v1Z" data-original="#000000" />
-                                                <path d="M11 17v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Zm4 0v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Z" data-original="#000000" />
-                                            </svg>
-                                        </button>
-                                    </td>
-                                </tr>
+                                <?php
+                                foreach ($Tags as $tag) :
+                                ?>
+                                    <tr class="even:bg-blue-50">
+                                        <td class="pl-10 py-4 text-sm">
+                                            <?= $tag->getId() ?>
+                                        </td>
+                                        <td class="px-6 py-4 text-sm">
+                                            <?= $tag->getTag_name(); ?>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <form action="../../controllers/ConTags.php" method="post">
+                                                <button class="mr-4" title="Edit" name="update" value="<?= $tag->getId() ?>">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 fill-blue-500 hover:fill-blue-700" viewBox="0 0 348.882 348.882">
+                                                        <path d="m333.988 11.758-.42-.383A43.363 43.363 0 0 0 304.258 0a43.579 43.579 0 0 0-32.104 14.153L116.803 184.231a14.993 14.993 0 0 0-3.154 5.37l-18.267 54.762c-2.112 6.331-1.052 13.333 2.835 18.729 3.918 5.438 10.23 8.685 16.886 8.685h.001c2.879 0 5.693-.592 8.362-1.76l52.89-23.138a14.985 14.985 0 0 0 5.063-3.626L336.771 73.176c16.166-17.697 14.919-45.247-2.783-61.418zM130.381 234.247l10.719-32.134.904-.99 20.316 18.556-.904.99-31.035 13.578zm184.24-181.304L182.553 197.53l-20.316-18.556L294.305 34.386c2.583-2.828 6.118-4.386 9.954-4.386 3.365 0 6.588 1.252 9.082 3.53l.419.383c5.484 5.009 5.87 13.546.861 19.03z" data-original="#000000" />
+                                                        <path d="M303.85 138.388c-8.284 0-15 6.716-15 15v127.347c0 21.034-17.113 38.147-38.147 38.147H68.904c-21.035 0-38.147-17.113-38.147-38.147V100.413c0-21.034 17.113-38.147 38.147-38.147h131.587c8.284 0 15-6.716 15-15s-6.716-15-15-15H68.904C31.327 32.266.757 62.837.757 100.413v180.321c0 37.576 30.571 68.147 68.147 68.147h181.798c37.576 0 68.147-30.571 68.147-68.147V153.388c.001-8.284-6.715-15-14.999-15z" data-original="#000000" />
+                                                    </svg>
+                                                </button>
+                                            </form>
+                                            <form action="../../controllers/ConTags.php" method="post">
+
+                                                <button class="mr-4" title="Delete" name="delete" value="<?= $tag->getId() ?>">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 fill-red-500 hover:fill-red-700" viewBox="0 0 24 24">
+                                                        <path d="M19 7a1 1 0 0 0-1 1v11.191A1.92 1.92 0 0 1 15.99 21H8.01A1.92 1.92 0 0 1 6 19.191V8a1 1 0 0 0-2 0v11.191A3.918 3.918 0 0 0 8.01 23h7.98A3.918 3.918 0 0 0 20 19.191V8a1 1 0 0 0-1-1Zm1-3h-4V2a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v2H4a1 1 0 0 0 0 2h16a1 1 0 0 0 0-2ZM10 4V3h4v1Z" data-original="#000000" />
+                                                        <path d="M11 17v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Zm4 0v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Z" data-original="#000000" />
+                                                    </svg>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>
@@ -318,8 +177,79 @@ else{
     </div>
     </div>
 
-    <script src="../../../public/js/burgerMenu.js"></script>
 
+    <div id="overlay" class="hidden h-screen w-full fixed top-0 left-0 bg-black/10  flex justify-center items-center">
+
+                    <!------------------------- Displaying Data for update------------------------------ -->
+
+                        <?php
+                        if (isset($_SESSION['tags'])) {
+                            $Data = $_SESSION['tags'];
+
+                            [$name] = $Data;
+                        ?>
+                            <script>
+                                document.getElementById("overlay").classList.remove("hidden");
+                            </script>
+                        <?php
+                            unset($_SESSION['tags']);
+                        }
+                        ?>
+                    <!------------------------- Displaying Data for update------------------------------ -->
+
+
+        <div class="w-full md:w-1/2 mx-auto bg-white p-6 rounded-md shadow-md">
+        <?php if (isset($_SESSION['Idtag'])) {
+                        $id = $_SESSION['Idtag'] ?>
+                                    <h2 class="text-2xl font-semibold mb-4">Edit Tags</h2>
+
+
+                    <?php } else { ?>
+                        <h2 class="text-2xl font-semibold mb-4">Add Tags</h2>
+
+                    <?php } ?>
+
+
+                    <!------------------------------ Regex for existing Tag------------------------- -->
+
+                            <?php
+                            if (isset($_GET['error']) && $_GET['error'] === 'true') { ?>
+                                <script>
+                                    document.getElementById('overlay').classList.remove('hidden');
+                                </script>
+                                <p class="text-red-600">Tag Already Exist </p>
+                            <?php
+                                unset($_GET['error']);
+                            } ?>
+                    <!------------------------------ Regex for existing Tag--------------------------- -->
+
+            <form action="../../controllers/ConTags.php" method="POST" enctype="multipart/form-data">
+                <div class="mb-4">
+                    <label for="TagName" class="block text-gray-700 text-sm font-bold mb-2"> Tags Name </label>
+                    <input type="text" id="TagsName" name="TagsName" value="<?= $name ?>" placeholder="Exp : Tag1, Tag2, Tag3 ..." class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+                </div>
+   
+                <div class="flex justify-end">
+                <?php if (isset($_SESSION['Idtag'])) {
+                        $id = $_SESSION['Idtag'] ?>
+                        <button type="submit" name="updateTags" value="<?= $id ?>" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            Edit Tag
+                        </button>
+
+                    <?php } else { ?>
+                        <button type="submit" name="addTags" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            Add Tag
+                        </button>
+                    <?php } ?>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <script src="../../../public/js/burgerMenu.js"></script>
+    <script src="../../../public/js/PopUp.js">
+    </script>
 </body>
 
 </html>

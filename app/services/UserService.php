@@ -69,6 +69,12 @@ return $users;
         return $loged;
     }
 
+public function CountAUthors(){
 
+    $conn = $this->connect();
+    $query = "SELECT count(user_id) as authors WHERE user_role = author";
+    $stmt = $conn->prepare($query);
+    $stmt->execute();
+}
   
 }

@@ -3,11 +3,11 @@
 interface TagsInterface{
 
     public function addtags(tag $tags);
-    public function gettagss();
-    public function updatetags(tag $tags,$id);
-    public function displayUpdate($id);
+    public function getTags();
+    public function updateTags(tag $tags,$id);
+    public function displayUpdateTags($id);
     public function removetags($id);
-    public function CheckCat($name);
+    public function CheckTags($name);
   
 }
 

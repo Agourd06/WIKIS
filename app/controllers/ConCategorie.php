@@ -10,7 +10,7 @@ $categoryService = new CategoryService();
 
 // -----------------------Add Categorys----------------------------
 
-if (isset($_POST["addcategory"])) {
+if (isset($_POST["addCat"])) {
     $CatName = $_POST["CategoryName"];
     $CatDescr = $_POST["CategoryDesc"];
     $image = $_FILES["image"]["name"];
@@ -21,6 +21,8 @@ if (isset($_POST["addcategory"])) {
     if ($CatName !== '' && $CatDescr !== ''  && preg_match('/^[A-Za-z\s-]+$/', $CatName)) {
 
         if ($names) {
+            $_SESSION['error'] = 'Category Already Exist';
+
             header('Location: ../views/admin/Categories.php?error=true');
         } else {
             $category = new Category($id, $CatName, $CatDescr, URLROOT . 'public/images/' . $image);
@@ -29,7 +31,7 @@ if (isset($_POST["addcategory"])) {
         }
     } else {
         $_SESSION['error'] = 'Empty Input or invalid Information';
-        header('Location: ../views/authentification/register.php');
+        header('Location: ../views/admin/Categories.php?error=true');
     }
 }
 
@@ -72,11 +74,12 @@ if (isset($_POST["updateCat"])) {
      
             $category = new Category($idcat, $CatName, $CatDescr, URLROOT . 'public/images/' . $image);
             $categoryService->updateCategory($category, $id);
+            unset($_SESSION['IdCat']);
             header('Location: ../views/admin/Categories.php');
         
     } else {
         $_SESSION['error'] = 'Empty Input or invalid Information';
-        header('Location: ../views/authentification/register.php');
+        header('Location: ../views/admin/Categories.php');
     }
 }
 

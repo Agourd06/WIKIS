@@ -13,18 +13,15 @@ class Tag{
     $this->tag_name = $tag_name;
         
     }
-public function __get($property) {
-    if (property_exists($this, $property)) {
-      return $this->$property;
+    public function getId()
+    {
+        return $this->id;
     }
-}
-
-public function __set($property, $value) {
-    if (property_exists($this, $property)) {
-        $this->$property = $value;
+    
+    public function getTag_name()
+    {
+        return $this->tag_name;
     }
-
-}
 }
 
 ?>
