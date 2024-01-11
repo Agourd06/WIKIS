@@ -73,7 +73,21 @@ class WikiService
         }
         return $wikis;
     }
+    public function getHomeWiki()
+    {
 
+        $conn = $this->connect();
+
+        $query = "SELECT * FROM wiki ORDER BY wiki_title DESC LIMIT 3";
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+        $Wiki  = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $wikis = array();
+        foreach ($Wiki as $row) {
+            $wikis[] =   new wiki($row["wiki_id"], $row["wiki_image"], $row["wiki_title"], $row['wiki_content'], $row["wiki_summarize"], $row['created_at'], $row["category_id"], $row['user_id'], $row['wiki_statut']);
+        }
+        return $wikis;
+    }
 
     public function getAuthorWikis($id)
     {

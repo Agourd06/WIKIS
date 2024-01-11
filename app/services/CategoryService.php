@@ -39,6 +39,21 @@ class CategoryService implements CategoryInterface
         }
         return $Category;
     }
+    public function getHomeCategorys()
+    {
+
+        $conn = $this->connect();
+
+        $query = "SELECT * FROM category ORDER BY category_name DESC LIMIT 3";
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+        $categorys  = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $Category = array();
+        foreach ($categorys as $cat) {
+            $Category[] = new Category($cat['category_id'], $cat['category_name'], $cat['category_desc'], $cat['category_image']);
+        }
+        return $Category;
+    }
 
     public function CheckCat($name)
     {

@@ -1,5 +1,6 @@
 <?php
 require_once(__DIR__ . "/../../controllers/ConWikis.php");
+$_SESSION["CatId"] = $_POST["catId"];
 ?>
 
 <!DOCTYPE html>
@@ -219,8 +220,9 @@ require_once(__DIR__ . "/../../controllers/ConWikis.php");
         <div class="min-h-full w-[70%] mx-auto rounded-xl">
 
             <?php 
-            var_dump($wikis);
-            foreach ($wikis as $wiki) : ?>
+$wik = isset($wikisCat) ? $wikisCat : $wikis;
+
+            foreach ($wik as $wiki) : ?>
 
                 <div class="md:flex cursor-pointer w-full md:min-h-[25vh] min-h-fit bg-slate-100 rounded-xl p-8 md:p-0  hover:scale-105 mb-6 md:mb-4">
                     <img class="w-64 md:h-[100%] h-[5%]  md:h-auto md:rounded-xl rounded-xl mx-auto" src="<?= $wiki->getWikiImage(); ?>" alt="" width="384" height="512">

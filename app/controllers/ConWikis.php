@@ -46,26 +46,34 @@ if (isset($_POST["addWiki"])) {
 }
 // --------------------------fetch Wikis-------------------------------
 
-if(isset($_POST['catId']) ) {
-    $id = $_POST['catId'];
-    $data =  $WikisService->getfiltredWikis($id);
+
+
+
+    $id = $_SESSION["CatId"];
+var_dump($id);
+ 
+    $wikisCat =  $WikisService->getfiltredWikis($id);
+ 
+
+
+
     
-    // header('Location: ../views/visiteur/');
+    $wikis =  $WikisService->getWikis();
 
 
-} else {
-    
-    // $wikis =  $WikisService->getWikis();
-    // header('Location: ../views/visiteur/');
 
-}
-var_dump($_POST['catId']);
-// $wikis = $data;
+    $wikiHome =  $WikisService->getHomeWiki();
 
 
-if(isset($_POST['Unset']) ) {
-    unset($_POST['catId']);
-    header('Location: ../views/visiteur/');
+
+
+
+
+
+
+if(isset($_SESSION["CatId"]) ) {
+    unset($_SESSION["CatId"]);
+    header('Location: ../views/visiteur/wikis.php');
 
 }
 // --------------------------fetch Admin Wikis-------------------------------

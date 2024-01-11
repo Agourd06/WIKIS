@@ -38,6 +38,8 @@ if (isset($_POST["addCat"])) {
 
 $Categorys = $categoryService->getCategorys();
 
+$categories =$categoryService->getHomeCategorys();
+
 
 
 // <!-- ---------------------data for updating------------------------ -->
