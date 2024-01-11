@@ -116,4 +116,18 @@ $WikisService->ArchiveWiki($id);
 header('Location: ../views/admin/wikis.php');
 
 }
+// ---------------------------UnArchive-----------------------------
+if (isset($_POST['unarchive'])) {
+    $id = $_POST['unarchive'];
+$WikisService->uNArchiveWiki($id);
+header('Location: ../views/admin/wikis.php');
+
+}
+
+
+// -------------------------------Count Wikis---------------------------------------------
+$wikiTot = $WikisService->CountWikis();
+
+// -------------------------------Count Archived Wikis---------------------------------------------
+$wikiArchived = $WikisService->CountArchivedWikis();
 ?>

@@ -123,6 +123,15 @@ public function ArchiveWiki($id){
     $stmt->execute();
 
 }
+public function uNArchiveWiki($id){
+
+    $conn = $this->connect();
+    $query = "UPDATE wiki set wiki_statut = False WHERE wiki_id =:id";
+    $stmt = $conn->prepare($query);
+    $stmt->bindParam(":id", $id);
+    $stmt->execute();
+
+}
 
   
 public function getAdminWikis(){
@@ -143,9 +152,27 @@ return $Adminwikis;
 }
 
 
+public function CountWikis(){
 
+    $conn = $this->connect();
+    $query = 'SELECT COUNT(wiki_id) as Wikis FROM wiki';
+    $stmt = $conn->prepare($query);
+    $stmt->execute();
+    $result = $stmt->fetchColumn();
+    return $result;
+}
+public function CountArchivedWikis(){
+
+    $conn = $this->connect();
+    $query = 'SELECT COUNT(wiki_id) as Wikis FROM wiki WHERE wiki_statut = TRUE ';
+    $stmt = $conn->prepare($query);
+    $stmt->execute();
+    $result = $stmt->fetchColumn();
+    return $result;
 }
 
+
+}
 
 
 

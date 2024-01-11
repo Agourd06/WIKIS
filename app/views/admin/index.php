@@ -2,6 +2,7 @@
 require_once(__DIR__ . '/../../controllers/ConUser.php');
 require_once(__DIR__ . '/../../controllers/ConCategorie.php');
 require_once(__DIR__ . '/../../controllers/ConTags.php');
+require_once(__DIR__ . '/../../controllers/ConWikis.php');
 
 if(isset($_SESSION['user'])){
     $welcom =  'WELCOM :'. $_SESSION['username'];
@@ -154,7 +155,7 @@ else{
                          0 56.5 23.5T880-640v400q0 33-23.5 56.5T800-160H160Zm0-80h640v-400H447l-80-80H160v480Zm0 0v-480 480Z" />
                             </svg>
                             <span class="py-2 px-16 bg-grey-lightest font-bold uppercase text-l text-grey-light ">
-                                454545
+                           <?= $wikiTot ?>
                             </span>
                             <h3 class="py-2 px-4 bg-grey-lightest font-bold uppercase text-sm text-gray-500 border-b border-grey-light">
                                 Available Wikis</h3>
@@ -190,7 +191,7 @@ else{
                                 <path d="m480-240 160-160-56-56-64 64v-168h-80v168l-64-64-56 56 160 160ZM200-640v440h560v-440H200Zm0 520q-33 0-56.5-23.5T120-200v-499q0-14 4.5-27t13.5-24l50-61q11-14 27.5-21.5T250-840h460q18 0 34.5 7.5T772-811l50 61q9 11 13.5 24t4.5 27v499q0 33-23.5 56.5T760-120H200Zm16-600h528l-34-40H250l-34 40Zm264 300Z" />
                             </svg>
                             <span class="py-2 px-10 bg-grey-lightest font-bold uppercase text-l text-grey-light ">
-                                4654654
+                          <?=  $wikiArchived ?>
                             </span>
                             <h3 class="py-2 px-4 bg-grey-lightest font-bold uppercase text-sm text-gray-500 border-b border-grey-light">
                                 Wiki Archived</h3>
