@@ -17,6 +17,7 @@ if (isset($_POST["addWiki"])) {
     $wikiAuthor = $_SESSION['user'];
     $image = $_FILES["image"]["name"];
     $tempname = $_FILES["image"]["tmp_name"];
+
     $WikiStatus = TRUE;
     $selectedTags = isset($_POST['nametag']) ? $_POST['nametag'] : array();
 
@@ -29,14 +30,14 @@ if (isset($_POST["addWiki"])) {
 
             header('Location: ../views/Author/AddWiki.php?error=true');
         } else {
-            $wikis = new wiki($id, URLROOT . 'public/images/' . $image, $wikiTitile, $wikiContent, $wikiSummary, $wikiCategory, $wikiAuthor, $WikiStatus);
+            $wikis = new wiki($id, URLROOT . 'public/images/' . $image, $wikiTitile, $wikiContent, $wikiSummary,$created_at, $wikiCategory, $wikiAuthor, $WikiStatus);
             $wikiId =  $WikisService->addWikis($wikis);
             foreach ($selectedTags as $selectedTag) {
                 var_dump($selectedTag);
                 $wikistags = new WikisTags($wikiId, $selectedTag);
                 $WikisService->TagsOfWikis($wikistags);
             }
-            header('Location: ../views/Author/AddWiki.php');
+            header('Location: ../views/Author/dashboardWikis.php');
         }
     } else {
         $_SESSION['error'] = 'Empty Input or invalid Information';
@@ -45,13 +46,36 @@ if (isset($_POST["addWiki"])) {
 }
 // --------------------------fetch Wikis-------------------------------
 
+if(isset($_POST['catId']) ) {
+    $id = $_POST['catId'];
+    $data =  $WikisService->getfiltredWikis($id);
+    
+    // header('Location: ../views/visiteur/');
 
 
-$wikis =  $WikisService->getWikis();
+} else {
+    
+    // $wikis =  $WikisService->getWikis();
+    // header('Location: ../views/visiteur/');
 
-// --------------------------fetch Wikis-------------------------------
+}
+var_dump($_POST['catId']);
+// $wikis = $data;
+
+
+if(isset($_POST['Unset']) ) {
+    unset($_POST['catId']);
+    header('Location: ../views/visiteur/');
+
+}
+// --------------------------fetch Admin Wikis-------------------------------
 
 $AdminWikis =  $WikisService->getAdminWikis();
+
+
+// --------------------------fetch Auhor Wikis-------------------------------
+
+$AuthorWikis =  $WikisService->getAuthorWikis($_SESSION['user']);
 
 
 
@@ -85,15 +109,14 @@ if (isset($_POST["updatewiki"])) {
     $wikiAuthor = '';
     $image = '';
     $WikiStatus = '';
-
     $idwiki = '';
     if ($wikiTitile !== '' && $wikiSummary !== '' && $wikiContent !== '' ) {
 
        
     
-            $wikis = new wiki($idwiki, URLROOT . 'public/images/' . $image, $wikiTitile, $wikiContent, $wikiSummary, $wikiCategory, $wikiAuthor, $WikiStatus);
+            $wikis = new wiki($idwiki, URLROOT . 'public/images/' . $image, $wikiTitile, $wikiContent, $wikiSummary, $created_at,$wikiCategory, $wikiAuthor, $WikiStatus);
             $WikisService->updateWiki($wikis,$id);
-           
+           unset($_SESSION['Idwiki']);
             header('Location: ../views/Author/dashboardWikis.php');
         
     } else {

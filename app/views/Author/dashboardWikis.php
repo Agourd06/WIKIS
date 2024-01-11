@@ -75,7 +75,7 @@ if (isset($_SESSION['user'])) {
                             </thead>
                             <tbody class="whitespace-nowrap">
                                 <?php
-                                foreach ($wikis as $wiki) :
+                                foreach ($AuthorWikis as $wiki) :
                                 ?>
                                     <tr class="even:bg-blue-50">
                                         <td class="pr-6 py-4 ">

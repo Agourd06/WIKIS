@@ -1,6 +1,5 @@
 <?php
-session_start();
-
+require_once(__DIR__ . "/../../controllers/ConWikis.php");
 ?>
 
 <!DOCTYPE html>
@@ -46,7 +45,7 @@ session_start();
                                     My WIKIS
 
                                 </button></a>
-                                <a href="../authentification/login.php"><button type="button" class="flex gap-x-2 md:font-bold items-center text-[10px] md:text-[14px] h-10 px-5 text-indigo-100 transition-colors duration-150 bg-gray-600 rounded-lg focus:shadow-outline hover:bg-gray-700">
+                            <a href="../authentification/login.php"><button type="button" class="flex gap-x-2 md:font-bold items-center text-[10px] md:text-[14px] h-10 px-5 text-indigo-100 transition-colors duration-150 bg-gray-600 rounded-lg focus:shadow-outline hover:bg-gray-700">
                                     Log Out
                                 </button></a>
                         <?php  } else { ?>
@@ -65,6 +64,7 @@ session_start();
             </div>
         </div>
     </nav>
+    <div>
     <?php
     if (isset($_SESSION['user'])) {
 
@@ -74,7 +74,8 @@ session_start();
                         <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
                     </svg>
                     <span>Create your own WIKI</span>
-                </button></a></div>
+                </button></a>
+            </div>
     <?php  } else { ?>
         <div class="w-[90%] mx-auto flex justify-end h-16 items-center">
             <a href="../authentification/login.php"><button class="flex gap-x-2 font-bold items-center h-10 px-5 text-indigo-100 transition-colors duration-150 bg-blue-600 rounded-lg focus:shadow-outline hover:bg-blue-700">
@@ -87,7 +88,8 @@ session_start();
         </div>
     <?php   }
     ?>
-
+   <form action="../../controllers/ConWikis.php" method="post"><button name="Unset">All Wikis</button></form> 
+</div>
 
     <section class="flex min-h-screen ">
         <!-------------------------------------------------------------Categorys------------------------------------------------- -->
@@ -216,45 +218,44 @@ session_start();
 
         <div class="min-h-full w-[70%] mx-auto rounded-xl">
 
+            <?php 
+            var_dump($wikis);
+            foreach ($wikis as $wiki) : ?>
 
+                <div class="md:flex cursor-pointer w-full md:min-h-[25vh] min-h-fit bg-slate-100 rounded-xl p-8 md:p-0  hover:scale-105 mb-6 md:mb-4">
+                    <img class="w-64 md:h-[100%] h-[5%]  md:h-auto md:rounded-xl rounded-xl mx-auto" src="<?= $wiki->getWikiImage(); ?>" alt="" width="384" height="512">
+                    <div class="pt-6 md:p-8 text-center md:text-left space-y-4">
+                        <div class="text-slate-700 text-2xl font-bold">
+                            <h1><?= $wiki->getWikiTitle(); ?></h1>
+                        </div>
+                        <div>
+                            <p class="text-lg font-medium">
+                                <?= $wiki->getWikiSummarize(); ?>
+                            </p>
+                        </div>
+                        <div class="font-medium text-sky-500">
 
-            <div class="md:flex cursor-pointer w-full md:min-h-[25vh] min-h-fit bg-slate-100 rounded-xl p-8 md:p-0  hover:scale-105 mb-6 md:mb-4">
-                <img class="w-64 md:h-[100%] h-[5%]  md:h-auto md:rounded-xl rounded-xl mx-auto" src="../../../public/images/Capture d'écran 2024-01-08 202704.png" alt="" width="384" height="512">
-                <div class="pt-6 md:p-8 text-center md:text-left space-y-4">
-                    <div class="text-slate-700 text-2xl font-bold">
-                        <h1>web developer cnejzhchci jhdchai</h1>
+                            <p><?= $_SESSION['username'] ?></p>
+                            <div class="w-full text-right font-medium text-gray-500 mt-2"> <?= $wiki->getDate(); ?></div>
+
+                        </div>
+                        <div class="flex flex-wrap">
+                            <p class="m-1 w-[7%] mb-4  flex justify-center text-[10px] sm:text-sm bg-gray-200 hover:bg-gray-300  rounded-[40px] px-4 py-2 font-bold leading-loose   "> Friend</p>
+                            <p class="m-1 w-[7%] mb-4  flex justify-center text-[10px] sm:text-sm bg-gray-200 hover:bg-gray-300  rounded-[40px] px-4 py-2 font-bold leading-loose   "> Friend</p>
+                            <p class="m-1 w-[7%] mb-4  flex justify-center text-[10px] sm:text-sm bg-gray-200 hover:bg-gray-300  rounded-[40px] px-4 py-2 font-bold leading-loose   "> Friend</p>
+
+                            <p class="m-1 w-[7%] mb-4  flex justify-center text-[10px] sm:text-sm bg-gray-200 hover:bg-gray-300  rounded-[40px] px-4 py-2 font-bold leading-loose   "> Friend</p>
+                            <p class="m-1 w-[7%] mb-4  flex justify-center text-[10px] sm:text-sm bg-gray-200 hover:bg-gray-300  rounded-[40px] px-4 py-2 font-bold leading-loose   "> Friend</p>
+                            <p class="m-1 w-[7%] mb-4  flex justify-center text-[10px] sm:text-sm bg-gray-200 hover:bg-gray-300  rounded-[40px] px-4 py-2 font-bold leading-loose   "> Friend</p>
+                            <p class="m-1 w-[7%] mb-4  flex justify-center text-[10px] sm:text-sm bg-gray-200 hover:bg-gray-300  rounded-[40px] px-4 py-2 font-bold leading-loose   "> Friend</p>
+                            <p class="m-1 w-[7%] mb-4  flex justify-center text-[10px] sm:text-sm bg-gray-200 hover:bg-gray-300  rounded-[40px] px-4 py-2 font-bold leading-loose   "> Friend</p>
+
+                        </div>
+
                     </div>
-                    <div>
-                        <p class="text-lg font-medium">
-                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nemo qui nihil autem error saepe
-                            ex,
-                            omnis architecto, praesentium consequatur accusantium, illum veniam dolor tempore.
-                            Asperiores
-                            debitis pariatur illo perferendis delectus!
-                        </p>
-                    </div>
-                    <div class="font-medium text-sky-500">
-
-                        <p>oualid agourd</p>
-                        <div class="w-full text-right font-medium text-gray-500 mt-2"> Date : 20/20/2000 15:15</div>
-
-                    </div>
-                    <div class="flex flex-wrap">
-                        <p class="m-1 w-[7%] mb-4  flex justify-center text-[10px] sm:text-sm bg-gray-200 hover:bg-gray-300  rounded-[40px] px-4 py-2 font-bold leading-loose   "> Friend</p>
-                        <p class="m-1 w-[7%] mb-4  flex justify-center text-[10px] sm:text-sm bg-gray-200 hover:bg-gray-300  rounded-[40px] px-4 py-2 font-bold leading-loose   "> Friend</p>
-                        <p class="m-1 w-[7%] mb-4  flex justify-center text-[10px] sm:text-sm bg-gray-200 hover:bg-gray-300  rounded-[40px] px-4 py-2 font-bold leading-loose   "> Friend</p>
-
-                        <p class="m-1 w-[7%] mb-4  flex justify-center text-[10px] sm:text-sm bg-gray-200 hover:bg-gray-300  rounded-[40px] px-4 py-2 font-bold leading-loose   "> Friend</p>
-                        <p class="m-1 w-[7%] mb-4  flex justify-center text-[10px] sm:text-sm bg-gray-200 hover:bg-gray-300  rounded-[40px] px-4 py-2 font-bold leading-loose   "> Friend</p>
-                        <p class="m-1 w-[7%] mb-4  flex justify-center text-[10px] sm:text-sm bg-gray-200 hover:bg-gray-300  rounded-[40px] px-4 py-2 font-bold leading-loose   "> Friend</p>
-                        <p class="m-1 w-[7%] mb-4  flex justify-center text-[10px] sm:text-sm bg-gray-200 hover:bg-gray-300  rounded-[40px] px-4 py-2 font-bold leading-loose   "> Friend</p>
-                        <p class="m-1 w-[7%] mb-4  flex justify-center text-[10px] sm:text-sm bg-gray-200 hover:bg-gray-300  rounded-[40px] px-4 py-2 font-bold leading-loose   "> Friend</p>
-
-                    </div>
-
                 </div>
-            </div>
 
+            <?php endforeach; ?>
 
 
 

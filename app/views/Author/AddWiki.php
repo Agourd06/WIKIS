@@ -16,7 +16,7 @@ require_once(__DIR__ . "/../../controllers/ConWikis.php");
     <title>Document</title>
 </head>
 
-<body class="bg-gradient-to-r to-blue-300 from-black  min-h-screen p-4 	">
+<body class="bg-gradient-to-r to-blue-300 from-black  min-h-screen p-4 flex flex-col justify-center gap-y-4	">
 
     <div class="h-[7vh] w-1/2 mx-auto bg-gray-300 flex justify-center items-center rounded-md">
         <h1 class="text-transparent bg-clip-text m-4 text-[15px] sm:text-[15px]  lg:text-[21px] font-bold bg-gradient-to-r to-blue-400 from-blue-700"><?= $_SESSION['username'] ?> Thank you for generously sharing your knowledge by creating a Wiki</h1>
@@ -27,7 +27,7 @@ require_once(__DIR__ . "/../../controllers/ConWikis.php");
     if (isset($_SESSION['wikis'])) {
         $Data = $_SESSION['wikis'];
 
-        [$img, $title,$content, $summary] = $Data;
+        [$img, $title, $content, $summary] = $Data;
 
         unset($_SESSION['wikis']);
     }
@@ -38,9 +38,7 @@ require_once(__DIR__ . "/../../controllers/ConWikis.php");
 
         <?php
         if (isset($_GET['error']) && $_GET['error'] === 'true') { ?>
-            <script>
-                document.getElementById('overlay').classList.remove('hidden');
-            </script>
+
             <p class="text-red-600 w-1/2 mx-auto"><?= $_SESSION['error'] ?> </p>
         <?php
             unset($_GET['error']);
@@ -98,9 +96,9 @@ require_once(__DIR__ . "/../../controllers/ConWikis.php");
 
             </div>
         <?php } ?>
-        </div>*
-        <?php if (isset($_SESSION['Idwiki'])) { 
-            $id =$_SESSION['Idwiki'] ?>
+        </div>
+        <?php if (isset($_SESSION['Idwiki'])) {
+            $id = $_SESSION['Idwiki'] ?>
             <div class="mx-4 lg:w-1/2 lg:mx-auto ">
                 <button type="submit" name="updatewiki" value="<?= $id ?>" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Update Wiki</button>
             </div>
