@@ -1,6 +1,7 @@
 <?php
 require_once(__DIR__ . "/../../controllers/ConWikis.php");
-$_SESSION["CatId"] = $_POST["catId"];
+require_once(__DIR__ . "/../../controllers/ConCategorie.php");
+
 ?>
 
 <!DOCTYPE html>
@@ -66,31 +67,38 @@ $_SESSION["CatId"] = $_POST["catId"];
         </div>
     </nav>
     <div>
-    <?php
-    if (isset($_SESSION['user'])) {
+        <?php
+        if (isset($_SESSION['user'])) {
 
-    ?>
-        <div class="w-[90%] mx-auto flex justify-end h-16 items-center"><a href="../Author/AddWiki.php"><button class="flex gap-x-2 font-bold items-center h-10 px-5 text-indigo-100 transition-colors duration-150 bg-blue-600 rounded-lg focus:shadow-outline hover:bg-blue-700">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24" fill="white" viewBox="0 -960 960 960" width="24">
-                        <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
-                    </svg>
-                    <span>Create your own WIKI</span>
-                </button></a>
+        ?>
+            <div class="w-[90%] mx-auto flex justify-between h-16 items-center">
+                <form action="../../controllers/ConWikis.php" method="post"><button name="Unset" class="px-2 py-2.5 min-w-[140px] shadow-lg rounded-full text-black text-sm  font-medium border-none outline-none bg-sky-200 active:shadow-inner">All Wikis</button></form>
+
+                <a href="../Author/AddWiki.php"><button class="flex gap-x-2 font-bold items-center h-10 px-5 text-indigo-100 transition-colors duration-150 bg-blue-600 rounded-lg focus:shadow-outline hover:bg-blue-700">
+
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24" fill="white" viewBox="0 -960 960 960" width="24">
+                            <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
+                        </svg>
+                        <span>Create your own WIKI</span>
+                    </button></a>
+
             </div>
-    <?php  } else { ?>
-        <div class="w-[90%] mx-auto flex justify-end h-16 items-center">
-            <a href="../authentification/login.php"><button class="flex gap-x-2 font-bold items-center h-10 px-5 text-indigo-100 transition-colors duration-150 bg-blue-600 rounded-lg focus:shadow-outline hover:bg-blue-700">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24" fill="white" viewBox="0 -960 960 960" width="24">
-                        <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
-                    </svg>
-                    <span>Create your own WIKI</span>
-                </button>
-            </a>
-        </div>
-    <?php   }
-    ?>
-   <form action="../../controllers/ConWikis.php" method="post"><button name="Unset">All Wikis</button></form> 
-</div>
+        <?php  } else { ?>
+            <div class="w-[90%] mx-auto flex justify-between h-16 items-center">
+                <form action="../../controllers/ConWikis.php" method="post"><button name="Unset" class="px-2 py-2.5 min-w-[140px] shadow-lg rounded-full text-black text-sm  font-medium border-none outline-none bg-sky-200 active:shadow-inner">All Wikis</button></form>
+
+                <a href="../authentification/login.php"><button class="flex gap-x-2 font-bold items-center h-10 px-5 text-indigo-100 transition-colors duration-150 bg-blue-600 rounded-lg focus:shadow-outline hover:bg-blue-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24" fill="white" viewBox="0 -960 960 960" width="24">
+                            <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
+                        </svg>
+                        <span>Create your own WIKI</span>
+                    </button>
+                </a>
+
+            </div>
+        <?php   }
+        ?>
+    </div>
 
     <section class="flex min-h-screen ">
         <!-------------------------------------------------------------Categorys------------------------------------------------- -->
@@ -100,164 +108,80 @@ $_SESSION["CatId"] = $_POST["catId"];
                     <h1>Categorys</h1>
                 </div>
 
-                <div class="flex flex-col w-[93%] rounded-t	 mx-auto items-center shadow-md rounded-[40px]">
-                    <a href="#">
-                        <img class="w-full rounded-t" src="https://images.pexels.com/photos/196667/pexels-photo-196667.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=1&amp;w=500" alt="Sunset in the mountains">
-                        <!-- <div
-                        class="hover:bg-transparent transition duration-300 absolute  bg-gray-900 opacity-25">
-                    </div> -->
 
-                    </a>
+                <?php
+                foreach ($Categorys as $Category) :
+                ?>
+                    <div>
+                        <form action="../../controllers/ConWikis.php" method="post">
+                            <input type="hidden" name="catId" value="<?= $Category->getId() ?>">
+                            <div class="flex flex-col w-[93%] rounded-t	 mx-auto items-center shadow-md rounded-[40px]">
+                                <a href="#">
+                                    <img class="w-full rounded-t" src="<?= $Category->getCategory_image(); ?>" alt="Sunset in the mountains">
 
-                    <div class="text-center rounded-b w-full bg-indigo-600 px-4 py-2 text-white text-sm hover:bg-white hover:text-indigo-600 transition duration-500 ">
-                        Photos
+
+                                </a>
+
+                                <button type="submit" class="text-center rounded-b w-full bg-indigo-600 px-4 py-2 text-white text-sm hover:bg-white hover:text-indigo-600 transition duration-500 ">
+                                    <?= $Category->getCategory_name(); ?>
+                                </button>
+
+
+
+                            </div>
+                        </form>
                     </div>
-
-
-
-                </div>
-                <div class="flex flex-col w-[93%] rounded-t	 mx-auto items-center shadow-md rounded-[40px]">
-                    <a href="#">
-                        <img class="w-full rounded-t" src="https://images.pexels.com/photos/196667/pexels-photo-196667.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=1&amp;w=500" alt="Sunset in the mountains">
-                        <!-- <div
-                        class="hover:bg-transparent transition duration-300 absolute  bg-gray-900 opacity-25">
-                    </div> -->
-
-                    </a>
-
-                    <div class="text-center rounded-b w-full bg-indigo-600 px-4 py-2 text-white text-sm hover:bg-white hover:text-indigo-600 transition duration-500 ">
-                        Photos
-                    </div>
-
-
-
-                </div>
-                <div class="flex flex-col w-[93%] rounded-t	 mx-auto items-center shadow-md rounded-[40px]">
-                    <a href="#">
-                        <img class="w-full rounded-t" src="https://images.pexels.com/photos/196667/pexels-photo-196667.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=1&amp;w=500" alt="Sunset in the mountains">
-                        <!-- <div
-                        class="hover:bg-transparent transition duration-300 absolute  bg-gray-900 opacity-25">
-                    </div> -->
-
-                    </a>
-
-                    <div class="text-center rounded-b w-full bg-indigo-600 px-4 py-2 text-white text-sm hover:bg-white hover:text-indigo-600 transition duration-500 ">
-                        Photos
-                    </div>
-
-
-
-                </div>
-                <div class="flex flex-col w-[93%] rounded-t	 mx-auto items-center shadow-md rounded-[40px]">
-                    <a href="#">
-                        <img class="w-full rounded-t" src="https://images.pexels.com/photos/196667/pexels-photo-196667.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=1&amp;w=500" alt="Sunset in the mountains">
-                        <!-- <div
-                        class="hover:bg-transparent transition duration-300 absolute  bg-gray-900 opacity-25">
-                    </div> -->
-
-                    </a>
-
-                    <div class="text-center rounded-b w-full bg-indigo-600 px-4 py-2 text-white text-sm hover:bg-white hover:text-indigo-600 transition duration-500 ">
-                        Photos
-                    </div>
-
-
-
-                </div>
-                <div class="flex flex-col w-[93%] rounded-t	 mx-auto items-center shadow-md rounded-[40px]">
-                    <a href="#">
-                        <img class="w-full rounded-t" src="https://images.pexels.com/photos/196667/pexels-photo-196667.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=1&amp;w=500" alt="Sunset in the mountains">
-                        <!-- <div
-                        class="hover:bg-transparent transition duration-300 absolute  bg-gray-900 opacity-25">
-                    </div> -->
-
-                    </a>
-
-                    <div class="text-center rounded-b w-full bg-indigo-600 px-4 py-2 text-white text-sm hover:bg-white hover:text-indigo-600 transition duration-500 ">
-                        Photos
-                    </div>
-
-
-
-                </div>
-                <div class="flex flex-col w-[93%] rounded-t	 mx-auto items-center shadow-md rounded-[40px]">
-                    <a href="#">
-                        <img class="w-full rounded-t" src="https://images.pexels.com/photos/196667/pexels-photo-196667.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=1&amp;w=500" alt="Sunset in the mountains">
-                        <!-- <div
-                        class="hover:bg-transparent transition duration-300 absolute  bg-gray-900 opacity-25">
-                    </div> -->
-
-                    </a>
-
-                    <div class="text-center rounded-b w-full bg-indigo-600 px-4 py-2 text-white text-sm hover:bg-white hover:text-indigo-600 transition duration-500 ">
-                        Photos
-                    </div>
-
-
-
-                </div>
-                <div class="flex flex-col w-[93%] rounded-t	 mx-auto items-center shadow-md rounded-[40px]">
-                    <a href="#">
-                        <img class="w-full rounded-t" src="https://images.pexels.com/photos/196667/pexels-photo-196667.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=1&amp;w=500" alt="Sunset in the mountains">
-                        <!-- <div
-                        class="hover:bg-transparent transition duration-300 absolute  bg-gray-900 opacity-25">
-                    </div> -->
-
-                    </a>
-
-                    <div class="text-center rounded-b w-full bg-indigo-600 px-4 py-2 text-white text-sm hover:bg-white hover:text-indigo-600 transition duration-500 ">
-                        Photos
-                    </div>
-
-
-
-                </div>
-
+                <?php
+                endforeach;
+                ?>
             </div>
         </div>
         <!--------------------------------------------------------------WIKIS------------------------------------------------- -->
 
         <div class="min-h-full w-[70%] mx-auto rounded-xl">
 
-            <?php 
-$wik = isset($wikisCat) ? $wikisCat : $wikis;
+            <?php
 
-            foreach ($wik as $wiki) : ?>
+            $wik = (!empty($wikisCat)) ? $wikisCat : $wikis;
 
-                <div class="md:flex cursor-pointer w-full md:min-h-[25vh] min-h-fit bg-slate-100 rounded-xl p-8 md:p-0  hover:scale-105 mb-6 md:mb-4">
-                    <img class="w-64 md:h-[100%] h-[5%]  md:h-auto md:rounded-xl rounded-xl mx-auto" src="<?= $wiki->getWikiImage(); ?>" alt="" width="384" height="512">
-                    <div class="pt-6 md:p-8 text-center md:text-left space-y-4">
-                        <div class="text-slate-700 text-2xl font-bold">
-                            <h1><?= $wiki->getWikiTitle(); ?></h1>
-                        </div>
-                        <div>
-                            <p class="text-lg font-medium">
-                                <?= $wiki->getWikiSummarize(); ?>
-                            </p>
-                        </div>
-                        <div class="font-medium text-sky-500">
+            if (empty($wik)) {
+                echo "No wikis found.";
+            } else {
+                foreach ($wik as $wiki) : ?>
+                    <div>
+                        <form action="../../controllers/ConWikis.php" method="post">
+                            <input type="hidden" name="wikiId" value="<?= $wik->getId(); ?>">
+                            <button type="submit" class="md:flex cursor-pointer w-full md:min-h-[25vh] min-h-fit bg-slate-100 rounded-xl p-8 md:p-0  hover:scale-105 mb-6 md:mb-4">
+                                <img class="w-64 md:h-[100%] h-[5%]  md:h-auto md:rounded-xl rounded-xl mx-auto lg:mx-0" src="<?= $wiki->getWikiImage(); ?>" alt="" width="384" height="512">
+                                <div class="pt-6 md:p-8 text-center md:text-left space-y-4">
+                                    <div class="text-slate-700 text-2xl font-bold">
+                                        <h1><?= $wiki->getWikiTitle(); ?></h1>
+                                    </div>
+                                    <div>
+                                        <p class="text-lg font-medium">
+                                            <?= $wiki->getWikiSummarize(); ?>
+                                        </p>
+                                    </div>
+                                    <div class="font-medium text-sky-500">
 
-                            <p><?= $_SESSION['username'] ?></p>
-                            <div class="w-full text-right font-medium text-gray-500 mt-2"> <?= $wiki->getDate(); ?></div>
+                                        <p><?= $_SESSION['username'] ?></p>
+                                        <div class="w-full text-right font-medium text-gray-500 mt-2"> <?= $wiki->getDate(); ?></div>
 
-                        </div>
-                        <div class="flex flex-wrap">
-                            <p class="m-1 w-[7%] mb-4  flex justify-center text-[10px] sm:text-sm bg-gray-200 hover:bg-gray-300  rounded-[40px] px-4 py-2 font-bold leading-loose   "> Friend</p>
-                            <p class="m-1 w-[7%] mb-4  flex justify-center text-[10px] sm:text-sm bg-gray-200 hover:bg-gray-300  rounded-[40px] px-4 py-2 font-bold leading-loose   "> Friend</p>
-                            <p class="m-1 w-[7%] mb-4  flex justify-center text-[10px] sm:text-sm bg-gray-200 hover:bg-gray-300  rounded-[40px] px-4 py-2 font-bold leading-loose   "> Friend</p>
+                                    </div>
+                                    <div class="flex flex-wrap">
+                                        <?php foreach ($tags as $tag) : ?>
+                                            <p class="m-1 w-[7%] mb-4  flex justify-center text-[10px] sm:text-sm bg-gray-200 hover:bg-gray-300  rounded-[40px] px-4 py-2 font-bold leading-loose   "><?= $tag->getTagname(); ?> </p>
 
-                            <p class="m-1 w-[7%] mb-4  flex justify-center text-[10px] sm:text-sm bg-gray-200 hover:bg-gray-300  rounded-[40px] px-4 py-2 font-bold leading-loose   "> Friend</p>
-                            <p class="m-1 w-[7%] mb-4  flex justify-center text-[10px] sm:text-sm bg-gray-200 hover:bg-gray-300  rounded-[40px] px-4 py-2 font-bold leading-loose   "> Friend</p>
-                            <p class="m-1 w-[7%] mb-4  flex justify-center text-[10px] sm:text-sm bg-gray-200 hover:bg-gray-300  rounded-[40px] px-4 py-2 font-bold leading-loose   "> Friend</p>
-                            <p class="m-1 w-[7%] mb-4  flex justify-center text-[10px] sm:text-sm bg-gray-200 hover:bg-gray-300  rounded-[40px] px-4 py-2 font-bold leading-loose   "> Friend</p>
-                            <p class="m-1 w-[7%] mb-4  flex justify-center text-[10px] sm:text-sm bg-gray-200 hover:bg-gray-300  rounded-[40px] px-4 py-2 font-bold leading-loose   "> Friend</p>
+                                        <?php endforeach; ?>
 
-                        </div>
+                                    </div>
 
+                                </div>
+                            </button>
+                        </form>
                     </div>
-                </div>
-
-            <?php endforeach; ?>
+            <?php endforeach;
+            } ?>
 
 
 

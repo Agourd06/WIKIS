@@ -88,6 +88,7 @@ if (isset($_POST['delete'])) {
     header('Location: ../views/admin/tags.php');
 
 }
+// -------------------------Tags of wiki---------------------
 
 
 

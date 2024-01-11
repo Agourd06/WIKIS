@@ -1,5 +1,6 @@
 <?php
 require_once(__DIR__ . '/../services//WikiService.php');
+
 require_once(__DIR__ . '/../models/wiki.php');
 require_once(__DIR__ . '/../models/wikisTags.php');
 
@@ -30,11 +31,11 @@ if (isset($_POST["addWiki"])) {
 
             header('Location: ../views/Author/AddWiki.php?error=true');
         } else {
-            $wikis = new wiki($id, URLROOT . 'public/images/' . $image, $wikiTitile, $wikiContent, $wikiSummary,$created_at, $wikiCategory, $wikiAuthor, $WikiStatus);
+            $wikis = new wiki($id, URLROOT . 'public/images/' . $image, $wikiTitile, $wikiContent, $wikiSummary, $created_at, $wikiCategory, $wikiAuthor, $WikiStatus);
             $wikiId =  $WikisService->addWikis($wikis);
             foreach ($selectedTags as $selectedTag) {
-                var_dump($selectedTag);
-                $wikistags = new WikisTags($wikiId, $selectedTag);
+$tagname='';
+                $wikistags = new WikisTags($wikiId, $selectedTag,$tag);
                 $WikisService->TagsOfWikis($wikistags);
             }
             header('Location: ../views/Author/dashboardWikis.php');
@@ -46,35 +47,39 @@ if (isset($_POST["addWiki"])) {
 }
 // --------------------------fetch Wikis-------------------------------
 
+if(isset($_POST["catId"])) {
+$_SESSION["CatId"] = isset($_POST["catId"]) ? $_POST["catId"] :'';
 
 
+header('Location: '.URLROOT. 'app/views/visiteur/wikis.php');
 
-    $id = $_SESSION["CatId"];
-var_dump($id);
- 
-    $wikisCat =  $WikisService->getfiltredWikis($id);
- 
+}
 
+$id = isset($_SESSION["CatId"]) ? $_SESSION["CatId"] :'';
 
-
-    
-    $wikis =  $WikisService->getWikis();
-
-
-
-    $wikiHome =  $WikisService->getHomeWiki();
+$wikisCat =  $WikisService->getfiltredWikis($id);
 
 
 
 
 
+$wikis =  $WikisService->getWikis();
+
+
+// -----------------------------Fetch Wikis for home page -------------------------
+
+$wikiHome =  $WikisService->getHomeWiki();
 
 
 
-if(isset($_SESSION["CatId"]) ) {
+
+
+
+
+
+if (isset($_POST['Unset'])) {
     unset($_SESSION["CatId"]);
     header('Location: ../views/visiteur/wikis.php');
-
 }
 // --------------------------fetch Admin Wikis-------------------------------
 
@@ -118,15 +123,14 @@ if (isset($_POST["updatewiki"])) {
     $image = '';
     $WikiStatus = '';
     $idwiki = '';
-    if ($wikiTitile !== '' && $wikiSummary !== '' && $wikiContent !== '' ) {
+    if ($wikiTitile !== '' && $wikiSummary !== '' && $wikiContent !== '') {
 
-       
-    
-            $wikis = new wiki($idwiki, URLROOT . 'public/images/' . $image, $wikiTitile, $wikiContent, $wikiSummary, $created_at,$wikiCategory, $wikiAuthor, $WikiStatus);
-            $WikisService->updateWiki($wikis,$id);
-           unset($_SESSION['Idwiki']);
-            header('Location: ../views/Author/dashboardWikis.php');
-        
+
+
+        $wikis = new wiki($idwiki, URLROOT . 'public/images/' . $image, $wikiTitile, $wikiContent, $wikiSummary, $created_at, $wikiCategory, $wikiAuthor, $WikiStatus);
+        $WikisService->updateWiki($wikis, $id);
+        unset($_SESSION['Idwiki']);
+        header('Location: ../views/Author/dashboardWikis.php');
     } else {
         $_SESSION['error'] = 'Empty Input or invalid Information';
         header('Location: ../views/Author/AddWiki.php?error=true');
@@ -138,21 +142,18 @@ if (isset($_POST['delete'])) {
     $id = $_POST['delete'];
     $WikisService->deleteWiki($id);
     header('Location: ../views/Author/dashboardWikis.php');
-
 }
 // ---------------------------Archive-----------------------------
 if (isset($_POST['archive'])) {
     $id = $_POST['archive'];
-$WikisService->ArchiveWiki($id);
-header('Location: ../views/admin/wikis.php');
-
+    $WikisService->ArchiveWiki($id);
+    header('Location: ../views/admin/wikis.php');
 }
 // ---------------------------UnArchive-----------------------------
 if (isset($_POST['unarchive'])) {
     $id = $_POST['unarchive'];
-$WikisService->uNArchiveWiki($id);
-header('Location: ../views/admin/wikis.php');
-
+    $WikisService->uNArchiveWiki($id);
+    header('Location: ../views/admin/wikis.php');
 }
 
 
@@ -161,4 +162,26 @@ $wikiTot = $WikisService->CountWikis();
 
 // -------------------------------Count Archived Wikis---------------------------------------------
 $wikiArchived = $WikisService->CountArchivedWikis();
-?>
+
+
+
+// ----------------------------------- WIKI -------------------------------------------
+
+if(isset($_POST["wikiId"])) {
+    $_SESSION["wikiId"] = isset($_POST["wikiId"]) ? $_POST["wikiId"] :'';
+    
+    
+    header('Location: '.URLROOT. 'app/views/visiteur/wikis.php');
+    
+    }
+    $id = isset($_SESSION["wikiId"]) ? $_SESSION["wikiId"] :'';
+
+$wiki = $WikisService->Wiki($id);
+
+
+// -----------------------------------Tags---------------------------------------
+
+
+
+$tags = $WikisService->WikiTag();
+

@@ -78,7 +78,7 @@ class WikiService
 
         $conn = $this->connect();
 
-        $query = "SELECT * FROM wiki ORDER BY wiki_title DESC LIMIT 3";
+        $query = "SELECT * FROM wiki WHERE wiki_statut = FALSE ORDER BY wiki_title DESC LIMIT 3 ";
         $stmt = $conn->prepare($query);
         $stmt->execute();
         $Wiki  = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -225,5 +225,34 @@ class WikiService
         $stmt->execute();
         $result = $stmt->fetchColumn();
         return $result;
+    }
+    public function Wiki($id) {
+        $conn = $this->connect();
+        $query = 'SELECT * FROM wiki WHERE wiki_id = :id';
+        $stmt = $conn->prepare($query);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+    
+        $wiki = $stmt->fetchObject('wiki');
+    
+        return $wiki;
+    }
+    
+
+    public function WikiTag()
+    {
+        $conn = $this->connect();
+        $query = "SELECT tag.tag_name 
+         FROM tag
+        JOIN wikitags ON tag.tag_id = wikitags.tag_id 
+         Join wiki ON wikitags.wiki_id = wiki.wiki_id";
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+      $results =  $stmt->fetchAll();
+      $tags= array();
+      foreach ($results as $row) {
+        $tags[] = new WikisTags($row, $row, $row["tag_name"]);
+      }
+      return $tags;
     }
 }

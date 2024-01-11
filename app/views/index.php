@@ -1,6 +1,7 @@
 <?php
 require_once(__DIR__ . "/../controllers/ConCategorie.php");
 require_once(__DIR__ . "/../controllers/Conwikis.php");
+unset($_SESSION["CatId"]);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,14 +39,14 @@ require_once(__DIR__ . "/../controllers/Conwikis.php");
                         if (isset($_SESSION['user'])) {
 
                         ?>
-                            <a href="../Author/dashboardWikis.php"><button title="Delete" name="delete" value="" class="flex gap-x-2 md:font-bold items-center text-[10px] md:text-[14px] h-10 px-5 text-indigo-100 transition-colors duration-150 bg-blue-600 rounded-lg focus:shadow-outline hover:bg-blue-700">
+                            <a href="../controllers/ConWikis.php"><button title="Delete" name="delete" value="" class="flex gap-x-2 md:font-bold items-center text-[10px] md:text-[14px] h-10 px-5 text-indigo-100 transition-colors duration-150 bg-blue-600 rounded-lg focus:shadow-outline hover:bg-blue-700">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="24" fill="white" viewBox="0 -960 960 960" width="24">
                                         <path d="M400-400h160v-80H400v80Zm0-120h320v-80H400v80Zm0-120h320v-80H400v80Zm-80 400q-33 0-56.5-23.5T240-320v-480q0-33 23.5-56.5T320-880h480q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H320Zm0-80h480v-480H320v480ZM160-80q-33 0-56.5-23.5T80-160v-560h80v560h560v80H160Zm160-720v480-480Z" />
                                     </svg>
                                     My WIKIS
 
                                 </button></a>
-                            <a href="../authentification/login.php"><button type="button" class="flex gap-x-2 md:font-bold items-center text-[10px] md:text-[14px] h-10 px-5 text-indigo-100 transition-colors duration-150 bg-gray-600 rounded-lg focus:shadow-outline hover:bg-gray-700">
+                            <a href="authentification/login.php"><button type="button" class="flex gap-x-2 md:font-bold items-center text-[10px] md:text-[14px] h-10 px-5 text-indigo-100 transition-colors duration-150 bg-gray-600 rounded-lg focus:shadow-outline hover:bg-gray-700">
                                     Log Out
                                 </button></a>
                         <?php  } else { ?>
@@ -74,8 +75,7 @@ require_once(__DIR__ . "/../controllers/Conwikis.php");
             </div>
             <hr class="border-[#333]" />
             <div class="mt-10 flex max-sm:flex-col justify-center sm:gap-6 gap-4">
-                <button type="button" class="px-6 py-3 rounded text-white text-sm tracking-wider font-semibold border border-[#333] outline-none bg-[#333] hover:bg-transparent hover:text-[#333] transition-all duration-300">Get started</button>
-                <button type="button" class="px-6 py-3 rounded text-sm tracking-wider font-semibold border border-[#333] outline-none bg-transparent hover:bg-[#333] hover:text-white transition-all duration-300">Learn more</button>
+                <a href="visiteur/wikis.php"> <button type="button" class="px-6 py-3 rounded text-sm tracking-wider font-semibold border border-[#333] outline-none bg-transparent hover:bg-[#333] hover:text-white transition-all duration-300">See More</button></a>
             </div>
         </div>
     </div>
@@ -85,30 +85,31 @@ require_once(__DIR__ . "/../controllers/Conwikis.php");
                 <h2 class="text-3xl font-extrabold text-[#333] inline-block">LATEST BLOGS</h2>
                 <p class="text-gray-600 text-sm mt-6  ">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis accumsan, nunc et tempus blandit, metus mi consectetur felis turpis vitae ligula.</p>
             </div>
-            <!-- <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12 max-md:max-w-lg mx-auto"> -->
-                <form action="visiteur/wikis.php" method="post" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12 max-md:max-w-lg mx-auto">
-                    <?php
-                    foreach ($categories as $Categorie) :
-                    ?>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12 max-md:max-w-lg mx-auto">
+                <?php
+                foreach ($categories as $Categorie) :
+                ?>
+                <div>
+                    <form action="../controllers/ConWikis.php" method="post">
+                        <input type="hidden" name="catId" value="<?= $Categorie->getId() ?>">
 
-                        <button type="submit" name="catId" value="<?= $Categorie->getId() ?>">
-                            <div class="bg-white cursor-pointer rounded overflow-hidden group relative before:absolute before:inset-0 before:z-10 before:bg-black before:opacity-50">
-                                <img src="<?= $Categorie->getCategory_image() ?>" alt="Blog Post 3" class="w-full h-96 object-cover group-hover:scale-110 transition-all duration-300" />
-                                <div class="p-6 absolute bottom-0 left-0 right-0 z-20">
-                                    <h3 class="text-xl font-bold text-white"><?= $Categorie->getCategory_name() ?></h3>
-                                    <div class="mt-4">
-                                        <p class="text-gray-200 text-sm "><?= $Categorie->getCategory_desc() ?></p>
-                                    </div>
+                        <div class="bg-white cursor-pointer rounded overflow-hidden group relative before:absolute before:inset-0 before:z-10 before:bg-black before:opacity-50">
+                            <img src="<?= $Categorie->getCategory_image() ?>" alt="Blog Post 3" class="w-full h-96 object-cover group-hover:scale-110 transition-all duration-300" />
+                            <div class="p-6 absolute bottom-0 left-0 right-0 z-20">
+                                <h3 class="text-xl font-bold text-white"><?= $Categorie->getCategory_name() ?></h3>
+                                <div class="mt-4">
+                                    <p class="text-gray-200 text-sm "><?= $Categorie->getCategory_desc() ?></p>
                                 </div>
                             </div>
-                        </button>
+                        </div>
+                        <button type="submit">Wikis of  <?= $Categorie->getCategory_name() ?> </button>
+                    </form>
+                    </div>
+                <?php
+                endforeach;
+                ?>
 
-                    <?php
-                    endforeach;
-                    ?>
-                </form>
-
-            <!-- </div> -->
+            </div>
         </div>
     </div>
     <div class="bg-white font-[sans-serif] p-4">
@@ -117,28 +118,27 @@ require_once(__DIR__ . "/../controllers/Conwikis.php");
                 <h2 class="text-3xl font-extrabold text-[#333] inline-block">LATEST BLOGS</h2>
                 <p class="text-gray-600 text-sm mt-6  ">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis accumsan, nunc et tempus blandit, metus mi consectetur felis turpis vitae ligula.</p>
             </div>
-            <!-- <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12 max-md:max-w-lg mx-auto"> -->
-                <form action="visiteur/wikis.php" method="post" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12 max-md:max-w-lg mx-auto">
-                    <?php
-                    foreach ($wikiHome as $wiki) :
-                    ?>
+            <form action="visiteur/wikis.php" method="post" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12 max-md:max-w-lg mx-auto">
+                <?php
+                foreach ($wikiHome as $wiki) :
+                ?>
 
-                        <button type="submit" name="catId" value="<?= $wiki->getId() ?>">
-                            <div class="bg-white cursor-pointer rounded overflow-hidden group relative before:absolute before:inset-0 before:z-10 before:bg-black before:opacity-50">
-                                <img src="<?= $wiki->getWikiImage() ?>" alt="Blog Post 3" class="w-full h-96 object-cover group-hover:scale-110 transition-all duration-300" />
-                                <div class="p-6 absolute bottom-0 left-0 right-0 z-20">
-                                    <h3 class="text-xl font-bold text-white"><?= $wiki->getWikiTitle() ?></h3>
-                                    <div class="mt-4">
-                                        <p class="text-gray-200 text-sm "><?= $wiki->getWikiSummarize() ?></p>
-                                    </div>
+                    <button type="submit" name="catId" value="<?= $wiki->getId() ?>">
+                        <div class="bg-white cursor-pointer rounded overflow-hidden group relative before:absolute before:inset-0 before:z-10 before:bg-black before:opacity-50">
+                            <img src="<?= $wiki->getWikiImage() ?>" alt="Blog Post 3" class="w-full h-96 object-cover group-hover:scale-110 transition-all duration-300" />
+                            <div class="p-6 absolute bottom-0 left-0 right-0 z-20">
+                                <h3 class="text-xl font-bold text-white"><?= $wiki->getWikiTitle() ?></h3>
+                                <div class="mt-4">
+                                    <p class="text-gray-200 text-sm "><?= $wiki->getWikiSummarize() ?></p>
                                 </div>
                             </div>
-                        </button>
+                        </div>
+                    </button>
 
-                    <?php
-                    endforeach;
-                    ?>
-                </form>
+                <?php
+                endforeach;
+                ?>
+            </form>
 
             <!-- </div> -->
         </div>
