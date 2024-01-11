@@ -9,7 +9,7 @@ interface WikiInterface{
     public function displayUpdateWiki($id);
     public function ArchiveWiki($id);
     public function CheckWiki($name);
-  
+  public function deleteWiki($id);
 }
 
 ?>

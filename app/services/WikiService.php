@@ -55,13 +55,92 @@ public function CheckWiki($title){
     $result = $stmt->fetch();
     return $result;
 }
-public function getWikis(){}
-public function updateWiki(wiki $wiki,$id){}
-public function displayUpdateWiki($id){}
-public function ArchiveWiki($id){}
+public function getWikis(){
+
+    $conn = $this->connect();
+    $query ="SELECT * FROM wiki WHERE wiki_statut = FALSE";
+     $stmt = $conn->prepare($query);
+     $stmt->execute();
+     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+     $wikis = array();
+     foreach($result as $row){
+        
+
+ $wikis[] =   new wiki($row["wiki_id"], $row["wiki_image"], $row["wiki_title"],$row['wiki_content'],$row["wiki_summarize"], $row["category_id"],$row['user_id'],$row['wiki_statut']);
+    }
+return $wikis;
+
+}
+public function updateWiki(wiki $wiki,$id){
+
+   
+    $conn = $this->connect();
+    $wikiTitle = $wiki->getWikiTitle();
+    $wikiContent = $wiki->getWikiContent();
+    $wikiSummary = $wiki->getWikiSummarize();
+    $query = 'UPDATE wiki SET wiki_title=:title ,wiki_summarize=:summary ,  wiki_content=:content WHERE wiki_id = :id';
+    $stmt = $conn->prepare($query);
+   $stmt->bindParam(':title', $wikiTitle);
+   $stmt->bindParam(':summary', $wikiSummary);
+   $stmt->bindParam(':content', $wikiContent);
+   $stmt->bindParam(':id', $id);
+    $stmt->execute();
+
+}
+
+            
+public function displayUpdateWiki($id){
+    $conn = $this->connect();
+    $query = "SELECT wiki_image , wiki_title ,  wiki_summarize,wiki_content FROM wiki WHERE wiki_id = :id";
+    $stmt = $conn->prepare($query);
+    $stmt->bindParam(":id", $id);
+    $stmt->execute();
+    $resulte = $stmt->fetch(PDO::FETCH_ASSOC);
+    $img = $resulte["wiki_image"];
+    $title = $resulte["wiki_title"];
+    $summary = $resulte["wiki_summarize"];
+    $content = $resulte["wiki_content"];
+
+    return [$img, $title,$content, $summary];
+}
+
+
+
+public function deleteWiki($id){
+    $conn = $this->connect();
+    $query = "DELETE FROM wiki WHERE wiki_id= :id";
+    $stmt = $conn->prepare($query);
+    $stmt->bindParam(":id", $id);
+    $stmt->execute();
+}
+
+public function ArchiveWiki($id){
+
+    $conn = $this->connect();
+    $query = "UPDATE wiki set wiki_statut = TRUE WHERE wiki_id =:id";
+    $stmt = $conn->prepare($query);
+    $stmt->bindParam(":id", $id);
+    $stmt->execute();
+
+}
 
   
+public function getAdminWikis(){
 
+    $conn = $this->connect();
+    $query ="SELECT * FROM wiki";
+     $stmt = $conn->prepare($query);
+     $stmt->execute();
+     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+     $Adminwikis = array();
+     foreach($result as $row){
+        
+
+        $Adminwikis[] =   new wiki($row["wiki_id"], $row["wiki_image"], $row["wiki_title"],$row['wiki_content'],$row["wiki_summarize"], $row["category_id"],$row['user_id'],$row['wiki_statut']);
+    }
+return $Adminwikis;
+
+}
 
 
 
