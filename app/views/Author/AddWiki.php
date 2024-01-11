@@ -15,39 +15,51 @@ require_once(__DIR__ ."/../../controllers/ConTags.php");
     <title>Document</title>
 </head>
 
-<body class="bg-[url('../../../public/images/wikiBg.jpg')] bg-cover bg-no-repeat min-h-screen	">
+<body class="bg-gradient-to-r to-blue-300 from-black  min-h-screen p-4 	">
 
-    <div class="h-[7vh] text-center bg-white">
-        <h1 class="text-transparent bg-clip-text m-4 text-[15px] sm:text-[20px]  lg:text-[30px] font-bold bg-gradient-to-r to-blue-400 from-blue-700"><?= $_SESSION['username'] ?> Thank you for generously sharing your knowledge by creating a Wiki</h1>
+    <div class="h-[7vh] w-1/2 mx-auto bg-gray-300 flex justify-center items-center rounded-md">
+        <h1 class="text-transparent bg-clip-text m-4 text-[15px] sm:text-[15px]  lg:text-[21px] font-bold bg-gradient-to-r to-blue-400 from-blue-700"><?= $_SESSION['username'] ?> Thank you for generously sharing your knowledge by creating a Wiki</h1>
     </div>
-    <form class=" min-w-screen mt-4 ">
+    <form action="../../controllers/ConWikis.php" method="post" class=" min-w-screen mt-4 " enctype="multipart/form-data">
+         <!------------------------------ Regex for existing wikis------------------------- -->
+
+         <?php
+                            if (isset($_GET['error']) && $_GET['error'] === 'true') { ?>
+                                <script>
+                                    document.getElementById('overlay').classList.remove('hidden');
+                                </script>
+                                <p class="text-red-600 w-1/2 mx-auto"><?= $_SESSION['error'] ?>  </p>
+                            <?php
+                                unset($_GET['error']);
+                            } ?>
+                    <!------------------------------ Regex for existing wikis--------------------------- -->
         <div class="grid md:grid-cols-2 md:gap-6 mx-4 lg:w-1/2 lg:mx-auto">
             <div class="mb-5">
-                <label for="email" class="block mb-2 text-sm font-medium text-white dark:text-white">Wiki Title</label>
-                <input type="email" id="email" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Title" required>
+                <label for="name" class="block mb-2 text-sm font-medium text-white dark:text-white">Wiki Title</label>
+                <input type="text" id="name" name="Title" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Title" >
             </div>
             <div class="mb-5">
 
                 
 <label class="block mb-2 text-sm font-medium text-white " for="multiple_files">Wiki Image</label>
 <input
-    type="file"
+    type="file" name="image"
     class="block w-full bg-white rounded-lg text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"/>
             </div>
         </div>
         <div class="mb-5 mx-4 lg:w-1/2 lg:mx-auto">
-            <label for="repeat-password" class="block mb-2 text-sm font-medium text-white dark:text-white">Wiki summary</label>
-            <input type="password" id="repeat-password" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="summary">
+            <label for="summary" class="block mb-2 text-sm font-medium text-white dark:text-white">Wiki summary</label>
+            <input type="text" name="summary" id="summary" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="summary">
         </div>
         <div class="mb-10 mx-4 lg:w-1/2 lg:mx-auto h-[30vh]">
 
             <label for="message" class="block mb-2 text-sm font-medium text-white dark:text-white">Wiki Content</label>
-            <textarea id="message" name=""  rows="4" class="block  p-2.5 w-full h-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 " placeholder="Share Your content here ..."></textarea>
+            <textarea id="message" name="content"  rows="4" class="block  p-2.5 w-full h-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 " placeholder="Share Your content here ..."></textarea>
 
         </div>
         <div class="grid mb-10 md:grid-cols-2 md:gap-6 mx-4 lg:w-1/2 lg:mx-auto">
 
-            <select id="countries" class="bg-gray-50 border h-[65px] border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+            <select id="Catgories" name="category" class="bg-gray-50 border h-[65px] border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
             <option selected>Choose a Category</option>
 
             <?php  foreach($Categorys as $cat):?>
@@ -72,7 +84,7 @@ require_once(__DIR__ ."/../../controllers/ConTags.php");
         </div>
         </div>
         <div class="mx-4 lg:w-1/2 lg:mx-auto ">
-            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add Wiki</button>
+            <button type="submit" name="addWiki" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add Wiki</button>
         </div>
     </form>
 

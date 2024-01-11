@@ -7,7 +7,7 @@ class UserService implements UserInterface
 {
     use Database;
 
-    protected $db;
+    // protected $db;
 
     public function adduser(User $user)
 {

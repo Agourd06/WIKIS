@@ -30,7 +30,6 @@ else{
             <div class="flex items-center justify-between px-4 w-[95%]">
                 <div class="flex items-center gap-2">
                     <img src="../../../public/images/logowiki.png" alt="Logo" class="w-24 h-18 mr-2">
-                    <p class="text-transparent bg-clip-text bg-gradient-to-r text-[20px] font-bold to-blue-400 from-blue-900">Administration</p>
 
                 </div>
 
@@ -44,72 +43,13 @@ else{
                 </div>
             </div>
 
-            <!-- --------------------------------burger icon ----------------------------- -->
-            <div class="space-x-5">
-                <button type="button" id="burger" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 ">
-                    <span class="sr-only">Open main menu</span>
-                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15" />
-                    </svg>
-                </button>
-            </div>
-            <!-- --------------------------------burger icon ----------------------------- -->
+         
 
         </div>
-        <!-- --------------------------------burger menu ----------------------------- -->
-
-        <div id="burgerbar" class="hidden absolute z-50	 top-0 right-0 w-72 md:w-1/6 bg-slate-200 opacity-75 flex flex-col font-bold text-xl gap-6 min-h-screen pl-2">
-            <a class="hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 h-12" id="close" href="#"><svg xmlns="http://www.w3.org/2000/svg" height="36" viewBox="0 -960 960 960" width="36">
-                    <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
-                </svg></a>
-            <a class="block text-black font-bold py-2.5 px-4 my-4 rounded  duration-300 hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 hover:text-white" href="index.php">
-                <i class="fas fa-home mr-2"></i>Dashboard
-            </a>
-
-
-            <a class="block text-black font-bold py-2.5 px-4 my-4 rounded  duration-300 hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 hover:text-white" href="Categories.php">
-                <i class="fas fa-file-alt mr-2"></i>Categorys
-            </a>
-
-            <a class="block text-black font-bold py-2.5 px-4 my-4 rounded  duration-300 hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 hover:text-white" href="wikis.php">
-                <i class="fas fa-store mr-2"></i>Wikis
-            </a>
-            <a class="block text-black font-bold py-2.5 px-4 my-4 rounded  duration-300 hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 hover:text-white" href="tags.php">
-                <i class="fas fa-store mr-2"></i>Tags
-            </a>
-            <a class="block text-black font-bold py-2.5 px-4 my-2 rounded duration-300 hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 hover:text-white mt-auto" href="../authentification/login.php">
-                    <i class="fas fa-sign-out-alt mr-2"></i>Log Out
-                </a>
-        </div>
-        <!-- --------------------------------burger menu ----------------------------- -->
-
+ 
         <div class="flex-1 flex flex-wrap">
 
-            <div class="p-2 bg-white w-full md:w-60 flex flex-col md:flex hidden" id="sideNav">
-                <nav><a class="block text-black font-bold py-2.5 px-4 my-4 rounded  duration-300 hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 hover:text-white" href="index.php">
-                        <i class="fas fa-home mr-2"></i>Dashboard
-                    </a>
-
-
-                    <a class="block text-black font-bold py-2.5 px-4 my-4 rounded  duration-300 hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 hover:text-white" href="Categories.php">
-                        <i class="fas fa-file-alt mr-2"></i>Categorys
-                    </a>
-
-                    <a class="block text-black font-bold py-2.5 px-4 my-4 rounded  duration-300 hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 hover:text-white" href="wikis.php">
-                        <i class="fas fa-store mr-2"></i>Wikis
-                    </a>
-                    <a class="block text-black font-bold py-2.5 px-4 my-4 rounded  duration-300 hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 hover:text-white" href="tags.php">
-                        <i class="fas fa-store mr-2"></i>Tags
-                    </a>
-
-                </nav>
-
-                <a class="block text-black font-bold py-2.5 px-4 my-2 rounded duration-300 hover:bg-gradient-to-r hover:from-sky-200 hover:to-sky-800 hover:text-white mt-auto" href="../authentification/login.php">
-                    <i class="fas fa-sign-out-alt mr-2"></i>Log Out
-                </a>
-
-
-            </div>
+       
 
             <div class="flex-1 p-4 w-full md:w-1/2">
 
@@ -154,8 +94,8 @@ else{
                                         <td class="pr-6 py-4 ">
                                             <img class="w-24 h-12" src="<?= $cat->getCategory_image(); ?>" alt="">
                                         </td>
-                                        <td class="px-6 py-4 text-sm">
-                                            <?= $cat->getCategory_desc(); ?>
+                                        <td class="px-6 py-4 text-sm max-w-[200px] h-12 text-balance">
+                                            <?= $cat->getCategory_desc(); ?>hgchzghxghgCJHGZjygcqzcghjsqgchjzqchjqshcfshqvchsqfchjfsqchfsgqhfcghsqfcghsqfcjgsqfcghfsqghcfsqghcfsgqfcgs
                                         </td>
                                         <td class="px-6 py-4 flex">
                                             <form action="../../controllers/ConCategorie.php" method="post">

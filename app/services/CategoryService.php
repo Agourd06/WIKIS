@@ -7,7 +7,6 @@ class CategoryService implements CategoryInterface
 {
     use Database;
 
-    protected $db;
 
     public function addCategory(Category $category)
     {

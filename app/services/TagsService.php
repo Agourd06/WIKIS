@@ -7,7 +7,6 @@ class TagsService implements TagsInterface
 {
     use Database;
 
-    protected $db;
 
     public function addtags(tag $tag)
     {
