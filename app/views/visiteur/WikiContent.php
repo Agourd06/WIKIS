@@ -15,11 +15,12 @@ require_once(__DIR__ . "/../../controllers/ConWikis.php");
 </head>
 
 <body>
-    <div class="h-[30vh] w-full">
-        <img src="<?= $image ?>" class=" w-full h-full" alt="">
+    <div class="h-[35vh] w-full bg-gray-100 mt-2  overflow-hidden  ">
+        <img src="<?= $image ?>" class="hover:scale-110	rounded transition-all  duration-300 w-[95%]  mx-auto h-full" alt="">
+
     </div>
-    <div class="font-[sans-serif] min-h-[100vh] bg-gray-100">
-        <div class="min-h-screen px-8 py-12 text-center bg-gray-800 text-white  shadow-xl">
+    <div class="font-[sans-serif]  min-h-[100vh] bg-gray-100">
+        <div class="min-h-screen px-8 py-12 text-center bg-gray-100 text-black  shadow-xl">
             <div class="max-w-4xl mx-auto">
                 <h2 class="text-4xl font-extrabold mb-6"><?= $title ?></h2>
                 <p class="text-base mb-4"><?= $content ?></p>

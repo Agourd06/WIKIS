@@ -2,7 +2,7 @@
 require_once(__DIR__ . '/../../controllers/ConCategorie.php');
 
 
-if(isset($_SESSION['user'])){
+if($_SESSION['role'] == 'admin' && isset($_SESSION['user'])){
     $welcom =  'WELCOM :'. $_SESSION['username'];
 }
 else{

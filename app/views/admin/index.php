@@ -4,7 +4,7 @@ require_once(__DIR__ . '/../../controllers/ConCategorie.php');
 require_once(__DIR__ . '/../../controllers/ConTags.php');
 require_once(__DIR__ . '/../../controllers/ConWikis.php');
 
-if(isset($_SESSION['user'])){
+if($_SESSION['role'] == 'admin' && isset($_SESSION['user'])){
     $welcom =  'WELCOM :'. $_SESSION['username'];
 }
 else{

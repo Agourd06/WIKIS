@@ -2,7 +2,12 @@
 require_once(__DIR__ . "/../../controllers/ConCategorie.php");
 require_once(__DIR__ . "/../../controllers/ConTags.php");
 require_once(__DIR__ . "/../../controllers/ConWikis.php");
-
+if($_SESSION['role'] == 'author' && isset($_SESSION['user'])){
+    $welcom =  'WELCOM :'. $_SESSION['username'];
+}
+else{
+    header('Location: ../authentification/login.php');
+}
 ?>
 
 <!DOCTYPE html>
@@ -18,7 +23,7 @@ require_once(__DIR__ . "/../../controllers/ConWikis.php");
 
 <body class="bg-gradient-to-r to-blue-300 from-black  min-h-screen p-4 flex flex-col justify-center gap-y-4	">
 
-    <div class="h-[7vh] w-1/2 mx-auto bg-gray-300 flex justify-center items-center rounded-md">
+    <div class="h-[7vh] min-w-1/2 mx-auto bg-gray-300 flex justify-center items-center rounded-md">
         <h1 class="text-transparent bg-clip-text m-4 text-[15px] sm:text-[15px]  lg:text-[21px] font-bold bg-gradient-to-r to-blue-400 from-blue-700"><?= $_SESSION['username'] ?> Thank you for generously sharing your knowledge by creating a Wiki</h1>
     </div>
     <!------------------------- Displaying Data for update------------------------------ -->
@@ -33,7 +38,12 @@ require_once(__DIR__ . "/../../controllers/ConWikis.php");
     }
     ?>
     <!------------------------- Displaying Data for update------------------------------ -->
+
+
+
     <form action="../../controllers/ConWikis.php" method="post" class=" min-w-screen mt-4 " enctype="multipart/form-data">
+
+
         <!------------------------------ Regex for existing wikis------------------------- -->
 
         <?php

@@ -49,6 +49,7 @@ if (isset($_POST['login'])) {
     $loged =  $Userservice->login($email);
     $password = $loged['user_pwd'];
     $role = $loged["user_role"];
+    $_SESSION['role'] = $loged["user_role"];
     $_SESSION['user'] = $loged['user_id'];
     $_SESSION['username'] = $loged['user_fullname'];
     if (preg_match('/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/', $email) && $email !== '' && $logPwd !== '') {

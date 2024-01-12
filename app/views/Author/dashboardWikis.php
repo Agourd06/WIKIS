@@ -4,11 +4,11 @@ require_once(__DIR__ . "/../../controllers/ConWikis.php");
 
 
 
-
-if (isset($_SESSION['user'])) {
-    $welcom =  'WELCOM :' . $_SESSION['username'];
-} else {
-    header('Location: ../visiteur/');
+if($_SESSION['role'] == 'author' && isset($_SESSION['user'])){
+    $welcom =  'WELCOM :'. $_SESSION['username'];
+}
+else{
+    header('Location: ../authentification/login.php');
 }
 ?>
 

@@ -17,7 +17,6 @@ if (isset($_POST["addWiki"])) {
     $wikiCategory = $_POST['category'];
     $wikiAuthor = $_SESSION['user'];
     $image = $_FILES["image"]["name"];
-    $tempname = $_FILES["image"]["tmp_name"];
 
     $WikiStatus = TRUE;
     $selectedTags = isset($_POST['nametag']) ? $_POST['nametag'] : array();
@@ -34,7 +33,7 @@ if (isset($_POST["addWiki"])) {
             $wikis = new wiki($id, URLROOT . 'public/images/' . $image, $wikiTitile, $wikiContent, $wikiSummary, $created_at, $wikiCategory, $wikiAuthor, $WikiStatus);
             $wikiId =  $WikisService->addWikis($wikis);
             foreach ($selectedTags as $selectedTag) {
-$tagname='';
+            $tagname='';
                 $wikistags = new WikisTags($wikiId, $selectedTag,$tag);
                 $WikisService->TagsOfWikis($wikistags);
             }
@@ -57,7 +56,7 @@ header('Location: '.URLROOT. 'app/views/visiteur/wikis.php');
 
 $id = isset($_SESSION["CatId"]) ? $_SESSION["CatId"] :'';
 
-$wikisCat =  $WikisService->getfiltredWikis($id);
+$wikisCat =  $WikisService->getFilteredWikis($id);
 
 
 
@@ -87,8 +86,8 @@ $AdminWikis =  $WikisService->getAdminWikis();
 
 
 // --------------------------fetch Auhor Wikis-------------------------------
-
-$AuthorWikis =  $WikisService->getAuthorWikis($_SESSION['user']);
+$UserId = isset($_SESSION['user']) ? $_SESSION['user'] :'';
+$AuthorWikis =  $WikisService->getAuthorWikis($UserId);
 
 
 
@@ -120,8 +119,8 @@ if (isset($_POST["updatewiki"])) {
     $wikiContent = $_POST["content"];
     $wikiCategory = '';
     $wikiAuthor = '';
-    $image = '';
-    $WikiStatus = '';
+    $image = $_FILES["image"]["name"];
+      $WikiStatus = '';
     $idwiki = '';
     if ($wikiTitile !== '' && $wikiSummary !== '' && $wikiContent !== '') {
 
@@ -183,5 +182,5 @@ $wiki = $WikisService->Wiki($id);
 
 
 
-$tags = $WikisService->WikiTag();
+$tagse = $WikisService->WikiTag();
 

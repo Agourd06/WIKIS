@@ -13,7 +13,7 @@ class wiki{
     private $author_id;
     private $wiki_statut;
 
-    public function __construct($id, $wiki_image, $wiki_title, $wiki_summarize,$wiki_content ,$created_at,  $category_id, $author_id, $wiki_statut){  
+    public function __construct($id, $wiki_image, $wiki_title,$wiki_content , $wiki_summarize,$created_at,  $category_id, $author_id, $wiki_statut){  
 
         $this->id = $id;
         $this->wiki_image = $wiki_image;

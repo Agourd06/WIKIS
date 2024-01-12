@@ -59,20 +59,51 @@ class WikiService
     }
     public function getWikis()
     {
-
+       
         $conn = $this->connect();
-        $query = "SELECT * FROM wiki WHERE wiki_statut = FALSE";
+        $query = "SELECT wiki.*, tag.tag_name, category.category_name , users.user_fullname
+        FROM wiki 
+        JOIN wikitags ON wiki.wiki_id = wikitags.wiki_id
+        JOIN tag ON tag.tag_id = wikitags.tag_id 
+        JOIN users On wiki.user_id = users.user_id
+                  LEFT JOIN category ON wiki.category_id = category.category_id
+                  WHERE wiki_statut = FALSE";
+
         $stmt = $conn->prepare($query);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
         $wikis = array();
         foreach ($result as $row) {
+            $wikiId = $row["wiki_id"];
 
+            if (!isset($wikis[$wikiId])) {
+                $wikis[$wikiId] = array(
+                    'wiki_id' => $wikiId,
+                    'wiki_image' => $row["wiki_image"],
+                    'wiki_title' => $row["wiki_title"],
+                    'wiki_content' => $row['wiki_content'],
+                    'wiki_summarize' => $row["wiki_summarize"],
+                    'created_at' => $row['created_at'],
+                    'category_id' => $row["category_id"],
+                    'user_id' => $row['user_id'],
+                    'wiki_statut' => $row['wiki_statut'],
+                    'tags' => array(),
+                    'category' => $row['category_name'],
+                    'username' => $row['user_fullname'],
 
-            $wikis[] =   new wiki($row["wiki_id"], $row["wiki_image"], $row["wiki_title"], $row['wiki_content'], $row["wiki_summarize"], $row['created_at'], $row["category_id"], $row['user_id'], $row['wiki_statut']);
+                );
+            }
+
+            $wikis[$wikiId]['tags'][] = $row['tag_name'];
         }
+
+        $wikis = array_values($wikis);
+
         return $wikis;
     }
+
+
     public function getHomeWiki()
     {
 
@@ -106,23 +137,52 @@ class WikiService
         }
         return $wikis;
     }
-    public function getfiltredWikis($id)
+    public function getFilteredWikis($id)
     {
-
         $conn = $this->connect();
-        $query = "SELECT * FROM wiki WHERE wiki_statut = FALSE AND category_id = :id";
+        $query = "SELECT wiki.*, tag.tag_name, category.category_name , users.user_fullname
+                  FROM wiki 
+                  JOIN wikitags ON wiki.wiki_id = wikitags.wiki_id
+                  JOIN tag ON tag.tag_id = wikitags.tag_id 
+                  JOIN users On wiki.user_id = users.user_id
+                  LEFT JOIN category ON wiki.category_id = category.category_id
+                  WHERE wiki_statut = FALSE AND wiki.category_id = :id";
+
         $stmt = $conn->prepare($query);
         $stmt->bindParam(":id", $id);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
         $wikis = array();
         foreach ($result as $row) {
+            $wikiId = $row["wiki_id"];
 
+            if (!isset($wikis[$wikiId])) {
+                $wikis[$wikiId] = array(
+                    'wiki_id' => $wikiId,
+                    'wiki_image' => $row["wiki_image"],
+                    'wiki_title' => $row["wiki_title"],
+                    'wiki_content' => $row['wiki_content'],
+                    'wiki_summarize' => $row["wiki_summarize"],
+                    'created_at' => $row['created_at'],
+                    'category_id' => $row["category_id"],
+                    'user_id' => $row['user_id'],
+                    'wiki_statut' => $row['wiki_statut'],
+                    'tags' => array(),
+                    'category' => $row['category_name'],
+                    'username' => $row['user_fullname'],
+                );
+            }
 
-            $wikis[] =   new wiki($row["wiki_id"], $row["wiki_image"], $row["wiki_title"], $row['wiki_content'], $row["wiki_summarize"], $row['created_at'], $row["category_id"], $row['user_id'], $row['wiki_statut']);
+            $wikis[$wikiId]['tags'][] = $row['tag_name'];
         }
+
+        $wikis = array_values($wikis);
+
         return $wikis;
     }
+
+
     public function updateWiki(wiki $wiki, $id)
     {
 
@@ -131,11 +191,13 @@ class WikiService
         $wikiTitle = $wiki->getWikiTitle();
         $wikiContent = $wiki->getWikiContent();
         $wikiSummary = $wiki->getWikiSummarize();
-        $query = 'UPDATE wiki SET wiki_title=:title ,wiki_summarize=:summary ,  wiki_content=:content WHERE wiki_id = :id';
+        $wikiImage = $wiki->getWikiImage();
+        $query = 'UPDATE wiki SET wiki_image =:image , wiki_title=:title ,wiki_summarize=:summary ,  wiki_content=:content WHERE wiki_id = :id';
         $stmt = $conn->prepare($query);
         $stmt->bindParam(':title', $wikiTitle);
         $stmt->bindParam(':summary', $wikiSummary);
         $stmt->bindParam(':content', $wikiContent);
+        $stmt->bindParam(':image', $wikiImage);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
     }
@@ -226,25 +288,25 @@ class WikiService
         $result = $stmt->fetchColumn();
         return $result;
     }
-public function Wiki($id){
-    $conn = $this->connect();
-    $query = 'SELECT * FROM wiki WHERE wiki_id = :id';
-    $stmt = $conn->prepare($query);
-    $stmt->bindParam(':id', $id);
-    $stmt->execute();
-    $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        
-    $wiki =    new wiki($row["wiki_id"], $row["wiki_image"], $row["wiki_title"], $row['wiki_content'], $row["wiki_summarize"], $row['created_at'], $row["category_id"], $row['user_id'], $row['wiki_statut']);
-   $idwiki = $wiki->getId();
-   $image = $wiki->getWikiImage();
-   $title = $wiki->getWikiTitle();
-   $summary = $wiki->getWikiSummarize();
-   $content = $wiki->getWikiContent();
-   $date  = $wiki->getDate();
+    public function Wiki($id)
+    {
+        $conn = $this->connect();
+        $query = 'SELECT * FROM wiki WHERE wiki_id = :id';
+        $stmt = $conn->prepare($query);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    return [$idwiki,$image,$title,$summary,$content,$date];
-       
-}
+        $wiki =    new wiki($row["wiki_id"], $row["wiki_image"], $row["wiki_title"], $row['wiki_content'], $row["wiki_summarize"], $row['created_at'], $row["category_id"], $row['user_id'], $row['wiki_statut']);
+        $idwiki = $wiki->getId();
+        $image = $wiki->getWikiImage();
+        $title = $wiki->getWikiTitle();
+        $summary = $wiki->getWikiSummarize();
+        $content = $wiki->getWikiContent();
+        $date  = $wiki->getDate();
+
+        return [$idwiki, $image, $title, $summary, $content, $date];
+    }
 
     public function WikiTag()
     {
@@ -255,11 +317,11 @@ public function Wiki($id){
          Join wiki ON wikitags.wiki_id = wiki.wiki_id";
         $stmt = $conn->prepare($query);
         $stmt->execute();
-      $results =  $stmt->fetchAll();
-      $tags= array();
-      foreach ($results as $row) {
-        $tags[] = new WikisTags($row, $row, $row["tag_name"]);
-      }
-      return $tags;
+        $results =  $stmt->fetchAll();
+        $tags = array();
+        foreach ($results as $row) {
+            $tags[] = new WikisTags($row, $row, $row["tag_name"]);
+        }
+        return $tags;
     }
 }

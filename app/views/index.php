@@ -30,9 +30,8 @@ unset($_SESSION["CatId"]);
 
                 </ul>
 
-                <div class="flex items-center md:justify-rounded md:w-[40vw] md:gap-x-32 gap-x-2">
+                <div class="flex items-center md:justify-end md:mr-24 md:w-[40vw] md:gap-x-32 gap-x-2">
 
-                    <input type="search" placeholder="Search" class="h-[40px] w-[140px] md:w-auto p-4 rounded-xl outline-none border border-gray-500 ">
 
                     <div class="flex gap-4">
                         <?php
@@ -65,7 +64,7 @@ unset($_SESSION["CatId"]);
             </div>
         </div>
     </nav>
-    <div class="bg-gradient-to-r from-blue-500 via-blue-300 to-blue-500 text-[#333] p-8 w-full rounded font-[sans-serif]">
+    <div class="bg-gradient-to-r from-blue-700 via-blue-400 to-blue-700 text-[#333] p-8 w-full rounded font-[sans-serif]">
         <div class="max-w-2xl mx-auto text-center">
             <h1 class="sm:text-5xl text-3xl font-extrabold">Discover, learn, and contribute! Welcome to our Wiki</h1>
             <div class="my-10">
@@ -80,7 +79,7 @@ unset($_SESSION["CatId"]);
             </div>
         </div>
     </div>
-    <div class="bg-gray-100 font-[sans-serif] p-4">
+    <div class=" font-[sans-serif] p-4">
         <div class="max-w-7xl mx-auto">
             <div class="text-center max-w-xl mx-auto">
                 <h2 class="text-3xl font-extrabold text-[#333] inline-block">LATEST CATEGORYS</h2>
@@ -94,7 +93,7 @@ unset($_SESSION["CatId"]);
                         <form action="../controllers/ConWikis.php" method="post">
                             <input type="hidden" name="catId" value="<?= $Categorie->getId() ?>">
 
-                            <div class="bg-white cursor-pointer rounded overflow-hidden group relative before:absolute before:inset-0 before:z-10 before:bg-black before:opacity-50">
+                            <div class="bg-white cursor-pointer rounded-t-md overflow-hidden group relative before:absolute before:inset-0 before:z-10 before:bg-black before:opacity-50">
                                 <img src="<?= $Categorie->getCategory_image() ?>" alt="Blog Post 3" class="w-full h-96 object-cover group-hover:scale-110 transition-all duration-300" />
                                 <div class="p-6 absolute bottom-0 left-0 right-0 z-20">
                                     <h3 class="text-xl font-bold text-white"><?= $Categorie->getCategory_name() ?></h3>
@@ -103,7 +102,7 @@ unset($_SESSION["CatId"]);
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit">Wikis of <?= $Categorie->getCategory_name() ?> </button>
+                            <button class="w-full bg-blue-700 hover:bg-blue-600 text-white rounded-b-md" type="submit">Wikis of <?= $Categorie->getCategory_name() ?> </button>
                         </form>
                     </div>
                 <?php
@@ -113,7 +112,7 @@ unset($_SESSION["CatId"]);
             </div>
         </div>
     </div>
-    <div class="bg-gray-100 font-[sans-serif] p-4">
+    <div class=" font-[sans-serif] p-4">
         <div class="max-w-7xl mx-auto">
             <div class="text-center max-w-xl mx-auto">
                 <h2 class="text-3xl font-extrabold text-[#333] inline-block">LATEST WIKIS</h2>
@@ -144,6 +143,26 @@ unset($_SESSION["CatId"]);
             <!-- </div> -->
         </div>
     </div>
+    <footer class="bg-gray-100 font-[sans-serif]">
+      <div class="py-8 px-4 sm:px-12">
+        <div class="flex flex-wrap items-center justify-between">
+          <div class="w-full md:w-auto  mb-6 md:mb-0">
+            <a href="javascript:void(0)" class=" w-full flex justify-center md:justify-start"><img class="mr-2 md:ml-10 w-[150px] h-[70px] md:w-[100px] " src="../../public/images/logowiki.png" alt="WIKI Logo" /></a>
+          </div>
+          <div class="w-full md:w-auto text-center">
+            <ul class="flex items-center justify-center flex-wrap gap-y-2 md:justify-end space-x-6">
+              <li><a href="index.php" class="text-gray-700 hover:text-gray-900 text-base">Home</a></li>
+              <li><a href="visiteur/wikis.php" class="text-gray-700 hover:text-gray-900 text-base">Wikis</a></li>
+              <li><a href="authentification/login.php" class="text-gray-700 hover:text-gray-900 text-base">Log in</a></li>
+              <li><a href="authentification/register.php" class="text-gray-700 hover:text-gray-900 text-base">Sing up</a></li>
+            </ul>
+          </div>
+        </div>
+        <hr class="my-6 border-gray-300" />
+          <p class='text-center text-gray-700 text-base'>Copyright © 2023<a href='index.php'
+        target='_blank' class="hover:underline mx-1">Wiki</a>All Rights Reserved.</p>
+      </div>
+    </footer>
 </body>
 
 </html>

@@ -16,7 +16,7 @@ require_once(__DIR__ . "/../../controllers/ConCategorie.php");
 </head>
 
 <body>
-    <nav class="relative flex w-full flex-wrap items-center justify-between bg-[#FBFBFB] py-2 text-neutral-500 shadow-lg hover:text-neutral-700 focus:text-neutral-700 mb-[5vh] lg:pt-2" data-te-navbar-ref>
+    <nav class="relative flex w-full  flex-wrap items-center justify-between bg-[#FBFBFB] py-2 text-neutral-500 shadow-lg hover:text-neutral-700 focus:text-neutral-700 mb-[5vh] lg:pt-2" data-te-navbar-ref>
         <div class="flex w-full items-center justify-between px-2">
             <div>
                 <a class="" href="../index.php">
@@ -31,16 +31,16 @@ require_once(__DIR__ . "/../../controllers/ConCategorie.php");
 
                 </ul>
 
-                <div class="flex items-center md:justify-rounded md:w-[40vw] md:gap-x-32 gap-x-2">
+                <div class="flex items-center md:justify-rounded lg:w-[40vw] md:gap-x-10 lg:gap-x-32 md:gap-x-0 gap-x-2">
 
                     <input type="search" placeholder="Search" class="h-[40px] w-[140px] md:w-auto p-4 rounded-xl outline-none border border-gray-500 ">
 
-                    <div class="flex gap-4">
+                    <div class="flex  gap-4">
                         <?php
-                        if (isset($_SESSION['user'])) {
+                        if (isset($_SESSION['user']) && $_SESSION['role'] ==='author') {
 
                         ?>
-                            <a href="../Author/dashboardWikis.php"><button  value="" class="flex gap-x-2 md:font-bold items-center text-[10px] md:text-[14px] h-10 px-5 text-indigo-100 transition-colors duration-150 bg-blue-600 rounded-lg focus:shadow-outline hover:bg-blue-700">
+                            <a href="../Author/dashboardWikis.php"><button value="" class="flex gap-x-2 md:font-bold items-center text-[10px] md:text-[14px] h-10 px-5 text-indigo-100 transition-colors duration-150 bg-blue-600 rounded-lg focus:shadow-outline hover:bg-blue-700">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="24" fill="white" viewBox="0 -960 960 960" width="24">
                                         <path d="M400-400h160v-80H400v80Zm0-120h320v-80H400v80Zm0-120h320v-80H400v80Zm-80 400q-33 0-56.5-23.5T240-320v-480q0-33 23.5-56.5T320-880h480q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H320Zm0-80h480v-480H320v480ZM160-80q-33 0-56.5-23.5T80-160v-560h80v560h560v80H160Zm160-720v480-480Z" />
                                     </svg>
@@ -68,11 +68,11 @@ require_once(__DIR__ . "/../../controllers/ConCategorie.php");
     </nav>
     <div>
         <?php
-        if (isset($_SESSION['user'])) {
+                        if (isset($_SESSION['user']) && $_SESSION['role'] ==='author') {
 
         ?>
             <div class="w-[91%] mx-auto flex justify-between h-16 items-center">
-                <form action="../../controllers/ConWikis.php" method="post"><button name="Unset"  class="px-2 py-2.5 min-w-[140px] lg:w-[290px] shadow-lg rounded-full text-black text-sm  font-medium border-none outline-none bg-sky-200 active:shadow-inner">All Wikis</button></form>
+                <form action="../../controllers/ConWikis.php" method="post"><button name="Unset" class="px-2 py-2.5 min-w-[140px] lg:w-[290px] shadow-lg rounded-full text-black text-sm  font-medium border-none outline-none bg-sky-200 active:shadow-inner">All Wikis</button></form>
 
                 <a href="../Author/AddWiki.php"><button class="flex gap-x-2 font-bold items-center h-10 px-5 text-indigo-100 transition-colors duration-150 bg-blue-600 rounded-lg focus:shadow-outline hover:bg-blue-700">
 
@@ -144,39 +144,48 @@ require_once(__DIR__ . "/../../controllers/ConCategorie.php");
 
             $wik = (!empty($wikisCat)) ? $wikisCat : $wikis;
 
-            
-                foreach ($wik as $wiki) : ?>
-                    <div>
-                        <form action="../../controllers/ConWikis.php" method="post">
-                            <button type="submit" name="wikiId" value="<?= $wiki->getId(); ?>" class="md:flex cursor-pointer w-full md:min-h-[25vh] min-h-fit bg-slate-100 rounded-xl p-8 md:p-0  hover:scale-105 mb-6 md:mb-4">
-                                <img class="w-64 md:min-h-[25vh] h-[5%]  md:h-auto md:rounded-xl rounded-xl mx-auto lg:mx-0" src="<?= $wiki->getWikiImage(); ?>" alt="" width="384" height="512">
-                                <div class="pt-6 md:p-8 text-center md:text-left space-y-4">
-                                    <div class="text-slate-700 text-2xl font-bold">
-                                        <h1><?= $wiki->getWikiTitle(); ?></h1>
-                                    </div>
-                                    <div>
-                                        <p class="text-lg font-medium">
-                                            <?= $wiki->getWikiSummarize(); ?>
-                                        </p>
-                                    </div>
-                                    <div class="font-medium text-sky-500">
 
-                                        <p><?= $_SESSION['username'] ?></p>
-                                        <div class="w-full text-right font-medium text-gray-500 mt-2"> <?= $wiki->getDate(); ?></div>
 
-                                    </div>
-                                    <div class="flex flex-wrap">
-                                        <?php foreach ($tags as $tag) : ?>
-                                            <p class="m-1 w-[7%] mb-4  flex justify-center text-[10px] sm:text-sm bg-gray-200 hover:bg-gray-300  rounded-[40px] px-4 py-2 font-bold leading-loose   "><?= $tag->getTagname(); ?> </p>
+            foreach ($wik as $wiki) : ?>
+                <div class="md:flex cursor-pointer md:flex-col lg:flex-row w-full lg:min-h-[25vh] min-h-fit bg-slate-100 rounded-xl p-8 md:p-0  hover:scale-105 mb-6 md:mb-4">
+                    <img class="lg:max-w-1/4  lg:min-h-[25vh] h-[5%]  md:h-auto md:rounded-xl rounded-xl mx-auto lg:mx-0" src="<?= $wiki['wiki_image'] ?>" alt="" width="384" height="512">
+                    <div class="pt-6 w-[100%] md:p-8 text-center md:text-left space-y-4">
+                        <div class="text-slate-700 text-2xl font-bold">
+                            <h1><?= $wiki['wiki_title'] ?></h1>
+                        </div>
+                        <div class="w-full">
+                            <p class="text-lg  font-medium">
+                                <?= $wiki['wiki_summarize'] ?>
+                            </p>
+                        </div>
+                        <div class="font-medium flex justify-between w-[100%] text-sky-500">
 
-                                        <?php endforeach; ?>
+                            <p class="w-1/2"><?= $wiki['username'] ?></p>
+                            <div class="w-full text-right font-medium text-gray-500 mt-2"> <?= $wiki['created_at'] ?></div>
 
-                                    </div>
+                        </div>
+                        <div class="flex flex-wrap">
+                            <?php
 
-                                </div>
-                            </button>
-                        </form>
+                            foreach ($wiki['tags'] as $tag) :
+                            ?>
+                                <p class="m-1 mr-1 w-[7%] mb-4  flex justify-center text-[10px] sm:text-sm bg-gray-200 hover:bg-gray-300  rounded-[40px] px-4 py-2 font-bold leading-loose   "><?= $tag ?> </p>
+
+                            <?php endforeach;
+                            ?>
+
+                        </div>
+
                     </div>
+                    <div class="w-[100%] lg:mr-6 lg:w-1/3 flex lg:flex-col justify-between   md:items-end md:gap-4 lg:gap-0 my-4 lg:items-right">
+                                <p class="md:ml-4 lg:ml-0 font-bold text-[12px] md:text-[17px]">Category : <?= $wiki['category'] ?></p>
+                      <form action="../../controllers/ConWikis.php" method="post" >
+
+                        <button type="submit" name="wikiId" class=" md:w-[150px] w-[70px] text-[10px] md:text-[15px] h-[40px] md:mr-4 lg:mr-0 bg-black rounded duration-300 hover:bg-blue-700  text-white" value="<?= $wiki['wiki_id'] ?>">Read More</button>
+                    </form>
+                    </div>
+                  
+                </div>
             <?php endforeach;
             ?>
 
@@ -184,6 +193,25 @@ require_once(__DIR__ . "/../../controllers/ConCategorie.php");
 
         </div>
     </section>
+    <footer class="bg-gray-200 md:w-full font-[sans-serif]">
+        <div class="py-8 px-4 sm:px-12">
+            <div class="flex flex-wrap items-center justify-between">
+                <div class="w-full md:w-auto text-center md:text-left mb-6 md:mb-0">
+                    <a href="javascript:void(0)" class="text-gray-700 hover:text-gray-900 font-extrabold text-2xl">ReadymadeUI</a>
+                </div>
+                <div class="w-full md:w-auto text-center">
+                    <ul class="flex items-center justify-center flex-wrap gap-y-2 md:justify-end space-x-6">
+                        <li><a href="../index.php" class="text-gray-700 hover:text-gray-900 text-base">Home</a></li>
+                        <li><a href="wikis.php" class="text-gray-700 hover:text-gray-900 text-base">Wikis</a></li>
+                        <li><a href="../authentification/login.php" class="text-gray-700 hover:text-gray-900 text-base">Log in</a></li>
+                        <li><a href="../authentification/register.php" class="text-gray-700 hover:text-gray-900 text-base">Sing up</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-6 border-gray-300" />
+            <p class='text-center text-gray-700 text-base'>Copyright © 2023<a href='../index.php' target='_blank' class="hover:underline mx-1">Wiki</a>All Rights Reserved.</p>
+        </div>
+    </footer>
 </body>
 
 </html>

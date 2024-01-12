@@ -12,7 +12,6 @@ if (isset($_POST["addCat"])) {
     $CatName = $_POST["CategoryName"];
     $CatDescr = $_POST["CategoryDesc"];
     $image = $_FILES["image"]["name"];
-    $tempname = $_FILES["image"]["tmp_name"];
 
     $id = '';
     $names =  $categoryService->CheckCat($CatName);
@@ -65,7 +64,6 @@ if (isset($_POST["updateCat"])) {
     $CatName = $_POST["CategoryName"];
     $CatDescr = $_POST["CategoryDesc"];
     $image = $_FILES["image"]["name"];
-    $tempname = $_FILES["image"]["tmp_name"];
 
     $idcat = '';
     
