@@ -199,8 +199,7 @@ $tagse = $WikisService->WikiTag();
 
 if (isset($_POST['search'])) {
     $searchTerm = $_POST['search'];
-   $servicewiki = new WikiService();
-        $wikis = $servicewiki->searchWikis($searchTerm);
+        $wikis = $WikisService->searchWikis($searchTerm);
     require_once(__DIR__.'/../views/visiteur/Search.php');
     }
 // ?>

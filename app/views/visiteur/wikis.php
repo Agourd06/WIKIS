@@ -33,17 +33,21 @@ require_once(__DIR__ . "/../../controllers/ConCategorie.php");
 
                 </ul>
 
-                <div class="flex items-center md:justify-rounded lg:w-[40vw] md:gap-x-10 lg:gap-x-32 md:gap-x-0 gap-x-2">
-<?php
-if(!empty($wikisCat)){}else{
-?>
-                    <input type="search" id="searchInput" placeholder="Search" class="h-[40px] w-[140px] md:w-auto p-4 rounded-xl outline-none border border-gray-500 ">
                     <?php
-}
-?>
+                    if (!empty($wikisCat)) {?>
+                        <div class="flex items-center md:justify-right lg:mr-24 md:gap-x-10 lg:gap-x-32 md:gap-x-0 gap-x-2">
+
+              <?php      } else {
+                    ?>
+                                    <div class="flex items-center md:justify-rounded lg:w-[40vw] md:gap-x-10 lg:gap-x-32 md:gap-x-0 gap-x-2">
+
+                        <input type="search" id="searchInput" placeholder="Search" class="h-[40px] w-[140px] md:w-auto p-4 rounded-xl outline-none border border-gray-500 ">
+                    <?php
+                    }
+                    ?>
                     <div class="flex  gap-4">
                         <?php
-                        if (isset($_SESSION['user']) && $_SESSION['role'] ==='author') {
+                        if (isset($_SESSION['user']) && $_SESSION['role'] === 'author') {
 
                         ?>
                             <a href="../Author/dashboardWikis.php"><button value="" class="flex gap-x-2 md:font-bold items-center text-[10px] md:text-[14px] h-10 px-5 text-indigo-100 transition-colors duration-150 bg-blue-600 rounded-lg focus:shadow-outline hover:bg-blue-700">
@@ -74,7 +78,7 @@ if(!empty($wikisCat)){}else{
     </nav>
     <div>
         <?php
-                        if (isset($_SESSION['user']) && $_SESSION['role'] ==='author') {
+        if (isset($_SESSION['user']) && $_SESSION['role'] === 'author') {
 
         ?>
             <div class="w-[91%] mx-auto flex justify-between h-16 items-center">
@@ -186,13 +190,13 @@ if(!empty($wikisCat)){}else{
 
                     </div>
                     <div class="w-[100%] lg:mr-6 lg:w-1/3 flex lg:flex-col justify-between   md:items-end md:gap-4 lg:gap-0 my-4 lg:items-right">
-                                <p class="md:ml-4 lg:ml-0 font-bold text-[12px] md:text-[17px]">Category : <?= $wiki['category'] ?></p>
-                      <form action="../../controllers/ConWikis.php" method="post" >
+                        <p class="md:ml-4 lg:ml-0 font-bold text-[12px] md:text-[17px]">Category : <?= $wiki['category'] ?></p>
+                        <form action="../../controllers/ConWikis.php" method="post">
 
-                        <button type="submit" name="wikiId" class=" md:w-[150px] w-[70px] text-[10px] md:text-[15px] h-[40px] md:mr-4 lg:mr-0 bg-black rounded duration-300 hover:bg-blue-700  text-white" value="<?= $wiki['wiki_id'] ?>">Read More</button>
-                    </form>
+                            <button type="submit" name="wikiId" class=" md:w-[150px] w-[70px] text-[10px] md:text-[15px] h-[40px] md:mr-4 lg:mr-0 bg-black rounded duration-300 hover:bg-blue-700  text-white" value="<?= $wiki['wiki_id'] ?>">Read More</button>
+                        </form>
                     </div>
-                  
+
                 </div>
             <?php endforeach;
             ?>
@@ -221,24 +225,26 @@ if(!empty($wikisCat)){}else{
         </div>
     </footer>
     <script>
-    $(document).ready(function () {
-        $('#searchInput').on('input', function () {
-            var searchTerm = $(this).val();
+        $(document).ready(function() {
+            $('#searchInput').on('input', function() {
+                var searchTerm = $(this).val();
 
-            $.ajax({
-                type: 'POST',
-                url: 'search.php', 
-                data: { search: searchTerm },
-                success: function (response) {
-                    $('#searchcontainer').html(response);
-                    $('#searchcontainer').show();
-                    $('#wikisContainer').hide();
-                }
+                $.ajax({
+                    type: 'POST',
+                    url: 'search.php',
+                    data: {
+                        search: searchTerm
+                    },
+                    success: function(response) {
+                        $('#searchcontainer').html(response);
+                        $('#searchcontainer').show();
+                        $('#wikisContainer').hide();
+                    }
+                });
+
             });
-
         });
-    });
-</script>
+    </script>
 </body>
 
 </html>
