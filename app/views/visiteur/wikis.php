@@ -10,6 +10,8 @@ require_once(__DIR__ . "/../../controllers/ConCategorie.php");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
     <script src="https://cdn.tailwindcss.com"></script>
 
     <title>Document</title>
@@ -33,7 +35,7 @@ require_once(__DIR__ . "/../../controllers/ConCategorie.php");
 
                 <div class="flex items-center md:justify-rounded lg:w-[40vw] md:gap-x-10 lg:gap-x-32 md:gap-x-0 gap-x-2">
 
-                    <input type="search" placeholder="Search" class="h-[40px] w-[140px] md:w-auto p-4 rounded-xl outline-none border border-gray-500 ">
+                    <input type="search" id="searchInput" placeholder="Search" class="h-[40px] w-[140px] md:w-auto p-4 rounded-xl outline-none border border-gray-500 ">
 
                     <div class="flex  gap-4">
                         <?php
@@ -137,8 +139,10 @@ require_once(__DIR__ . "/../../controllers/ConCategorie.php");
             </div>
         </div>
         <!--------------------------------------------------------------WIKIS------------------------------------------------- -->
+        <div id="searchcontainer" class="hidden min-h-full w-[70%] mx-auto rounded-xl">
+        </div>
 
-        <div class="min-h-full w-[70%] mx-auto rounded-xl">
+        <div id="wikisContainer" class="min-h-full w-[70%] mx-auto rounded-xl">
 
             <?php
 
@@ -212,6 +216,25 @@ require_once(__DIR__ . "/../../controllers/ConCategorie.php");
             <p class='text-center text-gray-700 text-base'>Copyright © 2023<a href='../index.php' target='_blank' class="hover:underline mx-1">Wiki</a>All Rights Reserved.</p>
         </div>
     </footer>
+    <script>
+    $(document).ready(function () {
+        $('#searchInput').on('input', function () {
+            var searchTerm = $(this).val();
+
+            $.ajax({
+                type: 'POST',
+                url: 'search.php', 
+                data: { search: searchTerm },
+                success: function (response) {
+                    $('#searchcontainer').html(response);
+                    $('#searchcontainer').show();
+                    $('#wikisContainer').hide();
+                }
+            });
+
+        });
+    });
+</script>
 </body>
 
 </html>

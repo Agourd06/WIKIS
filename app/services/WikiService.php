@@ -324,4 +324,55 @@ class WikiService
         }
         return $tags;
     }
+
+
+    public function searchWikis($search)
+    {
+       
+        $conn = $this->connect();
+        $query = "SELECT wiki.*, tag.tag_name, category.category_name, users.user_fullname
+        FROM wiki
+        JOIN wikitags ON wiki.wiki_id = wikitags.wiki_id
+        JOIN tag ON tag.tag_id = wikitags.tag_id
+        JOIN users ON wiki.user_id = users.user_id
+        LEFT JOIN category ON wiki.category_id = category.category_id
+        WHERE wiki_statut = FALSE 
+        AND (tag_name LIKE '%{$search}%' OR category_name LIKE '%{$search}%' OR wiki_title LIKE '%{$search}%')
+        ";
+
+        $stmt = $conn->prepare($query);
+        
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $wikis = array();
+        foreach ($result as $row) {
+            $wikiId = $row["wiki_id"];
+
+            if (!isset($wikis[$wikiId])) {
+                $wikis[$wikiId] = array(
+                    'wiki_id' => $wikiId,
+                    'wiki_image' => $row["wiki_image"],
+                    'wiki_title' => $row["wiki_title"],
+                    'wiki_content' => $row['wiki_content'],
+                    'wiki_summarize' => $row["wiki_summarize"],
+                    'created_at' => $row['created_at'],
+                    'category_id' => $row["category_id"],
+                    'user_id' => $row['user_id'],
+                    'wiki_statut' => $row['wiki_statut'],
+                    'tags' => array(),
+                    'category' => $row['category_name'],
+                    'username' => $row['user_fullname'],
+
+                );
+            }
+
+            $wikis[$wikiId]['tags'][] = $row['tag_name'];
+        }
+
+        $wikis = array_values($wikis);
+
+        return $wikis;
+    }
+
 }

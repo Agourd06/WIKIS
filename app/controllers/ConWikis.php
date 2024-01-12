@@ -184,3 +184,15 @@ $wiki = $WikisService->Wiki($id);
 
 $tagse = $WikisService->WikiTag();
 
+
+// -------------------------ajax-----------------------------
+
+// if (isset($_POST['search'])) {
+//     $searchTerm = $_POST['search'];
+
+   
+//     $wikis = $WikisService->searchWikis($searchTerm);
+
+//     include(__DIR__ . "/../views/visiteur/Search.php");  
+// }
+// ?>
