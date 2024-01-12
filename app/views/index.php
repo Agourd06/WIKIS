@@ -102,7 +102,7 @@ unset($_SESSION["CatId"]);
                                     </div>
                                 </div>
                             </div>
-                            <button class="w-full bg-blue-700 hover:bg-blue-600 text-white rounded-b-md" type="submit">Wikis of <?= $Categorie->getCategory_name() ?> </button>
+                            <button class="w-full h-[45px] bg-blue-700 hover:bg-blue-600 text-white  md:text-[17px] font-bold rounded-b-md" type="submit">Wikis of <?= $Categorie->getCategory_name() ?> </button>
                         </form>
                     </div>
                 <?php
