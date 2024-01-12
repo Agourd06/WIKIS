@@ -195,4 +195,12 @@ $tagse = $WikisService->WikiTag();
 
 //     include(__DIR__ . "/../views/visiteur/Search.php");  
 // }
+
+
+if (isset($_POST['search'])) {
+    $searchTerm = $_POST['search'];
+   $servicewiki = new WikiService();
+        $wikis = $servicewiki->searchWikis($searchTerm);
+    require_once(__DIR__.'/../views/visiteur/Search.php');
+    }
 // ?>

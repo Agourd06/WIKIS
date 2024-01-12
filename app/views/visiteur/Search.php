@@ -1,11 +1,7 @@
 <?php
 require_once(__DIR__ . "/../../controllers/ConWikis.php");
-require_once(__DIR__ . "/../../services/WikiService.php");
 
-if (isset($_POST['search'])) {
-    $searchTerm = $_POST['search'];
-   $servicewiki = new WikiService();
-        $wikis = $servicewiki->searchWikis($searchTerm);
+
 
 
     $wik = (!empty($wikisCat)) ? $wikisCat : $wikis;
@@ -54,6 +50,6 @@ if (isset($_POST['search'])) {
         </div>
     <?php endforeach;
 
-                    }
+                    
     ?>
 

@@ -34,9 +34,13 @@ require_once(__DIR__ . "/../../controllers/ConCategorie.php");
                 </ul>
 
                 <div class="flex items-center md:justify-rounded lg:w-[40vw] md:gap-x-10 lg:gap-x-32 md:gap-x-0 gap-x-2">
-
+<?php
+if(!empty($wikisCat)){}else{
+?>
                     <input type="search" id="searchInput" placeholder="Search" class="h-[40px] w-[140px] md:w-auto p-4 rounded-xl outline-none border border-gray-500 ">
-
+                    <?php
+}
+?>
                     <div class="flex  gap-4">
                         <?php
                         if (isset($_SESSION['user']) && $_SESSION['role'] ==='author') {
