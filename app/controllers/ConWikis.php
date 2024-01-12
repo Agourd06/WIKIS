@@ -171,7 +171,7 @@ if(isset($_POST["wikiId"])) {
     $_SESSION["wikiId"] = isset($_POST["wikiId"]) ? $_POST["wikiId"] :'';
     
     
-    header('Location: '.URLROOT. 'app/views/visiteur/wikis.php');
+    header('Location: '.URLROOT. 'app/views/visiteur/WikiContent.php');
     
     }
     $id = isset($_SESSION["wikiId"]) ? $_SESSION["wikiId"] :'';

@@ -19,7 +19,7 @@ require_once(__DIR__ . "/../../controllers/ConCategorie.php");
     <nav class="relative flex w-full flex-wrap items-center justify-between bg-[#FBFBFB] py-2 text-neutral-500 shadow-lg hover:text-neutral-700 focus:text-neutral-700 mb-[5vh] lg:pt-2" data-te-navbar-ref>
         <div class="flex w-full items-center justify-between px-2">
             <div>
-                <a class="" href="#">
+                <a class="" href="../index.php">
                     <img class="mr-2 md:ml-10 w-[150px] h-[70px] md:w-[100px] " src="../../../public/images/logowiki.png" alt="WIKI Logo" />
                 </a>
             </div>
@@ -40,7 +40,7 @@ require_once(__DIR__ . "/../../controllers/ConCategorie.php");
                         if (isset($_SESSION['user'])) {
 
                         ?>
-                            <a href="../Author/dashboardWikis.php"><button title="Delete" name="delete" value="" class="flex gap-x-2 md:font-bold items-center text-[10px] md:text-[14px] h-10 px-5 text-indigo-100 transition-colors duration-150 bg-blue-600 rounded-lg focus:shadow-outline hover:bg-blue-700">
+                            <a href="../Author/dashboardWikis.php"><button  value="" class="flex gap-x-2 md:font-bold items-center text-[10px] md:text-[14px] h-10 px-5 text-indigo-100 transition-colors duration-150 bg-blue-600 rounded-lg focus:shadow-outline hover:bg-blue-700">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="24" fill="white" viewBox="0 -960 960 960" width="24">
                                         <path d="M400-400h160v-80H400v80Zm0-120h320v-80H400v80Zm0-120h320v-80H400v80Zm-80 400q-33 0-56.5-23.5T240-320v-480q0-33 23.5-56.5T320-880h480q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H320Zm0-80h480v-480H320v480ZM160-80q-33 0-56.5-23.5T80-160v-560h80v560h560v80H160Zm160-720v480-480Z" />
                                     </svg>
@@ -71,8 +71,8 @@ require_once(__DIR__ . "/../../controllers/ConCategorie.php");
         if (isset($_SESSION['user'])) {
 
         ?>
-            <div class="w-[90%] mx-auto flex justify-between h-16 items-center">
-                <form action="../../controllers/ConWikis.php" method="post"><button name="Unset" class="px-2 py-2.5 min-w-[140px] shadow-lg rounded-full text-black text-sm  font-medium border-none outline-none bg-sky-200 active:shadow-inner">All Wikis</button></form>
+            <div class="w-[91%] mx-auto flex justify-between h-16 items-center">
+                <form action="../../controllers/ConWikis.php" method="post"><button name="Unset"  class="px-2 py-2.5 min-w-[140px] lg:w-[290px] shadow-lg rounded-full text-black text-sm  font-medium border-none outline-none bg-sky-200 active:shadow-inner">All Wikis</button></form>
 
                 <a href="../Author/AddWiki.php"><button class="flex gap-x-2 font-bold items-center h-10 px-5 text-indigo-100 transition-colors duration-150 bg-blue-600 rounded-lg focus:shadow-outline hover:bg-blue-700">
 
@@ -122,7 +122,7 @@ require_once(__DIR__ . "/../../controllers/ConCategorie.php");
 
                                 </a>
 
-                                <button type="submit" class="text-center rounded-b w-full bg-indigo-600 px-4 py-2 text-white text-sm hover:bg-white hover:text-indigo-600 transition duration-500 ">
+                                <button type="submit" class="text-center rounded-b w-full bg-blue-600 px-4 py-2 text-white text-sm hover:bg-white hover:text-indigo-600 transition duration-500 ">
                                     <?= $Category->getCategory_name(); ?>
                                 </button>
 
@@ -144,15 +144,12 @@ require_once(__DIR__ . "/../../controllers/ConCategorie.php");
 
             $wik = (!empty($wikisCat)) ? $wikisCat : $wikis;
 
-            if (empty($wik)) {
-                echo "No wikis found.";
-            } else {
+            
                 foreach ($wik as $wiki) : ?>
                     <div>
                         <form action="../../controllers/ConWikis.php" method="post">
-                            <input type="hidden" name="wikiId" value="<?= $wik->getId(); ?>">
-                            <button type="submit" class="md:flex cursor-pointer w-full md:min-h-[25vh] min-h-fit bg-slate-100 rounded-xl p-8 md:p-0  hover:scale-105 mb-6 md:mb-4">
-                                <img class="w-64 md:h-[100%] h-[5%]  md:h-auto md:rounded-xl rounded-xl mx-auto lg:mx-0" src="<?= $wiki->getWikiImage(); ?>" alt="" width="384" height="512">
+                            <button type="submit" name="wikiId" value="<?= $wiki->getId(); ?>" class="md:flex cursor-pointer w-full md:min-h-[25vh] min-h-fit bg-slate-100 rounded-xl p-8 md:p-0  hover:scale-105 mb-6 md:mb-4">
+                                <img class="w-64 md:min-h-[25vh] h-[5%]  md:h-auto md:rounded-xl rounded-xl mx-auto lg:mx-0" src="<?= $wiki->getWikiImage(); ?>" alt="" width="384" height="512">
                                 <div class="pt-6 md:p-8 text-center md:text-left space-y-4">
                                     <div class="text-slate-700 text-2xl font-bold">
                                         <h1><?= $wiki->getWikiTitle(); ?></h1>
@@ -181,7 +178,7 @@ require_once(__DIR__ . "/../../controllers/ConCategorie.php");
                         </form>
                     </div>
             <?php endforeach;
-            } ?>
+            ?>
 
 
 

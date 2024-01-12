@@ -39,7 +39,7 @@ unset($_SESSION["CatId"]);
                         if (isset($_SESSION['user'])) {
 
                         ?>
-                            <a href="../controllers/ConWikis.php"><button title="Delete" name="delete" value="" class="flex gap-x-2 md:font-bold items-center text-[10px] md:text-[14px] h-10 px-5 text-indigo-100 transition-colors duration-150 bg-blue-600 rounded-lg focus:shadow-outline hover:bg-blue-700">
+                            <a href="Author/dashboardWikis.php"><button title="Delete" name="delete" value="" class="flex gap-x-2 md:font-bold items-center text-[10px] md:text-[14px] h-10 px-5 text-indigo-100 transition-colors duration-150 bg-blue-600 rounded-lg focus:shadow-outline hover:bg-blue-700">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="24" fill="white" viewBox="0 -960 960 960" width="24">
                                         <path d="M400-400h160v-80H400v80Zm0-120h320v-80H400v80Zm0-120h320v-80H400v80Zm-80 400q-33 0-56.5-23.5T240-320v-480q0-33 23.5-56.5T320-880h480q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H320Zm0-80h480v-480H320v480ZM160-80q-33 0-56.5-23.5T80-160v-560h80v560h560v80H160Zm160-720v480-480Z" />
                                     </svg>
@@ -67,11 +67,12 @@ unset($_SESSION["CatId"]);
     </nav>
     <div class="bg-gradient-to-r from-blue-500 via-blue-300 to-blue-500 text-[#333] p-8 w-full rounded font-[sans-serif]">
         <div class="max-w-2xl mx-auto text-center">
-            <h1 class="sm:text-5xl text-3xl font-extrabold">Try using our templates</h1>
+            <h1 class="sm:text-5xl text-3xl font-extrabold">Discover, learn, and contribute! Welcome to our Wiki</h1>
             <div class="my-10">
-                <p class="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis accumsan, nunc et
-                    tempus blandit, metus mi consectetur nibh, a pharetra felis turpis vitae ligula. Etiam laoreet velit nec neque
-                    ultrices, non consequat mauris tincidunt.</p>
+
+                <p class="text-sm"> Explore and contribute to our collection of knowledge. Our wiki is a collaborative platform where you can find information on various topics and share your expertise with the community</p>
+                <p class="font-bold"> Start by browsing our <a class="text-blue-800" href="visiteur/wikis.php">wikis</a> or create your own.
+                </p>
             </div>
             <hr class="border-[#333]" />
             <div class="mt-10 flex max-sm:flex-col justify-center sm:gap-6 gap-4">
@@ -79,31 +80,31 @@ unset($_SESSION["CatId"]);
             </div>
         </div>
     </div>
-    <div class="bg-white font-[sans-serif] p-4">
+    <div class="bg-gray-100 font-[sans-serif] p-4">
         <div class="max-w-7xl mx-auto">
             <div class="text-center max-w-xl mx-auto">
-                <h2 class="text-3xl font-extrabold text-[#333] inline-block">LATEST BLOGS</h2>
-                <p class="text-gray-600 text-sm mt-6  ">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis accumsan, nunc et tempus blandit, metus mi consectetur felis turpis vitae ligula.</p>
+                <h2 class="text-3xl font-extrabold text-[#333] inline-block">LATEST CATEGORYS</h2>
+                <p class="text-gray-600 text-sm mt-6  ">Explore our freshest categories, each a gateway to a world of specialized knowledge. Dive in and discover the latest additions to our diverse collection!</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12 max-md:max-w-lg mx-auto">
                 <?php
                 foreach ($categories as $Categorie) :
                 ?>
-                <div>
-                    <form action="../controllers/ConWikis.php" method="post">
-                        <input type="hidden" name="catId" value="<?= $Categorie->getId() ?>">
+                    <div>
+                        <form action="../controllers/ConWikis.php" method="post">
+                            <input type="hidden" name="catId" value="<?= $Categorie->getId() ?>">
 
-                        <div class="bg-white cursor-pointer rounded overflow-hidden group relative before:absolute before:inset-0 before:z-10 before:bg-black before:opacity-50">
-                            <img src="<?= $Categorie->getCategory_image() ?>" alt="Blog Post 3" class="w-full h-96 object-cover group-hover:scale-110 transition-all duration-300" />
-                            <div class="p-6 absolute bottom-0 left-0 right-0 z-20">
-                                <h3 class="text-xl font-bold text-white"><?= $Categorie->getCategory_name() ?></h3>
-                                <div class="mt-4">
-                                    <p class="text-gray-200 text-sm "><?= $Categorie->getCategory_desc() ?></p>
+                            <div class="bg-white cursor-pointer rounded overflow-hidden group relative before:absolute before:inset-0 before:z-10 before:bg-black before:opacity-50">
+                                <img src="<?= $Categorie->getCategory_image() ?>" alt="Blog Post 3" class="w-full h-96 object-cover group-hover:scale-110 transition-all duration-300" />
+                                <div class="p-6 absolute bottom-0 left-0 right-0 z-20">
+                                    <h3 class="text-xl font-bold text-white"><?= $Categorie->getCategory_name() ?></h3>
+                                    <div class="mt-4">
+                                        <p class="text-gray-200 text-sm "><?= $Categorie->getCategory_desc() ?></p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <button type="submit">Wikis of  <?= $Categorie->getCategory_name() ?> </button>
-                    </form>
+                            <button type="submit">Wikis of <?= $Categorie->getCategory_name() ?> </button>
+                        </form>
                     </div>
                 <?php
                 endforeach;
@@ -112,18 +113,18 @@ unset($_SESSION["CatId"]);
             </div>
         </div>
     </div>
-    <div class="bg-white font-[sans-serif] p-4">
+    <div class="bg-gray-100 font-[sans-serif] p-4">
         <div class="max-w-7xl mx-auto">
             <div class="text-center max-w-xl mx-auto">
-                <h2 class="text-3xl font-extrabold text-[#333] inline-block">LATEST BLOGS</h2>
-                <p class="text-gray-600 text-sm mt-6  ">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis accumsan, nunc et tempus blandit, metus mi consectetur felis turpis vitae ligula.</p>
+                <h2 class="text-3xl font-extrabold text-[#333] inline-block">LATEST WIKIS</h2>
+                <p class="text-gray-600 text-sm mt-6  ">Stay up-to-date with our ever-expanding encyclopedia of knowledge. The latest wikis showcase the continuous collaboration and commitment to shared learning</p>
             </div>
-            <form action="visiteur/wikis.php" method="post" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12 max-md:max-w-lg mx-auto">
+            <form action="../controllers/ConWikis.php" method="post" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12 max-md:max-w-lg mx-auto">
                 <?php
                 foreach ($wikiHome as $wiki) :
                 ?>
 
-                    <button type="submit" name="catId" value="<?= $wiki->getId() ?>">
+                    <button type="submit" name="wikiId" value="<?= $wiki->getId() ?>">
                         <div class="bg-white cursor-pointer rounded overflow-hidden group relative before:absolute before:inset-0 before:z-10 before:bg-black before:opacity-50">
                             <img src="<?= $wiki->getWikiImage() ?>" alt="Blog Post 3" class="w-full h-96 object-cover group-hover:scale-110 transition-all duration-300" />
                             <div class="p-6 absolute bottom-0 left-0 right-0 z-20">

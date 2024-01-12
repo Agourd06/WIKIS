@@ -226,18 +226,25 @@ class WikiService
         $result = $stmt->fetchColumn();
         return $result;
     }
-    public function Wiki($id) {
-        $conn = $this->connect();
-        $query = 'SELECT * FROM wiki WHERE wiki_id = :id';
-        $stmt = $conn->prepare($query);
-        $stmt->bindParam(':id', $id);
-        $stmt->execute();
-    
-        $wiki = $stmt->fetchObject('wiki');
-    
-        return $wiki;
-    }
-    
+public function Wiki($id){
+    $conn = $this->connect();
+    $query = 'SELECT * FROM wiki WHERE wiki_id = :id';
+    $stmt = $conn->prepare($query);
+    $stmt->bindParam(':id', $id);
+    $stmt->execute();
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+    $wiki =    new wiki($row["wiki_id"], $row["wiki_image"], $row["wiki_title"], $row['wiki_content'], $row["wiki_summarize"], $row['created_at'], $row["category_id"], $row['user_id'], $row['wiki_statut']);
+   $idwiki = $wiki->getId();
+   $image = $wiki->getWikiImage();
+   $title = $wiki->getWikiTitle();
+   $summary = $wiki->getWikiSummarize();
+   $content = $wiki->getWikiContent();
+   $date  = $wiki->getDate();
+
+    return [$idwiki,$image,$title,$summary,$content,$date];
+       
+}
 
     public function WikiTag()
     {
